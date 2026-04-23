@@ -251,11 +251,13 @@ export default function Home() {
                 Currently listening to
               </p>
               <h2 className="mt-4 text-4xl leading-tight sm:text-5xl">
-                <span className="text-[#e36d2f]">
+                <span className="font-bold text-[#e36d2f]">
                   <em>ACCELERATOR</em>
                 </span>{" "}
                 <span className="text-white">by </span>
-                <span className="text-[#8aff9d]">greek</span>
+                <span className="font-bold text-white">
+                  greek
+                </span>
               </h2>
               <p className="mt-5 max-w-xl text-lg leading-8 text-stone-300/80">
                 <em>ACCELERATOR</em> has been one of my favorite albums since
