@@ -186,7 +186,7 @@ export default function Home() {
                 About Me
               </p>
               <h2 className="mt-4 text-4xl leading-tight text-[rgba(255,231,222,0.96)] sm:text-5xl">
-                Once again, my name is Shlok,
+                Hi! my name is Shlok Jadhav,
               </h2>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-stone-300/82">
                 and I am a Computer Science and Data Science student at the University of Wisconsin-Madison.
