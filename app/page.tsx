@@ -69,8 +69,14 @@ export default function Home() {
               </h1>
 
               <p className="mt-8 max-w-2xl text-xl leading-9 text-stone-200/82 sm:text-2xl">
-                I&apos;m a Computer Science and Data Science student at
-                UW-Madison interested in building data-driven systems 
+                I'm a{" "}
+                <span className="font-semibold">Computer Science</span>{" "}
+                and{" "}
+                <span className="font-semibold">Data Science</span>{" "}
+                student 
+                at{" "}
+                <span className="text-[#ff5e64] font-semibold">UW-Madison</span>{" "}
+                interested in building data-driven systems 
                 and applied machine learning for real-world problems 
                 (biology, XR, perception, and more).
               </p>
