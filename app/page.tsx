@@ -160,7 +160,7 @@ export default function Home() {
 
               </p>
               <p className="mt-4 max-w-xl text-sm leading-7 text-stone-400/85">
-                My personal favorite tracks from the album are:
+                My personal favorite songs from the album are:
                 <br />
                 <em>HOUNDS</em>, <em>SOMEDAY</em>, and <em>RIVER</em>!
               </p>
