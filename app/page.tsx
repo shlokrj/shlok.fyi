@@ -1,27 +1,63 @@
+"use client";
+
+const navItems = [
+  { href: "about", label: "About" },
+  { href: "contact", label: "Contact" },
+  { href: "listening", label: "Listening" },
+];
+
 export default function Home() {
+  const scrollToTop = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    document.documentElement.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const scrollToSection = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string,
+  ) => {
+    event.preventDefault();
+
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
-    <main className="relative overflow-hidden bg-[var(--background)] px-6 py-16 sm:px-10">
+    <main className="relative overflow-hidden bg-[var(--background)] px-6 py-8 sm:px-10 sm:py-10">
+      <div id="top" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(214,76,36,0.28),transparent_30%),radial-gradient(circle_at_85%_20%,rgba(183,46,24,0.24),transparent_22%),radial-gradient(circle_at_bottom_left,rgba(120,40,12,0.24),transparent_34%)]" />
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(209,67,33,0.26),rgba(209,67,33,0)_66%)] blur-3xl" />
 
-      <div className="relative mx-auto flex min-h-screen w-full max-w-5xl flex-col justify-center gap-8">
-        <nav className="sticky top-6 z-10 mx-auto flex w-full justify-center">
+      <div className="relative mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8">
+        <nav className="sticky top-3 z-10 mx-auto mb-4 flex w-full justify-center">
           <div className="flex flex-wrap items-center justify-center gap-3 rounded-full border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(88,31,21,0.74),rgba(26,14,11,0.88))] px-4 py-3 text-sm uppercase tracking-[0.24em] text-[rgba(255,188,160,0.78)] shadow-[0_16px_40px_rgba(26,10,5,0.22)] backdrop-blur sm:px-6">
-            <a href="#about" className="transition-colors duration-200 hover:text-white">
-              About
-            </a>
-            <a href="#contact" className="transition-colors duration-200 hover:text-white">
-              Contact
-            </a>
-            <a href="#listening" className="transition-colors duration-200 hover:text-white">
-              Listening
-            </a>
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={`#${item.href}`}
+                onClick={(event) => scrollToSection(event, item.href)}
+                className="cursor-pointer transition-colors duration-200 hover:text-white"
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
         </nav>
 
         <section
           id="about"
-          className="scroll-mt-28 w-full rounded-[2rem] border border-white/20 bg-[linear-gradient(145deg,rgba(92,34,21,0.9),rgba(56,22,16,0.93)_42%,rgba(26,14,11,0.97))] px-8 py-12 text-stone-100 shadow-[0_30px_80px_rgba(26,10,5,0.45)] backdrop-blur sm:px-12 sm:py-16"
+          className="scroll-mt-24 w-full rounded-[2rem] border border-white/20 bg-[linear-gradient(145deg,rgba(92,34,21,0.9),rgba(56,22,16,0.93)_42%,rgba(26,14,11,0.97))] px-8 py-12 text-stone-100 shadow-[0_30px_80px_rgba(26,10,5,0.45)] backdrop-blur sm:px-12 sm:py-16"
         >
           <div className="grid gap-12 lg:grid-cols-[1.5fr_0.9fr] lg:items-end">
             <div>
@@ -36,7 +72,7 @@ export default function Home() {
                 I&apos;m a Computer Science and Data Science student at
                 UW-Madison interested in building data-driven systems 
                 and applied machine learning for real-world problems 
-                (biology, XR, perception, and more!)
+                (biology, XR, perception, and more).
               </p>
             </div>
 
@@ -45,10 +81,16 @@ export default function Home() {
                 Current Focus
               </p>
               <p className="mt-4 text-3xl leading-tight text-[rgba(255,231,222,0.96)]">
-                Actively looking for ... .
+                Actively looking for 
+                <br />
+                <span className="text-[#ffec96]">
+                  <em>Summer 2026 Opportunities</em>
+                </span>
               </p>
               <p className="mt-5 text-base leading-7 text-stone-300/78">
-                Interested in ...
+                Building in: SWE · ML · Data
+              <br />
+                Areas: Bio · Climate · Emerging Tech
               </p>
             </div>
           </div>
@@ -56,7 +98,7 @@ export default function Home() {
 
         <section
           id="contact"
-          className="scroll-mt-28 w-full rounded-[1.75rem] border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(88,31,21,0.74),rgba(26,14,11,0.88))] px-8 py-8 text-stone-100 shadow-[0_20px_60px_rgba(26,10,5,0.3)] backdrop-blur sm:px-12"
+          className="scroll-mt-24 w-full rounded-[1.75rem] border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(88,31,21,0.74),rgba(26,14,11,0.88))] px-8 py-8 text-stone-100 shadow-[0_20px_60px_rgba(26,10,5,0.3)] backdrop-blur sm:px-12"
         >
           <p className="text-xs uppercase tracking-[0.32em] text-[rgba(255,188,160,0.74)]">
             Contact
@@ -89,7 +131,7 @@ export default function Home() {
 
         <section
           id="listening"
-          className="scroll-mt-28 w-full rounded-[1.75rem] border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(88,31,21,0.78),rgba(26,14,11,0.9))] px-8 py-8 text-stone-100 shadow-[0_20px_60px_rgba(26,10,5,0.3)] backdrop-blur sm:px-12"
+          className="scroll-mt-24 w-full rounded-[1.75rem] border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(88,31,21,0.78),rgba(26,14,11,0.9))] px-8 py-8 text-stone-100 shadow-[0_20px_60px_rgba(26,10,5,0.3)] backdrop-blur sm:px-12"
         >
           <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div>
@@ -132,6 +174,15 @@ export default function Home() {
           </div>
         </section>
       </div>
+
+      <a
+        href="#top"
+        aria-label="Back to top"
+        onClick={scrollToTop}
+        className="fixed bottom-6 right-6 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(255,205,190,0.18)] bg-[linear-gradient(180deg,rgba(88,31,21,0.88),rgba(26,14,11,0.94))] text-2xl text-[rgba(255,188,160,0.9)] shadow-[0_14px_35px_rgba(26,10,5,0.3)] backdrop-blur transition-colors duration-200 hover:text-white"
+      >
+        ↑
+      </a>
     </main>
   );
 }
