@@ -37,6 +37,11 @@ a {
   color: inherit;
 }
 
+.uw-outline {
+  color: var(--foreground);
+  -webkit-text-stroke: 1px #c5050c;
+}
+
 .fireplace-name {
   position: relative;
   display: inline-block;

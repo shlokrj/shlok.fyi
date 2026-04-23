@@ -96,7 +96,7 @@ export default function Home() {
                 <span className="font-semibold">Data Science</span>{" "}
                 student 
                 at{" "}
-                <span className="text-[#ff5e64] font-semibold">UW-Madison</span>{" "}
+                <span className="font-semibold">UW-Madison</span>{" "}
                 interested in building data-driven systems 
                 and applied machine learning for real-world problems 
                 (biology, XR, perception, and more).
