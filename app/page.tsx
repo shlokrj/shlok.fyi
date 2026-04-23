@@ -82,8 +82,11 @@ export default function Home() {
               <p className="text-lg italic tracking-[0.01em] text-[rgba(255,210,194,0.82)] sm:text-xl">
                 Hello! My name is
               </p>
-              <h1 className="mt-3 max-w-3xl text-6xl leading-[0.92] tracking-[-0.04em] text-[var(--foreground)] sm:text-8xl">
-                Shlok Jadhav.
+              <h1 className="fireplace-name mt-3 max-w-3xl text-6xl leading-[0.92] tracking-[-0.04em] text-[var(--foreground)] sm:text-8xl">
+                <span className="fireplace-name__text">Shlok Jadhav.</span>
+                <span className="fireplace-name__spark fireplace-name__spark--one" />
+                <span className="fireplace-name__spark fireplace-name__spark--two" />
+                <span className="fireplace-name__spark fireplace-name__spark--three" />
               </h1>
 
               <p className="mt-8 max-w-2xl text-xl leading-9 text-stone-200/82 sm:text-2xl">
