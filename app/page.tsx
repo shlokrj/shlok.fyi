@@ -130,12 +130,10 @@ export default function Home() {
             Projects
           </p>
           <h2 className="mt-4 text-4xl leading-tight text-[rgba(255,231,222,0.96)] sm:text-5xl">
-            A few things are on the way.
+            work in progress
           </h2>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-stone-300/80">
-            This section will eventually hold featured builds, research work,
-            and technical projects. For now, I&apos;m leaving it intentionally
-            minimal.
+            MAKE DEMOS HERE AND LINK TO GITHUB REPOS AND STUFF
           </p>
         </section>
 
@@ -149,11 +147,10 @@ export default function Home() {
             Experience
           </p>
           <h2 className="mt-4 text-4xl leading-tight text-[rgba(255,231,222,0.96)] sm:text-5xl">
-            Experience will live here soon.
+            experiences that are here
           </h2>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-stone-300/80">
-            I&apos;ll use this section for internships, research, campus work,
-            and the roles that shaped how I like to build.
+            internships, research, campus work, etc
           </p>
         </section>
 
@@ -167,12 +164,10 @@ export default function Home() {
             Awards
           </p>
           <h2 className="mt-4 text-4xl leading-tight text-[rgba(255,231,222,0.96)] sm:text-5xl">
-            A place for recognitions and milestones.
+            recognitions and milestones
           </h2>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-stone-300/80">
-            You can use this section for scholarships, honors, competition
-            results, academic awards, or any achievements you want to highlight
-            separately from experience.
+            competitions stuff
           </p>
         </section>
 
@@ -216,8 +211,7 @@ export default function Home() {
                     Interests
                   </p>
                   <p className="mt-3 text-base leading-7 text-stone-300/80">
-                    Add a few interests here: research topics, side projects,
-                    music, books, sports, or anything that feels like you.
+                    adding interests here
                   </p>
                 </div>
                 <div className="rounded-[1.25rem] border border-[rgba(255,205,190,0.12)] bg-black/10 p-4">
@@ -225,8 +219,7 @@ export default function Home() {
                     Personal Note
                   </p>
                   <p className="mt-3 text-base leading-7 text-stone-300/80">
-                    Leave yourself a place for one fun detail, favorite
-                    question, or small thing people usually remember about you.
+                    fun stuff about me here
                   </p>
                 </div>
               </div>
@@ -239,11 +232,10 @@ export default function Home() {
                     Photo
                   </p>
                   <p className="mt-4 text-xl leading-8 text-stone-300/82">
-                    Put a photo of yourself here later.
+                    linked in photo
                   </p>
                   <p className="mt-3 text-sm leading-7 text-stone-400/82">
-                    You can swap this box for an image once you pick one you
-                    like.
+                    swap the box here
                   </p>
                 </div>
               </div>
