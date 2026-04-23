@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Shlok Jadhav",
-  description: "A warm, editorial portfolio homepage for Shlok Jadhav.",
+  description: "A portfolio homepage for Shlok Jadhav.",
 };
 
 export default function RootLayout({
