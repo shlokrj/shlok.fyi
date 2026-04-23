@@ -188,16 +188,26 @@ export default function Home() {
                 About Me
               </p>
               <h2 className="mt-4 text-4xl leading-tight text-[rgba(255,231,222,0.96)] sm:text-5xl">
-                A little more beyond the resume.
+                Once again, my name is Shlok,
               </h2>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-stone-300/82">
-                Write a short intro here about who you are, what you care
-                about, and the kinds of work or ideas that excite you.
+                and I am a Computer Science and Data Science student at the University of Wisconsin-Madison.
+                I was born and raised in San Ramon, California, which is in the Bay Area. 
+                I moved to Wisconsin for college in 2025, and despite the cold, I&apos;ve really enjoyed my time here so far!
               </p>
-              <p className="mt-4 max-w-2xl text-base leading-8 text-stone-400/88">
-                You can also use this space to talk about your interests
-                outside of class, the communities you&apos;re part of, or the
-                little details that make you memorable.
+              <p className="mt-4 max-w-2xl text-base leading-8 text-stone-300/82">
+                I realized pretty early on that college isn't just about classes and grades for me, but it&apos;s also a lifestyle and what you make of it.
+                Outside of class, I&apos;m involved in research and a few student orgs on campus, and I also love to build projects for fun.
+                I love keeping myself busy, so I&apos;m always trying to learn new things, meet new people, and explore new places.
+              </p>
+              <p className="mt-4 max-w-2xl text-base leading-8 text-stone-300/82">
+                For my hobbies, I enjoy listening to music, playing games & sports, and exploring new places.
+                Some of my favorite artists recently include greek, Luna Li, Osamason, slayr, and more.
+                I have been growing up with video games, playing on my sister&apos;s DS and our family Wii.
+                Some of my favorite games all time include ANY Pokemon game (I know the Pokedex by heart), Minecraft, Fortnite, Valorant, 
+                I have been a huge Golden State Warriors fan for as long as I can remember, and I also 
+                have gotten into lifting weights and playing tennis in the past couple of years. 
+                I also love to travel and explore new cities, and I&apos;m always down for trying new food.
               </p>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
