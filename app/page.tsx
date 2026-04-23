@@ -4,6 +4,7 @@ const navItems = [
   { href: "home", label: "Home" },
   { href: "projects", label: "Projects" },
   { href: "experience", label: "Experience" },
+  { href: "awards", label: "Awards" },
   { href: "about-me", label: "About Me" },
   { href: "contact", label: "Contact" },
 ];
@@ -156,13 +157,90 @@ export default function Home() {
           </p>
         </section>
 
+        <SectionDivider label="Awards" />
+
+        <section
+          id="awards"
+          className="scroll-mt-24 w-full rounded-[1.75rem] border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(88,31,21,0.76),rgba(26,14,11,0.89))] px-8 py-8 text-stone-100 shadow-[0_20px_60px_rgba(26,10,5,0.3)] backdrop-blur sm:px-12"
+        >
+          <p className="text-xs uppercase tracking-[0.32em] text-[rgba(255,188,160,0.74)]">
+            Awards
+          </p>
+          <h2 className="mt-4 text-4xl leading-tight text-[rgba(255,231,222,0.96)] sm:text-5xl">
+            A place for recognitions and milestones.
+          </h2>
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-stone-300/80">
+            You can use this section for scholarships, honors, competition
+            results, academic awards, or any achievements you want to highlight
+            separately from experience.
+          </p>
+        </section>
+
         <SectionDivider label="About Me" />
 
         <section
           id="about-me"
           className="scroll-mt-24 w-full rounded-[1.75rem] border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(88,31,21,0.78),rgba(26,14,11,0.9))] px-8 py-8 text-stone-100 shadow-[0_20px_60px_rgba(26,10,5,0.3)] backdrop-blur sm:px-12"
         >
-          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+            <div className="rounded-[1.5rem] border border-[rgba(255,205,190,0.12)] bg-[linear-gradient(180deg,rgba(181,50,26,0.1),rgba(0,0,0,0.12))] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+              <p className="text-xs uppercase tracking-[0.32em] text-[rgba(255,188,160,0.74)]">
+                About Me
+              </p>
+              <h2 className="mt-4 text-4xl leading-tight text-[rgba(255,231,222,0.96)] sm:text-5xl">
+                A little more beyond the resume.
+              </h2>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-stone-300/82">
+                Write a short intro here about who you are, what you care
+                about, and the kinds of work or ideas that excite you.
+              </p>
+              <p className="mt-4 max-w-2xl text-base leading-8 text-stone-400/88">
+                You can also use this space to talk about your interests
+                outside of class, the communities you&apos;re part of, or the
+                little details that make you memorable.
+              </p>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-[1.25rem] border border-[rgba(255,205,190,0.12)] bg-black/10 p-4">
+                  <p className="text-xs uppercase tracking-[0.28em] text-[rgba(255,188,160,0.68)]">
+                    Interests
+                  </p>
+                  <p className="mt-3 text-base leading-7 text-stone-300/80">
+                    Add a few interests here: research topics, side projects,
+                    music, books, sports, or anything that feels like you.
+                  </p>
+                </div>
+                <div className="rounded-[1.25rem] border border-[rgba(255,205,190,0.12)] bg-black/10 p-4">
+                  <p className="text-xs uppercase tracking-[0.28em] text-[rgba(255,188,160,0.68)]">
+                    Personal Note
+                  </p>
+                  <p className="mt-3 text-base leading-7 text-stone-300/80">
+                    Leave yourself a place for one fun detail, favorite
+                    question, or small thing people usually remember about you.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-[1.5rem] border border-[rgba(255,205,190,0.12)] bg-[linear-gradient(180deg,rgba(181,50,26,0.08),rgba(0,0,0,0.16))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+              <div className="flex aspect-[4/5] items-center justify-center rounded-[1.2rem] border border-dashed border-[rgba(255,205,190,0.24)] bg-[rgba(0,0,0,0.16)] px-8 text-center">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.28em] text-[rgba(255,188,160,0.68)]">
+                    Photo
+                  </p>
+                  <p className="mt-4 text-xl leading-8 text-stone-300/82">
+                    Put a photo of yourself here later.
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-stone-400/82">
+                    You can swap this box for an image once you pick one you
+                    like.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div>
               <p className="text-xs uppercase tracking-[0.32em] text-[rgba(255,188,160,0.74)]">
                 Currently listening to
@@ -172,15 +250,14 @@ export default function Home() {
                   <em>ACCELERATOR</em>
                 </span>{" "}
                 <span className="text-white">by </span>
-                <span className="text-[#8aff9d]">
-                  greek
-                </span>
+                <span className="text-[#8aff9d]">greek</span>
               </h2>
               <p className="mt-5 max-w-xl text-lg leading-8 text-stone-300/80">
-                <em>ACCELERATOR</em> has been one of my favorite albums since its release in June 2024.
-                <br /> 
-                The album is a mix of Alternative R&B, Contemporary R&B, and Bedroom Pop.
-
+                <em>ACCELERATOR</em> has been one of my favorite albums since
+                its release in June 2024.
+                <br />
+                The album is a mix of Alternative R&amp;B, Contemporary R&amp;B,
+                and Bedroom Pop.
               </p>
               <p className="mt-4 max-w-xl text-sm leading-7 text-stone-400/85">
                 My personal favorite songs from the album are:
