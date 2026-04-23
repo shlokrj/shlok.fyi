@@ -1,10 +1,25 @@
 "use client";
 
 const navItems = [
-  { href: "about", label: "About" },
+  { href: "home", label: "Home" },
+  { href: "projects", label: "Projects" },
+  { href: "experience", label: "Experience" },
+  { href: "about-me", label: "About Me" },
   { href: "contact", label: "Contact" },
-  { href: "listening", label: "Listening" },
 ];
+
+function SectionDivider({ label }: { label: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="mx-auto flex w-full max-w-4xl items-center gap-4 px-4 text-[rgba(255,188,160,0.58)]"
+    >
+      <div className="h-px flex-1 bg-[linear-gradient(90deg,rgba(255,188,160,0),rgba(255,188,160,0.34))]" />
+      <span className="text-xs uppercase tracking-[0.38em]">{label}</span>
+      <div className="h-px flex-1 bg-[linear-gradient(90deg,rgba(255,188,160,0.34),rgba(255,188,160,0))]" />
+    </div>
+  );
+}
 
 export default function Home() {
   const scrollToTop = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -55,8 +70,10 @@ export default function Home() {
           </div>
         </nav>
 
+        <SectionDivider label="Home" />
+
         <section
-          id="about"
+          id="home"
           className="scroll-mt-24 w-full rounded-[2rem] border border-white/20 bg-[linear-gradient(145deg,rgba(92,34,21,0.9),rgba(56,22,16,0.93)_42%,rgba(26,14,11,0.97))] px-8 py-12 text-stone-100 shadow-[0_30px_80px_rgba(26,10,5,0.45)] backdrop-blur sm:px-12 sm:py-16"
         >
           <div className="grid gap-12 lg:grid-cols-[1.5fr_0.9fr] lg:items-end">
@@ -102,41 +119,47 @@ export default function Home() {
           </div>
         </section>
 
+        <SectionDivider label="Projects" />
+
         <section
-          id="contact"
+          id="projects"
           className="scroll-mt-24 w-full rounded-[1.75rem] border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(88,31,21,0.74),rgba(26,14,11,0.88))] px-8 py-8 text-stone-100 shadow-[0_20px_60px_rgba(26,10,5,0.3)] backdrop-blur sm:px-12"
         >
           <p className="text-xs uppercase tracking-[0.32em] text-[rgba(255,188,160,0.74)]">
-            Contact
+            Projects
           </p>
-          <div className="mt-5 grid gap-5 sm:grid-cols-2">
-            <div>
-              <p className="text-sm uppercase tracking-[0.24em] text-stone-300/68">
-                Personal
-              </p>
-              <a
-                href="mailto:shlok.jadhav.07@gmail.com"
-                className="mt-2 inline-block border-b border-[rgba(255,188,160,0.55)] text-2xl leading-tight text-[rgba(255,188,160,0.95)] transition-colors transition-[border-color,color] duration-200 hover:border-white hover:text-white"
-              >
-                shlok.jadhav.07@gmail.com
-              </a>
-            </div>
-            <div>
-              <p className="text-sm uppercase tracking-[0.24em] text-stone-300/68">
-                School
-              </p>
-              <a
-                href="mailto:shlok.jadhav@wisc.edu"
-                className="mt-2 inline-block border-b border-[rgba(255,188,160,0.55)] text-2xl leading-tight text-[rgba(255,188,160,0.95)] transition-colors transition-[border-color,color] duration-200 hover:border-white hover:text-white"
-              >
-                shlok.jadhav@wisc.edu
-              </a>
-            </div>
-          </div>
+          <h2 className="mt-4 text-4xl leading-tight text-[rgba(255,231,222,0.96)] sm:text-5xl">
+            A few things are on the way.
+          </h2>
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-stone-300/80">
+            This section will eventually hold featured builds, research work,
+            and technical projects. For now, I&apos;m leaving it intentionally
+            minimal.
+          </p>
         </section>
 
+        <SectionDivider label="Experience" />
+
         <section
-          id="listening"
+          id="experience"
+          className="scroll-mt-24 w-full rounded-[1.75rem] border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(88,31,21,0.78),rgba(26,14,11,0.9))] px-8 py-8 text-stone-100 shadow-[0_20px_60px_rgba(26,10,5,0.3)] backdrop-blur sm:px-12"
+        >
+          <p className="text-xs uppercase tracking-[0.32em] text-[rgba(255,188,160,0.74)]">
+            Experience
+          </p>
+          <h2 className="mt-4 text-4xl leading-tight text-[rgba(255,231,222,0.96)] sm:text-5xl">
+            Experience will live here soon.
+          </h2>
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-stone-300/80">
+            I&apos;ll use this section for internships, research, campus work,
+            and the roles that shaped how I like to build.
+          </p>
+        </section>
+
+        <SectionDivider label="About Me" />
+
+        <section
+          id="about-me"
           className="scroll-mt-24 w-full rounded-[1.75rem] border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(88,31,21,0.78),rgba(26,14,11,0.9))] px-8 py-8 text-stone-100 shadow-[0_20px_60px_rgba(26,10,5,0.3)] backdrop-blur sm:px-12"
         >
           <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
@@ -176,6 +199,41 @@ export default function Home() {
                 loading="lazy"
                 className="rounded-[1rem]"
               />
+            </div>
+          </div>
+        </section>
+
+        <SectionDivider label="Contact" />
+
+        <section
+          id="contact"
+          className="scroll-mt-24 w-full rounded-[1.75rem] border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(88,31,21,0.74),rgba(26,14,11,0.88))] px-8 py-8 text-stone-100 shadow-[0_20px_60px_rgba(26,10,5,0.3)] backdrop-blur sm:px-12"
+        >
+          <p className="text-xs uppercase tracking-[0.32em] text-[rgba(255,188,160,0.74)]">
+            Contact
+          </p>
+          <div className="mt-5 grid gap-5 sm:grid-cols-2">
+            <div>
+              <p className="text-sm uppercase tracking-[0.24em] text-stone-300/68">
+                Personal
+              </p>
+              <a
+                href="mailto:shlok.jadhav.07@gmail.com"
+                className="mt-2 inline-block border-b border-[rgba(255,188,160,0.55)] text-2xl leading-tight text-[rgba(255,188,160,0.95)] transition-colors transition-[border-color,color] duration-200 hover:border-white hover:text-white"
+              >
+                shlok.jadhav.07@gmail.com
+              </a>
+            </div>
+            <div>
+              <p className="text-sm uppercase tracking-[0.24em] text-stone-300/68">
+                School
+              </p>
+              <a
+                href="mailto:shlok.jadhav@wisc.edu"
+                className="mt-2 inline-block border-b border-[rgba(255,188,160,0.55)] text-2xl leading-tight text-[rgba(255,188,160,0.95)] transition-colors transition-[border-color,color] duration-200 hover:border-white hover:text-white"
+              >
+                shlok.jadhav@wisc.edu
+              </a>
             </div>
           </div>
         </section>
