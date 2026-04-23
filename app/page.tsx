@@ -63,7 +63,7 @@ export default function Home() {
                 key={item.href}
                 href={`#${item.href}`}
                 onClick={(event) => scrollToSection(event, item.href)}
-                className="cursor-pointer transition-colors duration-200 hover:text-white"
+                className="rounded-full px-2 py-1 transition duration-200 ease-out hover:-translate-y-0.5 hover:text-white hover:shadow-[0_0_18px_rgba(255,173,94,0.22)]"
               >
                 {item.label}
               </a>
