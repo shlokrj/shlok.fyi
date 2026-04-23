@@ -325,7 +325,7 @@ export default function Home() {
         href="#top"
         aria-label="Back to top"
         onClick={scrollToTop}
-        className="fixed bottom-6 right-6 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(255,205,190,0.18)] bg-[linear-gradient(180deg,rgba(88,31,21,0.88),rgba(26,14,11,0.94))] text-2xl text-[rgba(255,188,160,0.9)] shadow-[0_14px_35px_rgba(26,10,5,0.3)] backdrop-blur transition-colors duration-200 hover:text-white"
+        className="fixed bottom-6 right-6 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(255,205,190,0.18)] bg-[linear-gradient(180deg,rgba(88,31,21,0.88),rgba(26,14,11,0.94))] text-2xl text-[rgba(255,188,160,0.9)] shadow-[0_14px_35px_rgba(26,10,5,0.3)] backdrop-blur transition duration-200 ease-out hover:-translate-y-0.5 hover:text-white hover:shadow-[0_0_18px_rgba(255,173,94,0.22)]"
       >
         ↑
       </a>
