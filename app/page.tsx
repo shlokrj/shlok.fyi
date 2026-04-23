@@ -196,7 +196,7 @@ export default function Home() {
                 I moved to Wisconsin for college in 2025, and despite the cold, I&apos;ve really enjoyed my time here so far!
               </p>
               <p className="mt-4 max-w-2xl text-base leading-8 text-stone-300/82">
-                I realized pretty early on that college isn't just about classes and grades for me, but it&apos;s also a lifestyle and what you make of it.
+                I realized pretty early on that college isn&apos;t just about classes and grades for me, but it&apos;s also a lifestyle and what you make of it.
                 Outside of class, I&apos;m involved in research and a few student orgs on campus, and I also love to build projects for fun.
                 I love keeping myself busy, so I&apos;m always trying to learn new things, meet new people, and explore new places.
               </p>
