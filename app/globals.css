@@ -19,15 +19,15 @@
 
 html {
   scroll-behavior: smooth;
-  background:
-    radial-gradient(circle at top, rgba(209, 76, 41, 0.18), transparent 28%),
-    radial-gradient(circle at 82% 16%, rgba(161, 34, 19, 0.14), transparent 18%),
-    linear-gradient(180deg, #3f1e17 0%, #23120f 42%, #120b09 100%);
+  background: #000;
 }
 
 body {
   scroll-behavior: smooth;
-  background: var(--background);
+  background:
+    radial-gradient(circle at top, rgba(209, 76, 41, 0.18), transparent 28%),
+    radial-gradient(circle at 82% 16%, rgba(161, 34, 19, 0.14), transparent 18%),
+    linear-gradient(180deg, #3f1e17 0%, #23120f 42%, #120b09 100%);
   color: var(--foreground);
   font-family: "Times New Roman", Times, serif;
   letter-spacing: 0.01em;

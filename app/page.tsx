@@ -69,7 +69,7 @@ export default function Home() {
               </h1>
 
               <p className="mt-8 max-w-2xl text-xl leading-9 text-stone-200/82 sm:text-2xl">
-                I'm a{" "}
+                I&apos;m a{" "}
                 <span className="font-semibold">Computer Science</span>{" "}
                 and{" "}
                 <span className="font-semibold">Data Science</span>{" "}
