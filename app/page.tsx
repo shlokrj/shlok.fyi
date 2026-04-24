@@ -77,7 +77,7 @@ export default function Home() {
           id="home"
           className="scroll-mt-24 w-full rounded-[2rem] border border-white/20 bg-[linear-gradient(145deg,rgba(92,34,21,0.9),rgba(56,22,16,0.93)_42%,rgba(26,14,11,0.97))] px-8 py-12 text-stone-100 shadow-[0_30px_80px_rgba(26,10,5,0.45)] backdrop-blur sm:px-12 sm:py-16"
         >
-          <div className="grid gap-12 lg:grid-cols-[1.5fr_0.9fr] lg:items-end">
+          <div className="grid gap-8 xl:grid-cols-[1.35fr_0.95fr_0.8fr] xl:items-start">
             <div>
               <p className="text-lg italic tracking-[0.01em] text-[rgba(255,210,194,0.82)] sm:text-xl">
                 Hello! My name is
@@ -119,6 +119,22 @@ export default function Home() {
               <br />
                 Areas: Bio · Climate · Emerging Tech
               </p>
+            </div>
+
+            <div className="w-full rounded-[1.75rem] border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(181,50,26,0.08),rgba(0,0,0,0.18))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+              <div className="flex aspect-[4/5] items-center justify-center rounded-[1.35rem] border border-dashed border-[rgba(255,205,190,0.26)] bg-[rgba(0,0,0,0.18)] px-8 text-center">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.28em] text-[rgba(255,188,160,0.68)]">
+                    Portrait
+                  </p>
+                  <p className="mt-4 text-xl leading-8 text-stone-300/82">
+                    picture of myself
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-stone-400/82">
+                    replace here.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
