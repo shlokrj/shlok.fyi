@@ -77,63 +77,67 @@ export default function Home() {
           id="home"
           className="scroll-mt-24 w-full rounded-[2rem] border border-white/20 bg-[linear-gradient(145deg,rgba(92,34,21,0.9),rgba(56,22,16,0.93)_42%,rgba(26,14,11,0.97))] px-8 py-12 text-stone-100 shadow-[0_30px_80px_rgba(26,10,5,0.45)] backdrop-blur sm:px-12 sm:py-16"
         >
-          <div className="grid gap-8 xl:grid-cols-[1.35fr_0.95fr_0.8fr] xl:items-start">
-            <div>
-              <p className="text-lg italic tracking-[0.01em] text-[rgba(255,210,194,0.82)] sm:text-xl">
-                Hello! My name is
-              </p>
-              <h1 className="fireplace-name mt-3 max-w-3xl text-6xl leading-[0.92] tracking-[-0.04em] text-[var(--foreground)] sm:text-8xl">
-                <span className="fireplace-name__text">Shlok Jadhav.</span>
-                <span className="fireplace-name__spark fireplace-name__spark--one" />
-                <span className="fireplace-name__spark fireplace-name__spark--two" />
-                <span className="fireplace-name__spark fireplace-name__spark--three" />
-              </h1>
+          <div className="grid gap-8 xl:grid-cols-[1.35fr_1fr] xl:items-start">
+            <div className="flex h-full flex-col justify-between gap-10">
+              <div>
+                <p className="text-lg italic tracking-[0.01em] text-[rgba(255,210,194,0.82)] sm:text-xl">
+                  Hello! My name is
+                </p>
+                <h1 className="fireplace-name mt-3 max-w-3xl text-[4.5rem] leading-[0.86] tracking-[-0.05em] text-[var(--foreground)] sm:text-[6rem] xl:text-[7.2rem]">
+                  <span className="fireplace-name__text block">Shlok</span>
+                  <span className="fireplace-name__text block">Jadhav.</span>
+                  <span className="fireplace-name__spark fireplace-name__spark--one" />
+                  <span className="fireplace-name__spark fireplace-name__spark--two" />
+                  <span className="fireplace-name__spark fireplace-name__spark--three" />
+                </h1>
+              </div>
 
-              <p className="mt-8 max-w-2xl text-xl leading-9 text-stone-200/82 sm:text-2xl">
+              <p className="max-w-[42rem] text-[1.25rem] leading-[1.7] text-stone-200/82 sm:text-[1.45rem] xl:text-[1.7rem]">
                 I&apos;m a{" "}
-                <span className="font-semibold">Computer Science</span>{" "}
+                <span className="font-semibold">B.S. Computer Science</span>{" "}
                 and{" "}
-                <span className="font-semibold">Data Science</span>{" "}
-                student 
-                at{" "}
+                <span className="font-semibold">B.S. Data Science</span>{" "}
+                student at{" "}
                 <span className="font-semibold">UW-Madison</span>{" "}
-                interested in building data-driven systems 
-                and applied machine learning for real-world problems 
-                (biology, XR, perception, and more).
+                interested in building data-driven systems and applied machine
+                learning for real-world problems (biology, XR, perception, and
+                more). I expect to graduate in May 2028!
               </p>
             </div>
 
-            <div className="rounded-[1.5rem] border border-[rgba(255,205,190,0.12)] bg-[linear-gradient(180deg,rgba(181,50,26,0.12),rgba(0,0,0,0.14))] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
-              <p className="text-xs uppercase tracking-[0.3em] text-[rgba(255,188,160,0.74)]">
-                Current Focus
-              </p>
-              <p className="mt-4 text-3xl leading-tight text-[rgba(255,231,222,0.96)]">
-                Actively looking for 
-                <br />
-                <span className="text-[#ffec96]">
-                  <em>Summer 2026 Opportunities</em>
-                </span>
-              </p>
-              <p className="mt-5 text-base leading-7 text-stone-300/78">
-                Building in: SWE · ML · Data
-              <br />
-                Areas: Bio · Climate · Emerging Tech
-              </p>
-            </div>
-
-            <div className="w-full rounded-[1.75rem] border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(181,50,26,0.08),rgba(0,0,0,0.18))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
-              <div className="flex aspect-[4/5] items-center justify-center rounded-[1.35rem] border border-dashed border-[rgba(255,205,190,0.26)] bg-[rgba(0,0,0,0.18)] px-8 text-center">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.28em] text-[rgba(255,188,160,0.68)]">
-                    Portrait
-                  </p>
-                  <p className="mt-4 text-xl leading-8 text-stone-300/82">
-                    picture of myself
-                  </p>
-                  <p className="mt-3 text-sm leading-7 text-stone-400/82">
-                    replace here.
-                  </p>
+            <div className="grid gap-5 xl:grid-rows-[1fr_auto]">
+              <div className="w-full rounded-[1.75rem] border border-[rgba(255,205,190,0.14)] bg-[linear-gradient(180deg,rgba(181,50,26,0.08),rgba(0,0,0,0.18))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+                <div className="flex h-full min-h-[18rem] items-center justify-center rounded-[1.35rem] border border-dashed border-[rgba(255,205,190,0.26)] bg-[rgba(0,0,0,0.18)] px-8 text-center">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.28em] text-[rgba(255,188,160,0.68)]">
+                      Portrait
+                    </p>
+                    <p className="mt-4 text-xl leading-8 text-stone-300/82">
+                      picture of myself
+                    </p>
+                    <p className="mt-3 text-sm leading-7 text-stone-400/82">
+                      replace here.
+                    </p>
+                  </div>
                 </div>
+              </div>
+
+              <div className="rounded-[1.5rem] border border-[rgba(255,205,190,0.12)] bg-[linear-gradient(180deg,rgba(181,50,26,0.12),rgba(0,0,0,0.14))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+                <p className="text-xs uppercase tracking-[0.3em] text-[rgba(255,188,160,0.74)]">
+                  Current Focus
+                </p>
+                <p className="mt-3 text-[2rem] leading-[1.1] text-[rgba(255,231,222,0.96)] sm:text-[2.3rem]">
+                  Actively looking for
+                  <br />
+                  <span className="text-[#ffec96]">
+                    <em>Summer 2026 Opportunities</em>
+                  </span>
+                </p>
+                <p className="mt-4 text-sm leading-6 text-stone-300/78 sm:text-base">
+                  Building in: SWE · ML · Data
+                  <br />
+                  Areas: Bio · Climate · Emerging Tech
+                </p>
               </div>
             </div>
           </div>
