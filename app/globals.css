@@ -37,6 +37,32 @@ a {
   color: inherit;
 }
 
+.hero-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  pointer-events: none;
+  animation: hero-curtain-fade 1.65s ease forwards;
+}
+
+.hero-curtain__title {
+  margin: 0;
+  animation: hero-curtain-name 1.65s ease forwards;
+}
+
+.hero-curtain__text {
+  color: #fff3df;
+  text-shadow:
+    0 0 2px rgba(255, 244, 224, 0.72),
+    0 0 14px rgba(255, 145, 61, 0.35),
+    0 0 28px rgba(217, 81, 32, 0.24),
+    0 0 52px rgba(164, 45, 17, 0.16);
+}
+
 .uw-outline {
   color: var(--foreground);
   -webkit-text-stroke: 1px #c5050c;
@@ -185,10 +211,47 @@ a {
   }
 }
 
+@keyframes hero-curtain-name {
+  0% {
+    opacity: 0;
+    filter: blur(6px);
+  }
+  28% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes hero-curtain-fade {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  72% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .hero-curtain,
+  .hero-curtain__title,
+  .hero-curtain__text,
   .fireplace-name__text,
   .fireplace-name__spark {
     animation: none;
+  }
+
+  .hero-curtain {
+    display: none;
   }
 }
 

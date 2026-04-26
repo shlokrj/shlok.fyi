@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 const navItems = [
   { href: "home", label: "Home" },
   { href: "projects", label: "Projects" },
@@ -23,6 +25,16 @@ function SectionDivider({ label }: { label: string }) {
 }
 
 export default function Home() {
+  const [showCurtain, setShowCurtain] = useState(true);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setShowCurtain(false);
+    }, 1650);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
   const scrollToTop = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
 
@@ -51,6 +63,13 @@ export default function Home() {
 
   return (
     <main className="relative overflow-hidden bg-[var(--background)] px-6 py-8 sm:px-10 sm:py-10">
+      {showCurtain ? (
+        <div aria-hidden="true" className="hero-curtain">
+          <h1 className="hero-curtain__title text-[5.2rem] leading-[0.9] tracking-[-0.055em] text-[var(--foreground)] sm:text-[6.8rem] xl:text-[8.4rem]">
+            <span className="hero-curtain__text">Shlok Jadhav.</span>
+          </h1>
+        </div>
+      ) : null}
       <div id="top" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(214,76,36,0.28),transparent_30%),radial-gradient(circle_at_85%_20%,rgba(183,46,24,0.24),transparent_22%),radial-gradient(circle_at_bottom_left,rgba(120,40,12,0.24),transparent_34%)]" />
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(209,67,33,0.26),rgba(209,67,33,0)_66%)] blur-3xl" />
@@ -83,7 +102,7 @@ export default function Home() {
                 <p className="text-lg italic tracking-[0.01em] text-[rgba(255,210,194,0.82)] sm:text-xl">
                   Hello! My name is
                 </p>
-                <h1 className="fireplace-name mt-3 max-w-3xl text-[4.5rem] leading-[0.86] tracking-[-0.05em] text-[var(--foreground)] sm:text-[6rem] xl:text-[7.2rem]">
+                <h1 className="fireplace-name mt-3 max-w-3xl text-[5.2rem] leading-[0.82] tracking-[-0.055em] text-[var(--foreground)] sm:text-[6.8rem] xl:text-[8.4rem]">
                   <span className="fireplace-name__text block">Shlok</span>
                   <span className="fireplace-name__text block">Jadhav.</span>
                   <span className="fireplace-name__spark fireplace-name__spark--one" />
