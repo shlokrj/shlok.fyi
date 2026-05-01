@@ -68,25 +68,29 @@ function MoonIcon() {
   );
 }
 
+function getPreferredTheme(): Theme {
+  const savedTheme = window.localStorage.getItem("theme");
+  const systemTheme = window.matchMedia("(prefers-color-scheme: light)").matches
+    ? "light"
+    : "dark";
+
+  return savedTheme === "light" || savedTheme === "dark"
+    ? savedTheme
+    : systemTheme;
+}
+
+function applyTheme(theme: Theme) {
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.style.colorScheme = theme;
+  window.localStorage.setItem("theme", theme);
+}
+
 export default function Home() {
   const [showCurtain, setShowCurtain] = useState(true);
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === "undefined") {
-      return "dark";
-    }
-
-    const savedTheme = window.localStorage.getItem("theme");
-    const systemTheme = window.matchMedia("(prefers-color-scheme: light)")
-      .matches
-      ? "light"
-      : "dark";
-
-    return savedTheme === "light" || savedTheme === "dark"
-      ? savedTheme
-      : systemTheme;
-  });
 
   useEffect(() => {
+    applyTheme(getPreferredTheme());
+
     const timer = window.setTimeout(() => {
       setShowCurtain(false);
     }, 1650);
@@ -94,13 +98,11 @@ export default function Home() {
     return () => window.clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem("theme", theme);
-  }, [theme]);
-
   const toggleTheme = () => {
-    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
+    const currentTheme = document.documentElement.dataset.theme;
+    const nextTheme: Theme = currentTheme === "light" ? "dark" : "light";
+
+    applyTheme(nextTheme);
   };
 
   const scrollToTop = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -144,12 +146,16 @@ export default function Home() {
       <button
         type="button"
         onClick={toggleTheme}
-        aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-        title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-        suppressHydrationWarning
+        aria-label="Toggle color theme"
+        title="Toggle color theme"
         className="control-button fixed right-4 top-4 z-30 flex h-11 w-11 items-center justify-center rounded-full border backdrop-blur transition duration-200 ease-out hover:-translate-y-0.5 sm:right-6 sm:top-6"
       >
-        {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+        <span className="theme-toggle__icon theme-toggle__sun">
+          <SunIcon />
+        </span>
+        <span className="theme-toggle__icon theme-toggle__moon">
+          <MoonIcon />
+        </span>
       </button>
 
       <div className="relative mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8">
@@ -303,7 +309,7 @@ export default function Home() {
                 About Me
               </p>
               <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
-                Hi! my name is Shlok Jadhav,
+                Hi! My name is Shlok Jadhav,
               </h2>
               <p className="theme-muted mt-5 max-w-2xl text-lg leading-8">
                 and I am a Computer Science and Data Science student at the University of Wisconsin-Madison.

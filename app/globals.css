@@ -208,10 +208,40 @@ a {
 }
 
 .control-button {
+  position: fixed;
   border-color: var(--panel-border);
   background: var(--nav-background);
   color: var(--eyebrow);
   box-shadow: 0 14px 35px var(--shadow);
+}
+
+.theme-toggle__icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.theme-toggle__moon {
+  opacity: 0;
+  transform: scale(0.82) rotate(-12deg);
+  pointer-events: none;
+}
+
+html[data-theme="light"] .theme-toggle__sun {
+  opacity: 0;
+  transform: scale(0.82) rotate(12deg);
+  pointer-events: none;
+}
+
+html[data-theme="light"] .theme-toggle__moon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  pointer-events: auto;
 }
 
 .eyebrow {
