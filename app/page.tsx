@@ -327,25 +327,6 @@ export default function Home() {
                 Outside of that, traveling has always been a major part of my life. 
                 I&apos;ve been lucky to visit many different places growing up, and I&apos;m especially excited to explore countries like Egypt, Singapore, and Switzerland in the future.
               </p>
-
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <div className="mini-card rounded-[1.25rem] border p-4">
-                  <p className="eyebrow-soft text-xs uppercase tracking-[0.28em]">
-                    Interests
-                  </p>
-                  <p className="theme-muted mt-3 text-base leading-7">
-                    adding interests here
-                  </p>
-                </div>
-                <div className="mini-card rounded-[1.25rem] border p-4">
-                  <p className="eyebrow-soft text-xs uppercase tracking-[0.28em]">
-                    Personal Note
-                  </p>
-                  <p className="theme-muted mt-3 text-base leading-7">
-                    fun stuff about me here
-                  </p>
-                </div>
-              </div>
             </div>
 
             <div className="sub-panel rounded-[1.5rem] border p-5">
