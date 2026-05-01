@@ -316,13 +316,16 @@ export default function Home() {
                 I love keeping myself busy, and I&apos;m a firm believer that there are always things to learn, people to meet, places to explore, etc.
               </p>
               <p className="theme-muted mt-4 max-w-2xl text-base leading-8">
-                For my hobbies, I enjoy listening to music, playing games & sports, and exploring new places.
-                Some of my favorite artists recently include greek, Luna Li, Osamason, slayr, and more.
-                I have been growing up with video games, playing on my sister&apos;s DS and our family Wii.
-                Some of my favorite games all time include ANY Pokemon game (I know the Pokedex by heart), Minecraft, Fortnite, Valorant, 
-                I have been a huge Golden State Warriors fan for as long as I can remember, and I also 
-                have gotten into lifting weights and playing tennis in the past couple of years. 
-                I also love to travel and explore new cities, and I&apos;m always down for trying new food.
+                In my free time, I like to stay busy with a mix of hobbies. 
+                Music is a big part of my day, and I&apos;ve been listening to artists like greek, Luna Li, Osamason, and slayr lately.
+                I also enjoy playing games and sports, something that&apos;s been part of my life since I was young, from playing on my sister&apos;s DS to our family Wii.
+                I&apos;m a huge Pokémon fan and can recognize almost every single one (maybe not so much anymore).
+                Sports have been another constant in my life; I&apos;ve played and followed them for as long as I can remember.
+                Basketball is probably my favorite sport, and I&apos;ve been a dedicated Golden State Warriors fan since I was a kid.
+                For a little over a decade, I practiced Taekwondo, which shaped not just my work ethic but also a big part of who I am.
+                Since starting college, I&apos;ve gotten into weightlifting and enjoy pushing toward new PRs.
+                Outside of that, traveling has always been a major part of my life. 
+                I&apos;ve been lucky to visit many different places growing up, and I&apos;m especially excited to explore countries like Egypt, Singapore, and Switzerland in the future.
               </p>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
