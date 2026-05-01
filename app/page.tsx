@@ -235,7 +235,7 @@ export default function Home() {
               <p className="mt-4 max-w-2xl text-base leading-8 text-stone-300/82">
                 I realized pretty early on that college isn&apos;t just about classes and grades for me, but it&apos;s also a lifestyle and what you make of it.
                 Outside of class, I&apos;m involved in research and a few student orgs on campus, and I also love to build projects for fun.
-                I love keeping myself busy, so I&apos;m always trying to learn new things, meet new people, and explore new places.
+                I love keeping myself busy, and I&apos;m a firm believer that there are always things to learn, people to meet, places to explore, etc.
               </p>
               <p className="mt-4 max-w-2xl text-base leading-8 text-stone-300/82">
                 For my hobbies, I enjoy listening to music, playing games & sports, and exploring new places.

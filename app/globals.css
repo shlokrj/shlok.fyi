@@ -214,15 +214,12 @@ a {
 @keyframes hero-curtain-name {
   0% {
     opacity: 0;
-    filter: blur(6px);
   }
   28% {
     opacity: 1;
-    filter: blur(0);
   }
   100% {
     opacity: 1;
-    filter: blur(0);
   }
 }
 
