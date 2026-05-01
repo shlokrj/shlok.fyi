@@ -276,6 +276,15 @@ a {
     0 0 52px rgba(164, 45, 17, 0.16);
 }
 
+[data-theme="light"] .fireplace-name__text {
+  animation-name: fireplace-flicker-light;
+  color: #c24b16;
+  text-shadow:
+    0 1px 0 rgba(255, 247, 235, 0.78),
+    0 0 10px rgba(255, 147, 56, 0.28),
+    0 0 24px rgba(216, 82, 22, 0.18);
+}
+
 .fireplace-name__spark {
   position: absolute;
   z-index: 0;
@@ -352,6 +361,50 @@ a {
       0 0 20px rgba(255, 126, 39, 0.54),
       0 0 40px rgba(214, 74, 27, 0.3),
       0 0 70px rgba(143, 34, 12, 0.2);
+  }
+}
+
+@keyframes fireplace-flicker-light {
+  0%,
+  100% {
+    color: #c24b16;
+    transform: translateY(0) scale(1);
+    text-shadow:
+      0 1px 0 rgba(255, 247, 235, 0.78),
+      0 0 10px rgba(255, 147, 56, 0.28),
+      0 0 24px rgba(216, 82, 22, 0.18);
+  }
+  18% {
+    color: #df5b18;
+    transform: translateY(-0.002em) scale(1.0004);
+    text-shadow:
+      0 1px 0 rgba(255, 249, 239, 0.86),
+      0 0 14px rgba(255, 139, 45, 0.36),
+      0 0 30px rgba(213, 73, 18, 0.22);
+  }
+  38% {
+    color: #a83b12;
+    transform: translateY(0.002em) scale(0.9992);
+    text-shadow:
+      0 1px 0 rgba(255, 247, 235, 0.72),
+      0 0 9px rgba(255, 132, 38, 0.24),
+      0 0 22px rgba(181, 57, 14, 0.18);
+  }
+  61% {
+    color: #d95217;
+    transform: translateY(-0.002em) scale(1.0006);
+    text-shadow:
+      0 1px 0 rgba(255, 249, 239, 0.84),
+      0 0 12px rgba(255, 146, 54, 0.32),
+      0 0 28px rgba(210, 75, 19, 0.2);
+  }
+  82% {
+    color: #b84413;
+    transform: translateY(0.002em) scale(0.9994);
+    text-shadow:
+      0 1px 0 rgba(255, 247, 235, 0.76),
+      0 0 11px rgba(255, 124, 34, 0.3),
+      0 0 24px rgba(190, 59, 14, 0.18);
   }
 }
 

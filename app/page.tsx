@@ -26,6 +26,48 @@ function SectionDivider({ label }: { label: string }) {
   );
 }
 
+function SunIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.8"
+      viewBox="0 0 24 24"
+    >
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2" />
+      <path d="M12 20v2" />
+      <path d="m4.93 4.93 1.41 1.41" />
+      <path d="m17.66 17.66 1.41 1.41" />
+      <path d="M2 12h2" />
+      <path d="M20 12h2" />
+      <path d="m6.34 17.66-1.41 1.41" />
+      <path d="m19.07 4.93-1.41 1.41" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.8"
+      viewBox="0 0 24 24"
+    >
+      <path d="M20.99 12.52A8.5 8.5 0 1 1 11.48 3.01 6.5 6.5 0 0 0 20.99 12.52Z" />
+    </svg>
+  );
+}
+
 export default function Home() {
   const [showCurtain, setShowCurtain] = useState(true);
   const [theme, setTheme] = useState<Theme>(() => {
@@ -52,12 +94,13 @@ export default function Home() {
     return () => window.clearTimeout(timer);
   }, []);
 
-  const toggleTheme = () => {
-    const nextTheme = theme === "dark" ? "light" : "dark";
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("theme", theme);
+  }, [theme]);
 
-    setTheme(nextTheme);
-    document.documentElement.dataset.theme = nextTheme;
-    window.localStorage.setItem("theme", nextTheme);
+  const toggleTheme = () => {
+    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
   };
 
   const scrollToTop = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -98,6 +141,16 @@ export default function Home() {
       <div id="top" />
       <div className="site-ambient pointer-events-none absolute inset-0" />
       <div className="site-glow pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
+      <button
+        type="button"
+        onClick={toggleTheme}
+        aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+        title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+        suppressHydrationWarning
+        className="control-button fixed right-4 top-4 z-30 flex h-11 w-11 items-center justify-center rounded-full border backdrop-blur transition duration-200 ease-out hover:-translate-y-0.5 sm:right-6 sm:top-6"
+      >
+        {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+      </button>
 
       <div className="relative mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8">
         <nav className="sticky top-3 z-10 mx-auto mb-4 flex w-full justify-center">
@@ -112,15 +165,6 @@ export default function Home() {
                 {item.label}
               </a>
             ))}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-              suppressHydrationWarning
-              className="nav-link rounded-full border border-current/20 px-3 py-1 transition duration-200 ease-out hover:-translate-y-0.5"
-            >
-              {theme === "dark" ? "Light" : "Dark"}
-            </button>
           </div>
         </nav>
 
