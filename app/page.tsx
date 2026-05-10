@@ -13,7 +13,7 @@ const navItems = [
   { href: "contact", label: "Contact" },
 ];
 
-function SectionDivider({ label }: { label: string }) {
+function SectionDivider({ label }: Readonly<{ label: string }>) {
   return (
     <div
       aria-hidden="true"
@@ -69,8 +69,8 @@ function MoonIcon() {
 }
 
 function getPreferredTheme(): Theme {
-  const savedTheme = window.localStorage.getItem("theme");
-  const systemTheme = window.matchMedia("(prefers-color-scheme: light)").matches
+  const savedTheme = globalThis.localStorage.getItem("theme");
+  const systemTheme = globalThis.matchMedia("(prefers-color-scheme: light)").matches
     ? "light"
     : "dark";
 
@@ -82,7 +82,7 @@ function getPreferredTheme(): Theme {
 function applyTheme(theme: Theme) {
   document.documentElement.dataset.theme = theme;
   document.documentElement.style.colorScheme = theme;
-  window.localStorage.setItem("theme", theme);
+  globalThis.localStorage.setItem("theme", theme);
 }
 
 export default function Home() {
@@ -91,11 +91,11 @@ export default function Home() {
   useEffect(() => {
     applyTheme(getPreferredTheme());
 
-    const timer = window.setTimeout(() => {
+    const timer = globalThis.setTimeout(() => {
       setShowCurtain(false);
     }, 1650);
 
-    return () => window.clearTimeout(timer);
+    return () => globalThis.clearTimeout(timer);
   }, []);
 
   const toggleTheme = () => {
