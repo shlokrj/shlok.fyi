@@ -197,14 +197,13 @@ export default function Home() {
 
               <p className="theme-muted max-w-[42rem] text-[1.25rem] leading-[1.7] sm:text-[1.45rem] xl:text-[1.7rem]">
                 I&apos;m a{" "}
-                <span className="font-semibold">B.S. Computer Science</span>{" "}
+                <span className="font-semibold">Computer Science</span>{" "}
                 and{" "}
-                <span className="font-semibold">B.S. Data Science</span>{" "}
+                <span className="font-semibold">Data Science</span>{" "}
                 student at{" "}
                 <span className="font-semibold">UW-Madison</span>{" "}
                 interested in building data-driven systems and applied machine
-                learning for real-world problems (biology, XR, perception, and
-                more). I expect to graduate in May 2028!
+                learning for real-world problems (biology, XR, perception, etc.). I will be going into my second year and graduating in May 2028!
               </p>
             </div>
 
