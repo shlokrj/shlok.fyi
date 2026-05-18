@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type Theme = "dark" | "light";
@@ -209,18 +210,15 @@ export default function Home() {
 
             <div className="grid gap-5 xl:grid-rows-[1fr_auto]">
               <div className="sub-panel w-full rounded-[1.75rem] border p-4">
-                <div className="placeholder-panel flex h-full min-h-[18rem] items-center justify-center rounded-[1.35rem] border border-dashed px-8 text-center">
-                  <div>
-                    <p className="eyebrow-soft text-xs uppercase tracking-[0.28em]">
-                      Portrait
-                    </p>
-                    <p className="theme-muted mt-4 text-xl leading-8">
-                      picture of myself
-                    </p>
-                    <p className="theme-soft mt-3 text-sm leading-7">
-                      replace here.
-                    </p>
-                  </div>
+                <div className="placeholder-panel relative h-full min-h-[18rem] overflow-hidden rounded-[1.35rem] border">
+                  <Image
+                    src="/profile-photo.jpeg"
+                    alt="Shlok Jadhav overlooking the Bay Bridge at sunset"
+                    fill
+                    priority
+                    sizes="(min-width: 1280px) 28rem, (min-width: 640px) 34rem, calc(100vw - 5rem)"
+                    className="object-cover"
+                  />
                 </div>
               </div>
 
@@ -229,10 +227,10 @@ export default function Home() {
                   Current Focus
                 </p>
                 <p className="theme-heading mt-3 text-[2rem] leading-[1.1] sm:text-[2.3rem]">
-                  Actively looking for
+                  Working on personal projects & at
                   <br />
                   <span className="theme-accent">
-                    <em>Summer 2026 Opportunities</em>
+                    <em>TidalX AI</em>
                   </span>
                 </p>
                 <p className="theme-muted mt-4 text-sm leading-6 sm:text-base">
@@ -255,10 +253,10 @@ export default function Home() {
             Projects
           </p>
           <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
-            work in progress
+            Coming soon...
           </h2>
           <p className="theme-muted mt-5 max-w-3xl text-lg leading-8">
-            MAKE DEMOS HERE AND LINK TO GITHUB REPOS AND STUFF
+            Coming soon: a showcase of my projects and work, with links to GitHub repos and demos!
           </p>
         </section>
 
@@ -272,10 +270,10 @@ export default function Home() {
             Experience
           </p>
           <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
-            experiences that are here
+            Coming soon...
           </h2>
           <p className="theme-muted mt-5 max-w-3xl text-lg leading-8">
-            internships, research, campus work, etc
+            Coming soon: a summary of my experience, including internships, research, campus work, etc!
           </p>
         </section>
 
@@ -289,10 +287,10 @@ export default function Home() {
             Awards
           </p>
           <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
-            recognitions and milestones
+            Coming soon...
           </h2>
           <p className="theme-muted mt-5 max-w-3xl text-lg leading-8">
-            competitions stuff
+            Coming soon: a list of awards and honors I have received throughout my academic career!
           </p>
         </section>
 
@@ -335,18 +333,14 @@ export default function Home() {
             </div>
 
             <div className="sub-panel rounded-[1.5rem] border p-5">
-              <div className="placeholder-panel flex aspect-[4/5] items-center justify-center rounded-[1.2rem] border border-dashed px-8 text-center">
-                <div>
-                  <p className="eyebrow-soft text-xs uppercase tracking-[0.28em]">
-                    Photo
-                  </p>
-                  <p className="theme-muted mt-4 text-xl leading-8">
-                    linked in photo
-                  </p>
-                  <p className="theme-soft mt-3 text-sm leading-7">
-                    swap the box here
-                  </p>
-                </div>
+              <div className="placeholder-panel relative aspect-[4/5] overflow-hidden rounded-[1.2rem] border">
+                <Image
+                  src="/profile-photo.jpeg"
+                  alt="Shlok Jadhav overlooking the Bay Bridge at sunset"
+                  fill
+                  sizes="(min-width: 1024px) 24rem, (min-width: 640px) 34rem, calc(100vw - 5rem)"
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
