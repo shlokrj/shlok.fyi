@@ -556,10 +556,11 @@ html[data-theme="light"] .theme-toggle__moon {
 }
 
 .school-logo {
-  width: 4rem;
-  height: 4rem;
+  width: 4.5rem;
+  height: 4.5rem;
   overflow: hidden;
   border-radius: 0.42rem;
+  background: #ffffff;
   transition: transform 280ms ease;
 }
 

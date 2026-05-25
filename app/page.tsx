@@ -666,7 +666,7 @@ export default function Home() {
                     src="/logos/experience/dvhs.png"
                     alt="Dougherty Valley High School"
                     fill
-                    sizes="64px"
+                    sizes="72px"
                     className="object-contain"
                   />
                 </span>
@@ -676,6 +676,9 @@ export default function Home() {
                   </span>
                   <span className="theme-muted mt-1 block text-sm uppercase tracking-[0.18em]">
                     High school extracurricular leadership
+                  </span>
+                  <span className="theme-soft mt-1 block text-sm leading-snug">
+                    San Ramon, CA · On-site
                   </span>
                 </span>
               </span>
