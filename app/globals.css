@@ -250,6 +250,51 @@ a {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
+.home-photo-panel,
+.focus-panel,
+.about-copy-panel,
+.about-photo-panel,
+.about-media-panel,
+.contact-card {
+  transition:
+    transform 250ms ease,
+    border-color 250ms ease,
+    box-shadow 250ms ease,
+    background 250ms ease;
+}
+
+.home-photo img,
+.about-photo img {
+  transition: transform 580ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.focus-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  color: var(--link);
+  font-weight: 600;
+  transition:
+    color 200ms ease,
+    transform 220ms ease;
+}
+
+.focus-link svg {
+  transition: transform 220ms ease;
+}
+
+.contact-card {
+  min-width: 0;
+  border: 1px solid var(--panel-border);
+  border-radius: 0.5rem;
+  background: var(--card-background);
+  padding: 1.25rem;
+}
+
+.contact-card .theme-link {
+  overflow-wrap: anywhere;
+}
+
 .mini-card {
   border-color: var(--panel-border);
   background: var(--card-background);
@@ -491,6 +536,10 @@ html[data-theme="light"] .theme-toggle__moon {
   padding-top: 0.85rem;
 }
 
+.experience-reference-flash {
+  animation: experience-reference-flash 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 .school-group {
   overflow: hidden;
   border: 1px solid var(--experience-border);
@@ -626,6 +675,35 @@ html[data-theme="light"] .theme-toggle__moon {
   animation: experience-rise 480ms 190ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
+.scroll-lens-active .home-photo-panel {
+  animation: detail-rise 470ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+.scroll-lens-active .focus-panel {
+  animation: detail-rise 470ms 70ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+.scroll-lens-active .about-copy-panel {
+  animation: detail-rise 470ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+.scroll-lens-active .about-photo-panel {
+  animation: detail-rise 470ms 65ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+.scroll-lens-active .about-listening-copy,
+.scroll-lens-active .about-media-panel {
+  animation: detail-rise 470ms 115ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+.scroll-lens-active .contact-card {
+  animation: detail-rise 420ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+.scroll-lens-active .contact-card:nth-child(2) {
+  animation-delay: 65ms;
+}
+
 .scroll-lens-active .course-term {
   animation: course-term-rise 430ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
@@ -757,6 +835,26 @@ html[data-theme="light"] .theme-toggle__moon {
   width: fit-content;
 }
 
+.fireplace-name__button {
+  position: relative;
+  display: block;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-align: left;
+  letter-spacing: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.fireplace-name__button:focus-visible {
+  outline: 2px solid var(--link-border);
+  outline-offset: 0.16em;
+  border-radius: 0.08em;
+}
+
 .fireplace-name__text {
   position: relative;
   z-index: 1;
@@ -807,6 +905,59 @@ html[data-theme="light"] .theme-toggle__moon {
   left: 84%;
   top: 1rem;
   animation: fireplace-spark-three 2.6s linear 1.4s infinite;
+}
+
+.fireplace-burst {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.fireplace-burst__ember {
+  position: absolute;
+  left: 54%;
+  top: 54%;
+  width: 0.16em;
+  height: 0.16em;
+  border-radius: 999px;
+  background: #ffbb4d;
+  box-shadow:
+    0 0 8px rgba(255, 174, 67, 0.92),
+    0 0 18px rgba(227, 82, 29, 0.64);
+  animation: fireplace-burst 850ms cubic-bezier(0.16, 0.72, 0.24, 1) both;
+}
+
+.fireplace-burst__ember--1 { --burst-x: -2.15em; --burst-y: -1.08em; }
+.fireplace-burst__ember--2 { --burst-x: -1.22em; --burst-y: -1.84em; animation-delay: 25ms; }
+.fireplace-burst__ember--3 { --burst-x: -0.2em; --burst-y: -2.16em; animation-delay: 45ms; }
+.fireplace-burst__ember--4 { --burst-x: 0.94em; --burst-y: -1.86em; animation-delay: 10ms; }
+.fireplace-burst__ember--5 { --burst-x: 2.02em; --burst-y: -1.05em; animation-delay: 50ms; }
+.fireplace-burst__ember--6 { --burst-x: 2.35em; --burst-y: 0.08em; animation-delay: 25ms; }
+.fireplace-burst__ember--7 { --burst-x: 1.72em; --burst-y: 1.18em; animation-delay: 60ms; }
+.fireplace-burst__ember--8 { --burst-x: 0.64em; --burst-y: 1.72em; animation-delay: 35ms; }
+.fireplace-burst__ember--9 { --burst-x: -0.66em; --burst-y: 1.62em; animation-delay: 75ms; }
+.fireplace-burst__ember--10 { --burst-x: -1.72em; --burst-y: 1.03em; animation-delay: 32ms; }
+.fireplace-burst__ember--11 { --burst-x: -2.38em; --burst-y: 0.06em; animation-delay: 55ms; }
+.fireplace-burst__ember--12 { --burst-x: 0.16em; --burst-y: -1.48em; animation-delay: 95ms; }
+
+@keyframes fireplace-burst {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.2);
+  }
+  12% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  72% {
+    opacity: 0.94;
+    transform: translate(var(--burst-x), var(--burst-y)) scale(0.72);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(var(--burst-x) * 1.1), calc(var(--burst-y) * 1.28)) scale(0.2);
+  }
 }
 
 @keyframes fireplace-flicker {
@@ -1011,6 +1162,36 @@ html[data-theme="light"] .theme-toggle__moon {
     transform: translateY(-2px) scale(0.972);
   }
 
+  .home-photo-panel:hover,
+  .focus-panel:hover,
+  .about-copy-panel:hover,
+  .about-photo-panel:hover,
+  .about-media-panel:hover,
+  .contact-card:hover {
+    border-color: var(--section-hover-border);
+    box-shadow: var(--experience-hover-shadow);
+    transform: translateY(-3px);
+  }
+
+  .home-photo-panel:hover .home-photo img,
+  .about-photo-panel:hover .about-photo img {
+    transform: scale(1.035);
+  }
+
+  .focus-link:hover {
+    color: var(--nav-hover);
+    transform: translateX(2px);
+  }
+
+  .focus-link:hover svg {
+    transform: translateX(3px);
+  }
+
+  .contact-card:hover .theme-link {
+    color: var(--nav-hover);
+    border-color: var(--nav-hover);
+  }
+
   .course-term:hover .course-term__line {
     background: linear-gradient(90deg, var(--course-border-hover), transparent);
   }
@@ -1113,6 +1294,30 @@ html[data-theme="light"] .theme-toggle__moon {
   }
 }
 
+@keyframes detail-rise {
+  from {
+    opacity: 0.52;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes experience-reference-flash {
+  0%,
+  100% {
+    border-color: var(--experience-border);
+    box-shadow: none;
+  }
+  18%,
+  58% {
+    border-color: var(--experience-border-hover);
+    box-shadow: var(--experience-hover-shadow);
+  }
+}
+
 @keyframes course-term-rise {
   from {
     opacity: 0.5;
@@ -1157,7 +1362,8 @@ html[data-theme="light"] .theme-toggle__moon {
   .hero-curtain__title,
   .hero-curtain__text,
   .fireplace-name__text,
-  .fireplace-name__spark {
+  .fireplace-name__spark,
+  .fireplace-burst__ember {
     animation: none;
   }
 
@@ -1177,6 +1383,17 @@ html[data-theme="light"] .theme-toggle__moon {
   .experience-card,
   .experience-logo-link,
   .experience-logo__launch,
+  .experience-reference-flash,
+  .home-photo-panel,
+  .home-photo img,
+  .focus-panel,
+  .focus-link,
+  .about-copy-panel,
+  .about-photo-panel,
+  .about-photo img,
+  .about-listening-copy,
+  .about-media-panel,
+  .contact-card,
   .school-group,
   .school-group__content,
   .school-group__toggle,

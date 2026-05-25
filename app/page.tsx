@@ -312,6 +312,7 @@ function applyTheme(theme: Theme) {
 export default function Home() {
   const [showCurtain, setShowCurtain] = useState(true);
   const [isHighSchoolOpen, setIsHighSchoolOpen] = useState(false);
+  const [nameBurst, setNameBurst] = useState(0);
 
   useEffect(() => {
     applyTheme(getPreferredTheme());
@@ -383,6 +384,26 @@ export default function Home() {
     }, 1900);
   };
 
+  const scrollToExperience = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    experienceId: string,
+  ) => {
+    event.preventDefault();
+
+    const experience = document.getElementById(experienceId);
+    if (!experience) return;
+
+    globalThis.history.replaceState(null, "", `#${experienceId}`);
+    experience.classList.remove("experience-reference-flash");
+    void experience.offsetWidth;
+    experience.classList.add("experience-reference-flash");
+    experience.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    globalThis.setTimeout(() => {
+      experience.classList.remove("experience-reference-flash");
+    }, 1900);
+  };
+
   return (
     <main className="site-shell relative overflow-hidden px-6 py-8 sm:px-10 sm:py-10">
       {showCurtain ? (
@@ -439,11 +460,28 @@ export default function Home() {
                   Hello! My name is
                 </p>
                 <h1 className="fireplace-name mt-3 max-w-3xl text-[5.2rem] leading-[0.82] tracking-[-0.055em] text-[var(--foreground)] sm:text-[6.8rem] xl:text-[8.4rem]">
-                  <span className="fireplace-name__text block">Shlok</span>
-                  <span className="fireplace-name__text block">Jadhav.</span>
-                  <span className="fireplace-name__spark fireplace-name__spark--one" />
-                  <span className="fireplace-name__spark fireplace-name__spark--two" />
-                  <span className="fireplace-name__spark fireplace-name__spark--three" />
+                  <button
+                    type="button"
+                    onClick={() => setNameBurst((burst) => burst + 1)}
+                    aria-label="Ignite Shlok Jadhav's name"
+                    className="fireplace-name__button"
+                  >
+                    <span className="fireplace-name__text block">Shlok</span>
+                    <span className="fireplace-name__text block">Jadhav.</span>
+                    <span className="fireplace-name__spark fireplace-name__spark--one" />
+                    <span className="fireplace-name__spark fireplace-name__spark--two" />
+                    <span className="fireplace-name__spark fireplace-name__spark--three" />
+                    {nameBurst > 0 ? (
+                      <span key={nameBurst} aria-hidden="true" className="fireplace-burst">
+                        {Array.from({ length: 12 }, (_, index) => (
+                          <span
+                            key={index}
+                            className={`fireplace-burst__ember fireplace-burst__ember--${index + 1}`}
+                          />
+                        ))}
+                      </span>
+                    ) : null}
+                  </button>
                 </h1>
               </div>
 
@@ -460,8 +498,8 @@ export default function Home() {
             </div>
 
             <div className="grid gap-5 xl:grid-rows-[1fr_auto]">
-              <div className="sub-panel w-full rounded-[1.75rem] border p-4">
-                <div className="placeholder-panel relative h-full min-h-[18rem] overflow-hidden rounded-[1.35rem] border">
+              <div className="sub-panel home-photo-panel w-full rounded-[1.75rem] border p-4">
+                <div className="placeholder-panel home-photo relative h-full min-h-[18rem] overflow-hidden rounded-[1.35rem] border">
                   <Image
                     src="/profile-photo.jpeg"
                     alt="Shlok Jadhav overlooking the Bay Bridge at sunset"
@@ -473,21 +511,41 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="sub-panel rounded-[1.5rem] border p-5">
+              <div className="sub-panel focus-panel rounded-[1.5rem] border p-5">
                 <p className="eyebrow text-xs uppercase tracking-[0.3em]">
                   Current Focus
                 </p>
                 <p className="theme-heading mt-3 text-[2rem] leading-[1.1] sm:text-[2.3rem]">
-                  Working on personal projects & at
+                  Looking for
                   <br />
                   <span className="theme-accent">
-                    <em>TidalX AI</em>
+                    <em>Summer 2027 Internships</em>
                   </span>
                 </p>
                 <p className="theme-muted mt-4 text-sm leading-6 sm:text-base">
-                  Building in: SWE · ML · Data
+                  Currently working at{" "}
+                  <a
+                    href="#experience-tidal"
+                    onClick={(event) => scrollToExperience(event, "experience-tidal")}
+                    className="focus-link"
+                  >
+                    TidalX AI
+                    <svg
+                      aria-hidden="true"
+                      className="h-3.5 w-3.5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.8"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m13 6 6 6-6 6" />
+                    </svg>
+                  </a>
                   <br />
-                  Areas: Bio · Climate · Emerging Tech
+                  Building in: SWE · ML · Data
                 </p>
               </div>
             </div>
@@ -531,7 +589,10 @@ export default function Home() {
           <div className="experience-timeline mt-9 grid gap-4">
             {professionalExperience.map((experience) => (
               <div key={experience.role} className="experience-entry">
-                <article className="experience-card grid gap-5 p-5 sm:grid-cols-[4.5rem_1fr] sm:p-6">
+                <article
+                  id={experience.brand === "tidal" ? "experience-tidal" : undefined}
+                  className="experience-card grid scroll-mt-28 gap-5 p-5 sm:grid-cols-[4.5rem_1fr] sm:p-6"
+                >
                   <a
                     href={experience.href}
                     target="_blank"
@@ -876,7 +937,7 @@ export default function Home() {
           className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-            <div className="sub-panel rounded-[1.5rem] border p-6">
+            <div className="sub-panel about-copy-panel rounded-[1.5rem] border p-6">
               <p className="eyebrow text-xs uppercase tracking-[0.32em]">
                 About Me
               </p>
@@ -907,8 +968,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="sub-panel rounded-[1.5rem] border p-5">
-              <div className="placeholder-panel relative aspect-[4/5] overflow-hidden rounded-[1.2rem] border">
+            <div className="sub-panel about-photo-panel rounded-[1.5rem] border p-5">
+              <div className="placeholder-panel about-photo relative aspect-[4/5] overflow-hidden rounded-[1.2rem] border">
                 <Image
                   src="/profile-photo.jpeg"
                   alt="Shlok Jadhav overlooking the Bay Bridge at sunset"
@@ -921,7 +982,7 @@ export default function Home() {
           </div>
 
           <div className="mt-8 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-            <div>
+            <div className="about-listening-copy">
               <p className="eyebrow text-xs uppercase tracking-[0.32em]">
                 Currently listening to
               </p>
@@ -948,7 +1009,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="sub-panel overflow-hidden rounded-[1.5rem] border p-3">
+            <div className="sub-panel about-media-panel overflow-hidden rounded-[1.5rem] border p-3">
               <iframe
                 title="Spotify album"
                 src="https://open.spotify.com/embed/album/3h1UIz988QtS6gjJciFVSu?utm_source=generator"
@@ -972,7 +1033,7 @@ export default function Home() {
             Contact
           </p>
           <div className="mt-5 grid gap-5 sm:grid-cols-2">
-            <div>
+            <div className="contact-card">
               <p className="theme-soft text-sm uppercase tracking-[0.24em]">
                 Personal
               </p>
@@ -983,7 +1044,7 @@ export default function Home() {
                 shlok.jadhav.07@gmail.com
               </a>
             </div>
-            <div>
+            <div className="contact-card">
               <p className="theme-soft text-sm uppercase tracking-[0.24em]">
                 School
               </p>
