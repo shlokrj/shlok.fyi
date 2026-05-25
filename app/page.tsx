@@ -48,8 +48,101 @@ const relevantCoursework = [
   },
 ];
 
+const professionalExperience = [
+  {
+    role: "Software Engineer",
+    organization: "TidalX AI",
+    type: "Internship",
+    dates: "May 2026 - Present",
+    location: "San Francisco Bay Area · On-site",
+    detail:
+      "Computer vision, identity matching, metric learning, trajectory data, and human-in-the-loop AI for sustainable aquaculture.",
+    logo: "/logos/experience/tidal.png",
+    logoAlt: "TidalX AI",
+    brand: "tidal",
+  },
+  {
+    role: "Undergraduate Researcher",
+    organization: "University of Wisconsin-Madison",
+    type: "Full-time",
+    dates: "Feb 2026 - Present",
+    location: "Madison, Wisconsin · On-site",
+    detail:
+      "Computational Biology & Machine Learning Lab (PI: Dr. Dhananjay Bhaskar).",
+    logo: "/logos/experience/uw-research.png",
+    logoAlt: "University of Wisconsin-Madison",
+    brand: "uw-research",
+  },
+  {
+    role: "Help Desk Support Specialist",
+    organization: "UW-Madison Division of Information Technology (DoIT)",
+    type: "Part-time",
+    dates: "Jan 2026 - Present",
+    location: "Madison, Wisconsin · Hybrid",
+    detail: "",
+    logo: "/logos/experience/doit.png",
+    logoAlt: "UW-Madison Division of Information Technology",
+    brand: "doit",
+  },
+  {
+    role: "Education Director",
+    organization: "Design Interactive",
+    type: "Student Organization",
+    dates: "Dec 2025 - Present",
+    location: "Madison, Wisconsin · On-site",
+    detail: "",
+    logo: "/logos/experience/design-interactive.png",
+    logoAlt: "Design Interactive EDU",
+    brand: "design",
+  },
+];
+
+const highSchoolActivities = [
+  {
+    role: "Founder & Secretary",
+    organization: "NASA STEM Club",
+    dates: "Aug 2024 - Jun 2025",
+    detail:
+      "Mentored 60+ high school students in weekly meetings to prepare for NASA STEM Challenges.",
+    context:
+      "Founded after NASA ADC and JAXA Kibo Robotics to help other students participate in these challenges.",
+    logo: "/logos/experience/nasa-stem.png",
+    logoAlt: "NASA STEM DVHS",
+    awardLinks: [
+      { label: "NASA ADC Top Team", target: "award-nasa-adc" },
+      { label: "JAXA Kibo Robotics", target: "award-kibo" },
+    ],
+  },
+  {
+    role: "Treasurer",
+    organization: "XR EDU Club",
+    dates: "Aug 2021 - Jun 2025",
+    detail:
+      "Developed XR solutions for social good and organized Hack the Planet 2024 and 2025 while managing club finances and weekly meetings.",
+    context: "In association with Samsung Solve for Tomorrow finalist projects.",
+    logo: "/logos/experience/xr-edu.png",
+    logoAlt: "XR EDU",
+    awardLinks: [
+      { label: "Samsung 2024", target: "award-samsung-2024" },
+      { label: "Samsung 2023", target: "award-samsung-2023" },
+    ],
+  },
+  {
+    role: "Secretary & Outreach Officer",
+    organization: "Coding for SDG Club",
+    dates: "Jun 2024 - Jun 2025",
+    detail:
+      "Organized two hackathons centered on Sustainable Development Goals with 200 competitors and approximately $5,000 in sponsored prizes.",
+    context: "",
+    logo: "/logos/experience/coding-sdg.png",
+    logoAlt: "Coding for SDG",
+    awardLinks: [],
+  },
+];
+
 const supportingAwards = [
   {
+    id: "award-samsung-2024",
     title: "Samsung Solve for Tomorrow 2024",
     distinction: "California State Finalist",
     issuer: "Samsung Electronics",
@@ -60,6 +153,7 @@ const supportingAwards = [
     brand: "samsung",
   },
   {
+    id: "award-kibo",
     title: "Kibo Robotics Programming Challenge",
     distinction: "1st High School & 2nd Overall in the USA",
     issuer: "JAXA in cooperation with NASA STEM",
@@ -70,6 +164,7 @@ const supportingAwards = [
     brand: "jaxa",
   },
   {
+    id: "award-samsung-2023",
     title: "Samsung Solve for Tomorrow 2023",
     distinction: "California State Finalist",
     issuer: "Samsung Electronics",
@@ -210,6 +305,7 @@ function applyTheme(theme: Theme) {
 
 export default function Home() {
   const [showCurtain, setShowCurtain] = useState(true);
+  const [isHighSchoolOpen, setIsHighSchoolOpen] = useState(false);
 
   useEffect(() => {
     applyTheme(getPreferredTheme());
@@ -259,6 +355,26 @@ export default function Home() {
       behavior: "smooth",
       block: isLongSection ? "start" : "center",
     });
+  };
+
+  const scrollToAward = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    awardId: string,
+  ) => {
+    event.preventDefault();
+
+    const award = document.getElementById(awardId);
+    if (!award) return;
+
+    globalThis.history.replaceState(null, "", `#${awardId}`);
+    award.classList.remove("award-reference-flash");
+    void award.offsetWidth;
+    award.classList.add("award-reference-flash");
+    award.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    globalThis.setTimeout(() => {
+      award.classList.remove("award-reference-flash");
+    }, 1900);
   };
 
   return (
@@ -399,11 +515,165 @@ export default function Home() {
             Experience
           </p>
           <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
-            Coming soon...
+            Work &amp; Leadership
           </h2>
-          <p className="theme-muted mt-5 max-w-3xl text-lg leading-8">
-            Coming soon: a summary of my experience, including internships, research, campus work, etc!
+          <p className="theme-muted mt-4 max-w-3xl text-lg leading-8">
+            Roles across applied machine learning, campus technology, and
+            student education.
           </p>
+
+          <div className="experience-timeline mt-9 grid gap-4">
+            {professionalExperience.map((experience) => (
+              <div key={experience.role} className="experience-entry">
+                <article className="experience-card grid gap-5 p-5 sm:grid-cols-[4.5rem_1fr] sm:p-6">
+                  <div
+                    className={`experience-logo experience-logo--${experience.brand} relative`}
+                  >
+                    <Image
+                      src={experience.logo}
+                      alt={experience.logoAlt}
+                      fill
+                      sizes="72px"
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-start justify-between gap-x-5 gap-y-2">
+                      <div>
+                        <h3 className="theme-heading text-2xl leading-tight sm:text-[1.7rem]">
+                          {experience.role}
+                        </h3>
+                        <p className="experience-org mt-1 text-lg leading-snug">
+                          {experience.organization}
+                          <span className="experience-separator"> · </span>
+                          <span className="theme-muted">{experience.type}</span>
+                        </p>
+                      </div>
+                      <span className="experience-date">{experience.dates}</span>
+                    </div>
+                    <p className="theme-soft mt-2 text-base leading-7">
+                      {experience.location}
+                    </p>
+                    {experience.detail ? (
+                      <p className="theme-muted experience-detail mt-4 text-base leading-7 sm:text-lg">
+                        {experience.detail}
+                      </p>
+                    ) : null}
+                  </div>
+                </article>
+              </div>
+            ))}
+          </div>
+
+          <div className={`school-group mt-4${isHighSchoolOpen ? " school-group--open" : ""}`}>
+            <button
+              type="button"
+              className="school-group__trigger flex w-full items-center justify-between gap-5 p-5 text-left sm:p-6"
+              aria-expanded={isHighSchoolOpen}
+              aria-controls="high-school-activities"
+              onClick={() => setIsHighSchoolOpen((open) => !open)}
+            >
+              <span className="flex min-w-0 items-center gap-4">
+                <span className="school-logo relative block shrink-0">
+                  <Image
+                    src="/logos/experience/dvhs.png"
+                    alt="Dougherty Valley High School"
+                    fill
+                    sizes="64px"
+                    className="object-contain"
+                  />
+                </span>
+                <span className="min-w-0">
+                  <span className="theme-heading block text-xl leading-snug sm:text-2xl">
+                    Dougherty Valley High School
+                  </span>
+                  <span className="theme-muted mt-1 block text-sm uppercase tracking-[0.18em]">
+                    Extracurricular leadership
+                  </span>
+                </span>
+              </span>
+              <span className="school-group__toggle" aria-hidden="true">
+                <svg
+                  className="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </span>
+            </button>
+
+            <div id="high-school-activities" className="school-group__content">
+              <div className="school-group__inner grid gap-4 px-5 pb-5 sm:px-6 sm:pb-6">
+                {highSchoolActivities.map((activity) => (
+                  <article
+                    key={activity.organization}
+                    className="activity-card grid gap-4 p-4 sm:grid-cols-[3.75rem_1fr] sm:p-5"
+                  >
+                    <div className="activity-logo relative">
+                      <Image
+                        src={activity.logo}
+                        alt={activity.logoAlt}
+                        fill
+                        sizes="60px"
+                        className="object-contain"
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                        <h3 className="theme-heading text-xl leading-tight">
+                          {activity.organization}
+                        </h3>
+                        <span className="experience-date">{activity.dates}</span>
+                      </div>
+                      <p className="activity-role mt-1 text-sm uppercase tracking-[0.2em]">
+                        {activity.role}
+                      </p>
+                      <p className="theme-muted mt-3 text-base leading-7">
+                        {activity.detail}
+                      </p>
+                      {activity.context ? (
+                        <p className="activity-context mt-3 text-sm leading-6">
+                          {activity.context}
+                        </p>
+                      ) : null}
+                      {activity.awardLinks.length > 0 ? (
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {activity.awardLinks.map((link) => (
+                            <a
+                              key={link.target}
+                              href={`#${link.target}`}
+                              onClick={(event) => scrollToAward(event, link.target)}
+                              className="activity-award-link inline-flex items-center gap-2"
+                            >
+                              {link.label}
+                              <svg
+                                aria-hidden="true"
+                                className="h-3.5 w-3.5"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.8"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                viewBox="0 0 24 24"
+                              >
+                                <path d="M12 5v14" />
+                                <path d="m19 12-7 7-7-7" />
+                              </svg>
+                            </a>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
         </section>
 
         <SectionDivider label="Courses" />
@@ -474,7 +744,10 @@ export default function Home() {
           </p>
 
           <div className="award-feature-entry mt-9">
-            <article className="award-feature grid overflow-hidden lg:grid-cols-[1.03fr_0.97fr]">
+            <article
+              id="award-nasa-adc"
+              className="award-feature grid scroll-mt-28 overflow-hidden lg:grid-cols-[1.03fr_0.97fr]"
+            >
               <div className="award-feature__content flex flex-col justify-between gap-7 p-6 sm:p-8">
                 <div>
                   <div className="flex items-center justify-between gap-4">
@@ -494,48 +767,51 @@ export default function Home() {
                     NASA App Development Challenge Top Team
                   </h3>
                   <p className="theme-muted mt-4 text-lg leading-8">
-                    Alongside some friends, we worked on an app that visualizes the Moon's South Pole region and displays information for navigating the lunar surface. We were selected as a top team and invited to present at the Johnson Space Center in Houston, Texas!
+                    Alongside some friends, we worked on an app that visualizes the Moon&apos;s South Pole region and displays information for navigating the lunar surface. We were selected as a top team and invited to present at the Johnson Space Center in Houston, Texas!
                   </p>
                 </div>
                 <a
                   href="https://www.nasa.gov/general/nasa-challenge-gives-artemis-generation-coders-a-chance-to-shine/"
                   target="_blank"
                   rel="noreferrer"
-                className="award-link inline-flex w-fit items-center gap-3 text-sm uppercase tracking-[0.18em]"
-              >
-                Read the NASA Feature
-                <svg
-                  aria-hidden="true"
-                  className="award-link__icon h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.8"
-                  viewBox="0 0 24 24"
+                  className="award-link inline-flex w-fit items-center gap-3 text-sm uppercase tracking-[0.18em]"
                 >
-                  <path d="M15 3h6v6" />
-                  <path d="M10 14 21 3" />
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                </svg>
-              </a>
+                  Read the NASA Feature
+                  <svg
+                    aria-hidden="true"
+                    className="award-link__icon h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.8"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M15 3h6v6" />
+                    <path d="M10 14 21 3" />
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  </svg>
+                </a>
               </div>
               <figure className="award-photo relative min-h-[18rem] lg:min-h-full">
                 <Image
                   src="/awards/nasa-adc-team.jpg"
                   alt="NASA App Development Challenge top teams at Johnson Space Center in 2024"
                   fill
-                sizes="(min-width: 1024px) 30rem, calc(100vw - 4rem)"
-                className="object-cover"
-              />
-            </figure>
+                  sizes="(min-width: 1024px) 30rem, calc(100vw - 4rem)"
+                  className="object-cover"
+                />
+              </figure>
             </article>
           </div>
 
           <div className="awards-grid mt-6 grid gap-4 lg:grid-cols-3">
             {supportingAwards.map((award) => (
               <div key={award.title} className="award-card-entry">
-                <article className="award-card flex h-full flex-col p-5 sm:p-6">
+                <article
+                  id={award.id}
+                  className="award-card flex h-full scroll-mt-28 flex-col p-5 sm:p-6"
+                >
                   <div className="flex min-h-12 items-start justify-between gap-4">
                     <div className={`award-brand award-brand--${award.brand}`}>
                       <Image

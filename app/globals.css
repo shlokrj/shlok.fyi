@@ -58,6 +58,15 @@
   --award-hover-shadow: 0 15px 34px rgba(26, 10, 5, 0.22), 0 0 26px rgba(209, 67, 33, 0.14);
   --award-link-background: rgba(255, 205, 190, 0.07);
   --award-distinction: #ffec96;
+  --experience-background: rgba(255, 205, 190, 0.045);
+  --experience-border: rgba(255, 205, 190, 0.14);
+  --experience-border-hover: rgba(255, 173, 94, 0.33);
+  --experience-line: rgba(255, 188, 160, 0.2);
+  --experience-org: rgba(255, 231, 222, 0.9);
+  --experience-context: rgba(255, 188, 160, 0.76);
+  --experience-hover-shadow: 0 13px 32px rgba(26, 10, 5, 0.22), 0 0 22px rgba(209, 67, 33, 0.14);
+  --school-background: linear-gradient(145deg, rgba(181, 50, 26, 0.1), rgba(0, 0, 0, 0.12));
+  --activity-background: rgba(0, 0, 0, 0.12);
   --nav-hover: #ffffff;
   --divider-line: rgba(255, 188, 160, 0.34);
   --divider-text: rgba(255, 188, 160, 0.58);
@@ -121,6 +130,15 @@
   --award-hover-shadow: 0 14px 30px rgba(98, 57, 42, 0.13), 0 0 22px rgba(207, 104, 55, 0.1);
   --award-link-background: rgba(149, 41, 30, 0.05);
   --award-distinction: #956100;
+  --experience-background: rgba(255, 255, 255, 0.32);
+  --experience-border: rgba(98, 57, 42, 0.14);
+  --experience-border-hover: rgba(191, 92, 48, 0.32);
+  --experience-line: rgba(118, 48, 35, 0.15);
+  --experience-org: rgba(35, 18, 15, 0.88);
+  --experience-context: rgba(149, 41, 30, 0.78);
+  --experience-hover-shadow: 0 13px 28px rgba(98, 57, 42, 0.13), 0 0 20px rgba(207, 104, 55, 0.11);
+  --school-background: linear-gradient(145deg, rgba(255, 255, 255, 0.4), rgba(231, 200, 181, 0.27));
+  --activity-background: rgba(255, 255, 255, 0.34);
   --nav-hover: #7d211b;
   --divider-line: rgba(118, 48, 35, 0.24);
   --divider-text: rgba(118, 48, 35, 0.56);
@@ -377,6 +395,200 @@ html[data-theme="light"] .theme-toggle__moon {
 
 .course-title {
   color: var(--course-title);
+}
+
+.experience-card {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid var(--experience-border);
+  border-radius: 0.5rem;
+  background: var(--experience-background);
+  transition:
+    transform 250ms ease,
+    border-color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.experience-card::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, var(--experience-line), transparent);
+  opacity: 0.75;
+  transform: scaleX(0.74);
+  transition:
+    transform 290ms ease,
+    opacity 290ms ease;
+}
+
+.experience-logo {
+  width: 4.5rem;
+  height: 4.5rem;
+  overflow: hidden;
+  border-radius: 0.42rem;
+  background: transparent;
+  transition: transform 260ms ease;
+}
+
+.experience-org {
+  color: var(--experience-org);
+}
+
+.experience-separator {
+  color: var(--eyebrow-soft);
+}
+
+.experience-date {
+  flex-shrink: 0;
+  color: var(--eyebrow);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.experience-detail {
+  border-top: 1px solid var(--experience-line);
+  padding-top: 0.85rem;
+}
+
+.school-group {
+  overflow: hidden;
+  border: 1px solid var(--experience-border);
+  border-radius: 0.5rem;
+  background: var(--school-background);
+  transition:
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.school-group__trigger {
+  cursor: pointer;
+  color: inherit;
+}
+
+.school-logo {
+  width: 4rem;
+  height: 4rem;
+  overflow: hidden;
+  border-radius: 999px;
+  transition: transform 280ms ease;
+}
+
+.school-group__toggle {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid var(--experience-border);
+  border-radius: 999px;
+  color: var(--eyebrow);
+  transition:
+    transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background 240ms ease,
+    color 240ms ease;
+}
+
+.school-group--open .school-group__toggle {
+  transform: rotate(180deg);
+  background: var(--award-link-background);
+}
+
+.school-group__content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.school-group--open .school-group__content {
+  grid-template-rows: 1fr;
+}
+
+.school-group__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.activity-card {
+  border: 1px solid var(--experience-border);
+  border-radius: 0.5rem;
+  background: var(--activity-background);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity 250ms ease,
+    transform 280ms ease,
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.school-group--open .activity-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.school-group--open .activity-card:nth-child(2) {
+  transition-delay: 45ms;
+}
+
+.school-group--open .activity-card:nth-child(3) {
+  transition-delay: 90ms;
+}
+
+.activity-logo {
+  width: 3.75rem;
+  height: 3.75rem;
+  overflow: hidden;
+  border-radius: 0.38rem;
+  transition: transform 250ms ease;
+}
+
+.activity-role,
+.activity-context {
+  color: var(--experience-context);
+}
+
+.activity-award-link {
+  border: 1px solid var(--experience-border);
+  border-radius: 999px;
+  background: var(--award-link-background);
+  color: var(--link);
+  padding: 0.45rem 0.7rem;
+  font-size: 0.72rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.scroll-lens-active .experience-entry {
+  animation: experience-rise 440ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.scroll-lens-active .experience-entry:nth-child(2) {
+  animation-delay: 50ms;
+}
+
+.scroll-lens-active .experience-entry:nth-child(3) {
+  animation-delay: 100ms;
+}
+
+.scroll-lens-active .experience-entry:nth-child(4) {
+  animation-delay: 150ms;
+}
+
+.scroll-lens-active .school-group {
+  animation: experience-rise 480ms 190ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 .scroll-lens-active .course-term {
@@ -775,6 +987,52 @@ html[data-theme="light"] .theme-toggle__moon {
     transform: translateY(-3px);
   }
 
+  .experience-card:hover {
+    border-color: var(--experience-border-hover);
+    box-shadow: var(--experience-hover-shadow);
+    transform: translateY(-3px);
+  }
+
+  .experience-card:hover::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .experience-card:hover .experience-logo {
+    transform: translateY(-2px) scale(1.04);
+  }
+
+  .school-group:hover {
+    border-color: var(--experience-border-hover);
+    box-shadow: var(--experience-hover-shadow);
+  }
+
+  .school-group__trigger:hover .school-logo {
+    transform: rotate(-3deg) scale(1.04);
+  }
+
+  .school-group__trigger:hover .school-group__toggle {
+    color: var(--nav-hover);
+    background: var(--award-link-background);
+  }
+
+  .activity-card:hover {
+    border-color: var(--experience-border-hover);
+    box-shadow: var(--experience-hover-shadow);
+    transform: translateY(-2px);
+  }
+
+  .activity-card:hover .activity-logo {
+    transform: scale(1.05) rotate(-2deg);
+  }
+
+  .activity-award-link:hover {
+    border-color: var(--experience-border-hover);
+    color: var(--nav-hover);
+    box-shadow: var(--experience-hover-shadow);
+    transform: translateY(-2px);
+  }
+
   .award-feature:hover {
     border-color: var(--award-border-hover);
     box-shadow: var(--award-hover-shadow);
@@ -803,6 +1061,17 @@ html[data-theme="light"] .theme-toggle__moon {
   }
 }
 
+@keyframes experience-rise {
+  from {
+    opacity: 0.45;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes course-term-rise {
   from {
     opacity: 0.5;
@@ -822,6 +1091,23 @@ html[data-theme="light"] .theme-toggle__moon {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.award-reference-flash {
+  animation: award-reference-flash 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes award-reference-flash {
+  0%,
+  100% {
+    border-color: var(--award-border);
+    box-shadow: none;
+  }
+  18%,
+  58% {
+    border-color: var(--award-border-hover);
+    box-shadow: var(--award-hover-shadow);
   }
 }
 
@@ -846,10 +1132,18 @@ html[data-theme="light"] .theme-toggle__moon {
 
   .course-term,
   .course-item,
+  .experience-entry,
+  .experience-card,
+  .school-group,
+  .school-group__content,
+  .school-group__toggle,
+  .activity-card,
+  .activity-award-link,
   .award-feature-entry,
   .award-card-entry,
   .award-photo img,
-  .award-link {
+  .award-link,
+  .award-reference-flash {
     animation: none;
     transition: none;
   }
