@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Theme = "dark" | "light";
 
@@ -312,7 +312,15 @@ function applyTheme(theme: Theme) {
 export default function Home() {
   const [showCurtain, setShowCurtain] = useState(true);
   const [isHighSchoolOpen, setIsHighSchoolOpen] = useState(false);
-  const [nameBurst, setNameBurst] = useState(0);
+  const nameFlareRef = useRef<HTMLSpanElement>(null);
+
+  const handleNameFlare = () => {
+    const el = nameFlareRef.current;
+    if (!el) return;
+    el.classList.remove("fireplace-name__flare-active");
+    void el.offsetWidth;
+    el.classList.add("fireplace-name__flare-active");
+  };
 
   useEffect(() => {
     applyTheme(getPreferredTheme());
@@ -462,25 +470,17 @@ export default function Home() {
                 <h1 className="fireplace-name mt-3 max-w-3xl text-[5.2rem] leading-[0.82] tracking-[-0.055em] text-[var(--foreground)] sm:text-[6.8rem] xl:text-[8.4rem]">
                   <button
                     type="button"
-                    onClick={() => setNameBurst((burst) => burst + 1)}
+                    onClick={handleNameFlare}
                     aria-label="Ignite Shlok Jadhav's name"
                     className="fireplace-name__button"
                   >
-                    <span className="fireplace-name__text block">Shlok</span>
-                    <span className="fireplace-name__text block">Jadhav.</span>
+                    <span ref={nameFlareRef} className="fireplace-name__texts">
+                      <span className="fireplace-name__text block">Shlok</span>
+                      <span className="fireplace-name__text block">Jadhav.</span>
+                    </span>
                     <span className="fireplace-name__spark fireplace-name__spark--one" />
                     <span className="fireplace-name__spark fireplace-name__spark--two" />
                     <span className="fireplace-name__spark fireplace-name__spark--three" />
-                    {nameBurst > 0 ? (
-                      <span key={nameBurst} aria-hidden="true" className="fireplace-burst">
-                        {Array.from({ length: 12 }, (_, index) => (
-                          <span
-                            key={index}
-                            className={`fireplace-burst__ember fireplace-burst__ember--${index + 1}`}
-                          />
-                        ))}
-                      </span>
-                    ) : null}
                   </button>
                 </h1>
               </div>

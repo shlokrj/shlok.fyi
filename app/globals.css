@@ -847,6 +847,7 @@ html[data-theme="light"] .theme-toggle__moon {
   letter-spacing: inherit;
   cursor: pointer;
   padding: 0;
+  transition: transform 240ms ease;
 }
 
 .fireplace-name__button:focus-visible {
@@ -866,6 +867,7 @@ html[data-theme="light"] .theme-toggle__moon {
     0 0 14px rgba(255, 145, 61, 0.35),
     0 0 28px rgba(217, 81, 32, 0.24),
     0 0 52px rgba(164, 45, 17, 0.16);
+  transition: filter 280ms ease;
 }
 
 [data-theme="light"] .fireplace-name__text {
@@ -875,6 +877,47 @@ html[data-theme="light"] .theme-toggle__moon {
     0 1px 0 rgba(255, 247, 235, 0.78),
     0 0 10px rgba(255, 147, 56, 0.28),
     0 0 24px rgba(216, 82, 22, 0.18);
+}
+
+.fireplace-name__texts {
+  display: block;
+}
+
+.fireplace-name__flare-active {
+  animation: fireplace-name-flare 1.6s ease forwards;
+}
+
+@keyframes fireplace-name-flare {
+  0% {
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  14% {
+    filter:
+      drop-shadow(0 0 16px rgba(255, 215, 90, 0.95))
+      drop-shadow(0 0 38px rgba(255, 110, 25, 0.65))
+      drop-shadow(0 0 72px rgba(195, 55, 10, 0.38));
+  }
+  100% {
+    filter: drop-shadow(0 0 0 transparent);
+  }
+}
+
+[data-theme="light"] .fireplace-name__flare-active {
+  animation: fireplace-name-flare-light 1.6s ease forwards;
+}
+
+@keyframes fireplace-name-flare-light {
+  0% {
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  14% {
+    filter:
+      drop-shadow(0 0 14px rgba(255, 160, 50, 0.8))
+      drop-shadow(0 0 32px rgba(200, 75, 15, 0.5));
+  }
+  100% {
+    filter: drop-shadow(0 0 0 transparent);
+  }
 }
 
 .fireplace-name__spark {
@@ -905,59 +948,6 @@ html[data-theme="light"] .theme-toggle__moon {
   left: 84%;
   top: 1rem;
   animation: fireplace-spark-three 2.6s linear 1.4s infinite;
-}
-
-.fireplace-burst {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.fireplace-burst__ember {
-  position: absolute;
-  left: 54%;
-  top: 54%;
-  width: 0.16em;
-  height: 0.16em;
-  border-radius: 999px;
-  background: #ffbb4d;
-  box-shadow:
-    0 0 8px rgba(255, 174, 67, 0.92),
-    0 0 18px rgba(227, 82, 29, 0.64);
-  animation: fireplace-burst 850ms cubic-bezier(0.16, 0.72, 0.24, 1) both;
-}
-
-.fireplace-burst__ember--1 { --burst-x: -2.15em; --burst-y: -1.08em; }
-.fireplace-burst__ember--2 { --burst-x: -1.22em; --burst-y: -1.84em; animation-delay: 25ms; }
-.fireplace-burst__ember--3 { --burst-x: -0.2em; --burst-y: -2.16em; animation-delay: 45ms; }
-.fireplace-burst__ember--4 { --burst-x: 0.94em; --burst-y: -1.86em; animation-delay: 10ms; }
-.fireplace-burst__ember--5 { --burst-x: 2.02em; --burst-y: -1.05em; animation-delay: 50ms; }
-.fireplace-burst__ember--6 { --burst-x: 2.35em; --burst-y: 0.08em; animation-delay: 25ms; }
-.fireplace-burst__ember--7 { --burst-x: 1.72em; --burst-y: 1.18em; animation-delay: 60ms; }
-.fireplace-burst__ember--8 { --burst-x: 0.64em; --burst-y: 1.72em; animation-delay: 35ms; }
-.fireplace-burst__ember--9 { --burst-x: -0.66em; --burst-y: 1.62em; animation-delay: 75ms; }
-.fireplace-burst__ember--10 { --burst-x: -1.72em; --burst-y: 1.03em; animation-delay: 32ms; }
-.fireplace-burst__ember--11 { --burst-x: -2.38em; --burst-y: 0.06em; animation-delay: 55ms; }
-.fireplace-burst__ember--12 { --burst-x: 0.16em; --burst-y: -1.48em; animation-delay: 95ms; }
-
-@keyframes fireplace-burst {
-  0% {
-    opacity: 0;
-    transform: translate(0, 0) scale(0.2);
-  }
-  12% {
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
-  }
-  72% {
-    opacity: 0.94;
-    transform: translate(var(--burst-x), var(--burst-y)) scale(0.72);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(calc(var(--burst-x) * 1.1), calc(var(--burst-y) * 1.28)) scale(0.2);
-  }
 }
 
 @keyframes fireplace-flicker {
@@ -1148,6 +1138,13 @@ html[data-theme="light"] .theme-toggle__moon {
 }
 
 @media (hover: hover) {
+  .fireplace-name__button:hover .fireplace-name__text {
+    filter:
+      brightness(1.1)
+      drop-shadow(0 0 12px rgba(255, 155, 45, 0.72))
+      drop-shadow(0 0 28px rgba(210, 80, 15, 0.42));
+  }
+
   .scroll-lens-section:hover {
     border-color: var(--section-hover-border);
     box-shadow: var(--section-hover-glow);
@@ -1361,10 +1358,12 @@ html[data-theme="light"] .theme-toggle__moon {
   .hero-curtain,
   .hero-curtain__title,
   .hero-curtain__text,
+  .fireplace-name__button,
   .fireplace-name__text,
-  .fireplace-name__spark,
-  .fireplace-burst__ember {
+  .fireplace-name__flare-active,
+  .fireplace-name__spark {
     animation: none;
+    transition: none;
   }
 
   .hero-curtain {
