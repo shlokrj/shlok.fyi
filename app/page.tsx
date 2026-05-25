@@ -81,7 +81,8 @@ const professionalExperience = [
     type: "Part-time",
     dates: "Jan 2026 - Present",
     location: "Madison, Wisconsin · Hybrid",
-    detail: "",
+    detail:
+      "placeholder",
     logo: "/logos/experience/doit.png",
     logoAlt: "UW-Madison Division of Information Technology",
     brand: "doit",
@@ -93,7 +94,8 @@ const professionalExperience = [
     type: "Student Organization",
     dates: "Dec 2025 - Present",
     location: "Madison, Wisconsin · On-site",
-    detail: "",
+    detail:
+      "placeholder",
     logo: "/logos/experience/design-interactive.png",
     logoAlt: "Design Interactive EDU",
     brand: "design",
