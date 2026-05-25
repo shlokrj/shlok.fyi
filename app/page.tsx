@@ -678,7 +678,7 @@ export default function Home() {
                     High school extracurricular leadership
                   </span>
                   <span className="theme-soft mt-1 block text-sm leading-snug">
-                    San Ramon, CA · On-site
+                    San Ramon, California · On-site
                   </span>
                 </span>
               </span>
