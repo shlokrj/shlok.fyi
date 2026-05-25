@@ -54,9 +54,9 @@ const professionalExperience = [
     organization: "TidalX AI",
     type: "Internship",
     dates: "May 2026 - Present",
-    location: "San Francisco Bay Area · On-site",
+    location: "Bay Area, California · On-site",
     detail:
-      "Computer vision, identity matching, metric learning, trajectory data, and human-in-the-loop AI for sustainable aquaculture.",
+      "Developing computer vision and machine learning pipelines for aquaculture perception, combining Python data workflows with OpenCV, scikit-learn, feature engineering, geometric matching, and model evaluation.",
     logo: "/logos/experience/tidal.png",
     logoAlt: "TidalX AI",
     brand: "tidal",
@@ -69,7 +69,7 @@ const professionalExperience = [
     dates: "Feb 2026 - Present",
     location: "Madison, Wisconsin · On-site",
     detail:
-      "Computational Biology & Machine Learning Lab (PI: Dr. Dhananjay Bhaskar).",
+      "Under the Computational Biology & Machine Learning Lab, led by Principal Investigator Dr. Dhananjay Bhaskar, developing machine learning pipelines for birdsong analysis through audio preprocessing, spectrogram generation, and learned feature representations. Exploring neural models and dimensionality reduction methods to study structure in animal vocalizations.",
     logo: "/logos/experience/uw-research.png",
     logoAlt: "University of Wisconsin-Madison",
     brand: "uw-research",
@@ -82,7 +82,7 @@ const professionalExperience = [
     dates: "Jan 2026 - Present",
     location: "Madison, Wisconsin · Hybrid",
     detail:
-      "placeholder",
+      "Providing technical support for software, account access, security tools, and campus technology systems to UW-Madison students, faculty, staff, and off-campus users.",
     logo: "/logos/experience/doit.png",
     logoAlt: "UW-Madison Division of Information Technology",
     brand: "doit",
@@ -95,7 +95,7 @@ const professionalExperience = [
     dates: "Dec 2025 - Present",
     location: "Madison, Wisconsin · On-site",
     detail:
-      "placeholder",
+      "Leading weekly workshops for 50+ members on Figma, UI/UX design, web development, and frontend engineering fundamentals. Creating educational materials that make design more accessible to students.",
     logo: "/logos/experience/design-interactive.png",
     logoAlt: "Design Interactive EDU",
     brand: "design",
@@ -109,7 +109,7 @@ const highSchoolActivities = [
     organization: "NASA STEM Club",
     dates: "Aug 2024 - Jun 2025",
     detail:
-      "Mentored 60+ high school students in weekly meetings to prepare for NASA STEM Challenges.",
+      "Mentored selected students of 60+ applicants in weekly meetings to compete in NASA STEM Challenges.",
     context:
       "Founded after NASA ADC and JAXA Kibo Robotics to help other students participate in these challenges.",
     logo: "/logos/experience/nasa-stem.png",
@@ -124,7 +124,7 @@ const highSchoolActivities = [
     organization: "XR EDU Club",
     dates: "Aug 2021 - Jun 2025",
     detail:
-      "Developed XR solutions for social good and organized Hack the Planet 2024 and 2025 while managing club finances and weekly meetings.",
+      "Developed XR solutions for social good, helped manage club finances, and ran weekly meetings.",
     context: "In association with Samsung Solve for Tomorrow finalist projects.",
     logo: "/logos/experience/xr-edu.png",
     logoAlt: "XR EDU",
@@ -138,7 +138,7 @@ const highSchoolActivities = [
     organization: "Coding for SDG Club",
     dates: "Jun 2024 - Jun 2025",
     detail:
-      "Organized two hackathons centered on Sustainable Development Goals with 200 competitors and approximately $5,000 in sponsored prizes.",
+      "Helped organize two hackathons (Hack the Planet 2024 and Hack the Planet 2025) centered on Sustainable Development Goals with 100+ competitors and $5,000+ in sponsored prizes across both events.",
     context: "",
     logo: "/logos/experience/coding-sdg.png",
     logoAlt: "Coding for SDG",
@@ -492,8 +492,10 @@ export default function Home() {
                 <span className="font-semibold">Data Science</span>{" "}
                 student at{" "}
                 <span className="font-semibold">UW-Madison</span>{" "}
-                interested in building data-driven systems and applied machine
-                learning for real-world problems (biology, XR, perception, etc.). I will be going into my second year and graduating in May 2028!
+                interested in building data-driven systems related to{" "}
+                <span className="font-semibold">machine learning</span>,{" "}
+                <span className="font-semibold">computer vision</span>, and{" "}
+                <span className="font-semibold">applied research</span>. I enjoy turning real-world data into tools that are useful, visual, and meaningful. My expected graduation is in May 2028!
               </p>
             </div>
 
@@ -582,8 +584,7 @@ export default function Home() {
             Work &amp; Leadership
           </h2>
           <p className="theme-muted mt-4 max-w-3xl text-lg leading-8">
-            Roles across applied machine learning, campus technology, and
-            student education.
+            Roles across internships, work, and leadership opportunities.
           </p>
 
           <div className="experience-timeline mt-9 grid gap-4">
@@ -674,7 +675,7 @@ export default function Home() {
                     Dougherty Valley High School
                   </span>
                   <span className="theme-muted mt-1 block text-sm uppercase tracking-[0.18em]">
-                    Extracurricular leadership
+                    High school extracurricular leadership
                   </span>
                 </span>
               </span>
