@@ -312,6 +312,7 @@ function applyTheme(theme: Theme) {
 export default function Home() {
   const [showCurtain, setShowCurtain] = useState(true);
   const [isHighSchoolOpen, setIsHighSchoolOpen] = useState(false);
+  const [isNightwatchPreviewOpen, setIsNightwatchPreviewOpen] = useState(false);
   const nameFlareRef = useRef<HTMLSpanElement>(null);
 
   const handleNameFlare = () => {
@@ -564,11 +565,153 @@ export default function Home() {
             Projects
           </p>
           <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
-            Coming soon...
+            All Projects
           </h2>
-          <p className="theme-muted mt-5 max-w-3xl text-lg leading-8">
-            Coming soon: a showcase of my projects and work, with links to GitHub repos and demos!
+          <p className="theme-muted mt-4 max-w-3xl text-lg leading-8">
+            Things that I am working on across data, design,
+            useful software, and more.
           </p>
+
+          <div className="project-feature-entry mt-9">
+            <article className="project-feature">
+              <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
+                <div>
+                  <p className="eyebrow text-xs uppercase">Full-Stack Astronomy App</p>
+                  <h3 className="theme-heading mt-3 text-4xl leading-tight">
+                    Nightwatch
+                  </h3>
+                  <p className="theme-muted mt-4 text-base leading-8 sm:text-lg">
+                    A local night sky guide that combines astronomy calculations
+                    and weather conditions to show visible planets, moon phase,
+                    twilight times, and the best viewing window for tonight.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    <a
+                      href="https://nightwatch-psi.vercel.app/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-action project-action--primary"
+                    >
+                      Live Demo
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                      >
+                        <path d="M7 17 17 7" />
+                        <path d="M8 7h9v9" />
+                      </svg>
+                    </a>
+                    <a
+                      href="https://github.com/shlokrj/nightwatch"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-action"
+                    >
+                      GitHub Repo
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                      >
+                        <path d="M7 17 17 7" />
+                        <path d="M8 7h9v9" />
+                      </svg>
+                    </a>
+                    <button
+                      type="button"
+                      className={`project-action project-preview-toggle${isNightwatchPreviewOpen ? " project-preview-toggle--open" : ""}`}
+                      aria-expanded={isNightwatchPreviewOpen}
+                      aria-controls="nightwatch-preview"
+                      onClick={() => setIsNightwatchPreviewOpen((open) => !open)}
+                    >
+                      Preview
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        className="project-preview-toggle__icon h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                      >
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="project-stack">
+                  <p className="eyebrow text-xs uppercase">Key Technologies</p>
+                  <ul className="mt-4 flex flex-wrap gap-2" aria-label="Nightwatch technologies">
+                    {[
+                      "React",
+                      "Vite",
+                      "Tailwind CSS",
+                      "Python",
+                      "FastAPI",
+                      "Skyfield",
+                      "Open-Meteo",
+                      "Vercel",
+                    ].map((tool) => (
+                      <li key={tool} className="project-chip">
+                        {tool}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="theme-soft mt-5 text-sm leading-7">
+                    Built with place search, timezone detection, astronomy
+                    ephemerides, and weather-aware sky scoring.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                id="nightwatch-preview"
+                className={`project-preview${isNightwatchPreviewOpen ? " project-preview--open" : ""}`}
+              >
+                <div className="project-preview__inner">
+                  {isNightwatchPreviewOpen ? (
+                    <a
+                      href="https://nightwatch-psi.vercel.app/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-banner relative block overflow-hidden"
+                      aria-label="Open the live Nightwatch application"
+                    >
+                      <Image
+                        src="/projects/nightwatch-banner.png"
+                        alt="Nightwatch displaying a Madison stargazing report and best viewing window."
+                        width={1440}
+                        height={1100}
+                        sizes="(min-width: 1024px) 60rem, calc(100vw - 4rem)"
+                        className="project-banner__image w-full"
+                      />
+                      <span className="project-banner__label">
+                        View live app
+                        <svg
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                          className="h-4 w-4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                        >
+                          <path d="M7 17 17 7" />
+                          <path d="M8 7h9v9" />
+                        </svg>
+                      </span>
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+            </article>
+          </div>
         </section>
 
         <SectionDivider label="Experience" />

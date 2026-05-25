@@ -67,6 +67,12 @@
   --experience-hover-shadow: 0 13px 32px rgba(26, 10, 5, 0.22), 0 0 22px rgba(209, 67, 33, 0.14);
   --school-background: linear-gradient(145deg, rgba(181, 50, 26, 0.1), rgba(0, 0, 0, 0.12));
   --activity-background: rgba(0, 0, 0, 0.12);
+  --project-background: rgba(8, 12, 20, 0.42);
+  --project-border: rgba(255, 205, 190, 0.14);
+  --project-border-hover: rgba(255, 180, 91, 0.38);
+  --project-chip-background: rgba(255, 205, 190, 0.07);
+  --project-chip-border: rgba(255, 205, 190, 0.15);
+  --project-hover-shadow: 0 16px 36px rgba(26, 10, 5, 0.24), 0 0 28px rgba(209, 116, 34, 0.16);
   --nav-hover: #ffffff;
   --divider-line: rgba(255, 188, 160, 0.34);
   --divider-text: rgba(255, 188, 160, 0.58);
@@ -139,6 +145,12 @@
   --experience-hover-shadow: 0 13px 28px rgba(98, 57, 42, 0.13), 0 0 20px rgba(207, 104, 55, 0.11);
   --school-background: linear-gradient(145deg, rgba(255, 255, 255, 0.4), rgba(231, 200, 181, 0.27));
   --activity-background: rgba(255, 255, 255, 0.34);
+  --project-background: rgba(255, 255, 255, 0.34);
+  --project-border: rgba(98, 57, 42, 0.14);
+  --project-border-hover: rgba(191, 92, 48, 0.32);
+  --project-chip-background: rgba(149, 41, 30, 0.05);
+  --project-chip-border: rgba(98, 57, 42, 0.14);
+  --project-hover-shadow: 0 14px 30px rgba(98, 57, 42, 0.13), 0 0 22px rgba(207, 104, 55, 0.1);
   --nav-hover: #7d211b;
   --divider-line: rgba(118, 48, 35, 0.24);
   --divider-text: rgba(118, 48, 35, 0.56);
@@ -391,6 +403,113 @@ html[data-theme="light"] .theme-toggle__moon {
 
 .album-accent {
   color: var(--album-accent);
+}
+
+.project-feature {
+  overflow: hidden;
+  border: 1px solid var(--project-border);
+  border-radius: 0.5rem;
+  background: var(--project-background);
+  transition:
+    border-color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.project-banner {
+  border-top: 1px solid var(--project-border);
+}
+
+.project-banner__image {
+  display: block;
+  aspect-ratio: 16 / 8.5;
+  object-fit: cover;
+  object-position: center top;
+  transition:
+    transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 300ms ease;
+}
+
+.project-banner__label {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid var(--project-border-hover);
+  border-radius: 0.5rem;
+  background: var(--nav-background);
+  padding: 0.62rem 0.8rem;
+  color: var(--link);
+  font-size: 0.9rem;
+  transition:
+    transform 230ms ease,
+    box-shadow 230ms ease,
+    color 230ms ease;
+}
+
+.project-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  border: 1px solid var(--project-chip-border);
+  border-radius: 0.5rem;
+  background: var(--project-chip-background);
+  padding: 0.72rem 0.95rem;
+  color: var(--link);
+  transition:
+    transform 230ms ease,
+    border-color 230ms ease,
+    box-shadow 230ms ease,
+    color 230ms ease;
+}
+
+.project-action--primary {
+  border-color: transparent;
+  background: var(--link);
+  color: var(--background);
+}
+
+.project-preview-toggle__icon {
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-preview-toggle--open .project-preview-toggle__icon {
+  transform: rotate(180deg);
+}
+
+.project-preview {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 460ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-preview--open {
+  grid-template-rows: 1fr;
+}
+
+.project-preview__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.project-stack {
+  border-top: 1px solid var(--project-border);
+  padding-top: 1.5rem;
+}
+
+.project-chip {
+  border: 1px solid var(--project-chip-border);
+  border-radius: 999px;
+  background: var(--project-chip-background);
+  padding: 0.45rem 0.72rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  transition:
+    transform 210ms ease,
+    border-color 210ms ease,
+    box-shadow 210ms ease,
+    color 210ms ease;
 }
 
 .course-term {
@@ -1201,6 +1320,49 @@ html[data-theme="light"] .theme-toggle__moon {
     transform: translateY(-3px);
   }
 
+  .project-feature:hover {
+    border-color: var(--project-border-hover);
+    box-shadow: var(--project-hover-shadow);
+  }
+
+  .project-banner:hover .project-banner__image {
+    filter: brightness(1.04);
+    transform: scale(1.027);
+  }
+
+  .project-banner:hover .project-banner__label {
+    box-shadow: var(--project-hover-shadow);
+    color: var(--nav-hover);
+    transform: translateY(-2px);
+  }
+
+  .project-preview-toggle:hover .project-preview-toggle__icon {
+    transform: translateY(2px);
+  }
+
+  .project-preview-toggle--open:hover .project-preview-toggle__icon {
+    transform: rotate(180deg) translateY(2px);
+  }
+
+  .project-action:hover {
+    border-color: var(--project-border-hover);
+    box-shadow: var(--project-hover-shadow);
+    color: var(--nav-hover);
+    transform: translateY(-2px);
+  }
+
+  .project-action--primary:hover {
+    border-color: transparent;
+    color: var(--background);
+  }
+
+  .project-chip:hover {
+    border-color: var(--project-border-hover);
+    box-shadow: var(--project-hover-shadow);
+    color: var(--link);
+    transform: translateY(-2px);
+  }
+
   .experience-card:hover {
     border-color: var(--experience-border-hover);
     box-shadow: var(--experience-hover-shadow);
@@ -1279,6 +1441,21 @@ html[data-theme="light"] .theme-toggle__moon {
     box-shadow: var(--award-hover-shadow);
     transform: translateY(-4px);
   }
+}
+
+@keyframes project-rise {
+  from {
+    opacity: 0.48;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-lens-active .project-feature-entry {
+  animation: project-rise 480ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 @keyframes experience-rise {
@@ -1379,6 +1556,14 @@ html[data-theme="light"] .theme-toggle__moon {
 
   .course-term,
   .course-item,
+  .project-feature-entry,
+  .project-feature,
+  .project-banner__image,
+  .project-banner__label,
+  .project-action,
+  .project-preview,
+  .project-preview-toggle__icon,
+  .project-chip,
   .experience-entry,
   .experience-card,
   .experience-logo-link,
@@ -1413,6 +1598,24 @@ html[data-theme="light"] .theme-toggle__moon {
   .award-photo {
     border-top: 1px solid var(--award-border);
     border-left: 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .project-banner__label {
+    right: 0.65rem;
+    bottom: 0.65rem;
+    padding: 0.48rem 0.62rem;
+    font-size: 0.78rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-stack {
+    border-top: 0;
+    border-left: 1px solid var(--project-border);
+    padding-top: 0;
+    padding-left: 2rem;
   }
 }
 
