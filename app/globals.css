@@ -434,6 +434,41 @@ html[data-theme="light"] .theme-toggle__moon {
   transition: transform 260ms ease;
 }
 
+.experience-logo-link {
+  display: block;
+  outline: none;
+}
+
+.experience-logo__launch {
+  position: absolute;
+  right: 0.22rem;
+  bottom: 0.22rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border: 1px solid var(--experience-border);
+  border-radius: 999px;
+  background: var(--nav-background);
+  color: var(--link);
+  opacity: 0;
+  transform: translate(3px, 3px) scale(0.8);
+  transition:
+    opacity 200ms ease,
+    transform 230ms ease,
+    box-shadow 230ms ease;
+}
+
+.experience-logo-link:focus-visible {
+  box-shadow: 0 0 0 3px var(--experience-border-hover);
+}
+
+.experience-logo-link:focus-visible .experience-logo__launch {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
 .experience-org {
   color: var(--experience-org);
 }
@@ -475,7 +510,7 @@ html[data-theme="light"] .theme-toggle__moon {
   width: 4rem;
   height: 4rem;
   overflow: hidden;
-  border-radius: 999px;
+  border-radius: 0.42rem;
   transition: transform 280ms ease;
 }
 
@@ -998,8 +1033,14 @@ html[data-theme="light"] .theme-toggle__moon {
     transform: scaleX(1);
   }
 
-  .experience-card:hover .experience-logo {
+  .experience-card:hover .experience-logo-link {
     transform: translateY(-2px) scale(1.04);
+  }
+
+  .experience-logo-link:hover .experience-logo__launch {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+    box-shadow: var(--experience-hover-shadow);
   }
 
   .school-group:hover {
@@ -1134,6 +1175,8 @@ html[data-theme="light"] .theme-toggle__moon {
   .course-item,
   .experience-entry,
   .experience-card,
+  .experience-logo-link,
+  .experience-logo__launch,
   .school-group,
   .school-group__content,
   .school-group__toggle,

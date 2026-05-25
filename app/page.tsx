@@ -60,6 +60,7 @@ const professionalExperience = [
     logo: "/logos/experience/tidal.png",
     logoAlt: "TidalX AI",
     brand: "tidal",
+    href: "https://tidalx.ai/",
   },
   {
     role: "Undergraduate Researcher",
@@ -72,6 +73,7 @@ const professionalExperience = [
     logo: "/logos/experience/uw-research.png",
     logoAlt: "University of Wisconsin-Madison",
     brand: "uw-research",
+    href: "https://engineering.wisc.edu/directory/profile/dhananjay-bhaskar/",
   },
   {
     role: "Help Desk Support Specialist",
@@ -83,6 +85,7 @@ const professionalExperience = [
     logo: "/logos/experience/doit.png",
     logoAlt: "UW-Madison Division of Information Technology",
     brand: "doit",
+    href: "https://it.wisc.edu/services/help-desk/",
   },
   {
     role: "Education Director",
@@ -94,6 +97,7 @@ const professionalExperience = [
     logo: "/logos/experience/design-interactive.png",
     logoAlt: "Design Interactive EDU",
     brand: "design",
+    href: "https://www.designinteractive-uw.com/",
   },
 ];
 
@@ -526,8 +530,13 @@ export default function Home() {
             {professionalExperience.map((experience) => (
               <div key={experience.role} className="experience-entry">
                 <article className="experience-card grid gap-5 p-5 sm:grid-cols-[4.5rem_1fr] sm:p-6">
-                  <div
-                    className={`experience-logo experience-logo--${experience.brand} relative`}
+                  <a
+                    href={experience.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Visit ${experience.organization}`}
+                    title={`Visit ${experience.organization}`}
+                    className={`experience-logo-link experience-logo experience-logo--${experience.brand} relative`}
                   >
                     <Image
                       src={experience.logo}
@@ -536,7 +545,21 @@ export default function Home() {
                       sizes="72px"
                       className="object-contain"
                     />
-                  </div>
+                    <span className="experience-logo__launch" aria-hidden="true">
+                      <svg
+                        className="h-3.5 w-3.5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M15 3h6v6" />
+                        <path d="M10 14 21 3" />
+                      </svg>
+                    </span>
+                  </a>
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-start justify-between gap-x-5 gap-y-2">
                       <div>
