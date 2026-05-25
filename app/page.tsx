@@ -313,6 +313,7 @@ export default function Home() {
   const [showCurtain, setShowCurtain] = useState(true);
   const [isHighSchoolOpen, setIsHighSchoolOpen] = useState(false);
   const [isNightwatchPreviewOpen, setIsNightwatchPreviewOpen] = useState(false);
+  const [hasNightwatchPreviewOpened, setHasNightwatchPreviewOpened] = useState(false);
   const nameFlareRef = useRef<HTMLSpanElement>(null);
 
   const handleNameFlare = () => {
@@ -629,7 +630,10 @@ export default function Home() {
                       className={`project-action project-preview-toggle${isNightwatchPreviewOpen ? " project-preview-toggle--open" : ""}`}
                       aria-expanded={isNightwatchPreviewOpen}
                       aria-controls="nightwatch-preview"
-                      onClick={() => setIsNightwatchPreviewOpen((open) => !open)}
+                      onClick={() => {
+                        setHasNightwatchPreviewOpened(true);
+                        setIsNightwatchPreviewOpen((open) => !open);
+                      }}
                     >
                       Preview
                       <svg
@@ -674,13 +678,15 @@ export default function Home() {
               <div
                 id="nightwatch-preview"
                 className={`project-preview${isNightwatchPreviewOpen ? " project-preview--open" : ""}`}
+                aria-hidden={!isNightwatchPreviewOpen}
               >
                 <div className="project-preview__inner">
-                  {isNightwatchPreviewOpen ? (
+                  {hasNightwatchPreviewOpened ? (
                     <a
                       href="https://nightwatch-psi.vercel.app/"
                       target="_blank"
                       rel="noreferrer"
+                      tabIndex={isNightwatchPreviewOpen ? undefined : -1}
                       className="project-banner relative block overflow-hidden"
                       aria-label="Open the live Nightwatch application"
                     >
