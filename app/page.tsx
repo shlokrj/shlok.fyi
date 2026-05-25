@@ -9,6 +9,7 @@ const navItems = [
   { href: "home", label: "Home" },
   { href: "projects", label: "Projects" },
   { href: "experience", label: "Experience" },
+  { href: "courses", label: "Courses" },
   { href: "awards", label: "Awards" },
   { href: "about-me", label: "About Me" },
   { href: "contact", label: "Contact" },
@@ -129,13 +130,10 @@ function MoonIcon() {
 
 function getPreferredTheme(): Theme {
   const savedTheme = globalThis.localStorage.getItem("theme");
-  const systemTheme = globalThis.matchMedia("(prefers-color-scheme: light)").matches
-    ? "light"
-    : "dark";
 
   return savedTheme === "light" || savedTheme === "dark"
     ? savedTheme
-    : systemTheme;
+    : "light";
 }
 
 function applyTheme(theme: Theme) {
@@ -334,6 +332,23 @@ export default function Home() {
           </h2>
           <p className="theme-muted mt-5 max-w-3xl text-lg leading-8">
             Coming soon: a summary of my experience, including internships, research, campus work, etc!
+          </p>
+        </section>
+
+        <SectionDivider label="Courses" />
+
+        <section
+          id="courses"
+          className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+        >
+          <p className="eyebrow text-xs uppercase tracking-[0.32em]">
+            Courses
+          </p>
+          <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
+            Coming soon...
+          </h2>
+          <p className="theme-muted mt-5 max-w-3xl text-lg leading-8">
+            Coming soon: relevant coursework in computer science, data science, and related areas!
           </p>
         </section>
 
