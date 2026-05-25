@@ -186,7 +186,7 @@ export default function Home() {
 
     document.getElementById(sectionId)?.scrollIntoView({
       behavior: "smooth",
-      block: "start",
+      block: "center",
     });
   };
 

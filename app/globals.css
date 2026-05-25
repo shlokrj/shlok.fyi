@@ -544,9 +544,17 @@ html[data-theme="light"] .theme-toggle__moon {
 
 @media (hover: hover) {
   .scroll-lens-section:hover {
-    opacity: 1;
     border-color: var(--section-hover-border);
     box-shadow: var(--section-hover-glow);
+  }
+
+  .scroll-lens-section.scroll-lens-active:hover {
+    transform: translateY(-2px) scale(1.018);
+  }
+
+  .scroll-lens-section.scroll-lens-resting:hover {
+    opacity: 0.9;
+    transform: translateY(-2px) scale(0.972);
   }
 }
 
