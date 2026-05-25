@@ -14,6 +14,64 @@ const navItems = [
   { href: "contact", label: "Contact" },
 ];
 
+function useScrollLens() {
+  useEffect(() => {
+    let frame: number | null = globalThis.requestAnimationFrame(updateActiveSection);
+    const reduceMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function updateActiveSection() {
+      frame = null;
+      const elements = Array.from(document.querySelectorAll<HTMLElement>(".scroll-lens-section"));
+      if (elements.length === 0) return;
+      if (reduceMotion) { clearScrollLens(elements); return; }
+
+      const scrollY = globalThis.scrollY || globalThis.pageYOffset;
+      const atTop = scrollY <= 4;
+      const atBottom = globalThis.innerHeight + scrollY >= document.documentElement.scrollHeight - 28;
+      let activeIndex = 0;
+
+      if (atBottom) {
+        activeIndex = elements.length - 1;
+      } else if (!atTop) {
+        const focusY = globalThis.innerHeight * 0.48;
+        let bestScore = Number.POSITIVE_INFINITY;
+        elements.forEach((el, i) => {
+          const rect = el.getBoundingClientRect();
+          const visH = Math.max(0, Math.min(rect.bottom, globalThis.innerHeight) - Math.max(rect.top, 0));
+          const visR = visH / Math.min(Math.max(rect.height, 1), globalThis.innerHeight);
+          const near = Math.min(Math.max(focusY, rect.top), rect.bottom);
+          const score = Math.abs(near - focusY) + (visH > 0 ? 0 : globalThis.innerHeight * 0.65) - visR * 90;
+          if (score < bestScore) { bestScore = score; activeIndex = i; }
+        });
+      }
+
+      elements.forEach((el, i) => {
+        el.classList.toggle("scroll-lens-active", i === activeIndex);
+        el.classList.toggle("scroll-lens-resting", i !== activeIndex);
+      });
+    }
+
+    function scheduleUpdate() {
+      if (frame !== null) return;
+      frame = globalThis.requestAnimationFrame(updateActiveSection);
+    }
+
+    globalThis.addEventListener("scroll", scheduleUpdate, { passive: true });
+    globalThis.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      if (frame !== null) globalThis.cancelAnimationFrame(frame);
+      globalThis.removeEventListener("scroll", scheduleUpdate);
+      globalThis.removeEventListener("resize", scheduleUpdate);
+      clearScrollLens(Array.from(document.querySelectorAll<HTMLElement>(".scroll-lens-section")));
+    };
+  }, []);
+}
+
+function clearScrollLens(elements: HTMLElement[]) {
+  elements.forEach((el) => el.classList.remove("scroll-lens-active", "scroll-lens-resting"));
+}
+
 function SectionDivider({ label }: Readonly<{ label: string }>) {
   return (
     <div
@@ -106,6 +164,8 @@ export default function Home() {
     applyTheme(nextTheme);
   };
 
+  useScrollLens();
+
   const scrollToTop = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
 
@@ -179,7 +239,7 @@ export default function Home() {
 
         <section
           id="home"
-          className="hero-panel scroll-mt-24 w-full rounded-[2rem] border px-8 py-12 backdrop-blur sm:px-12 sm:py-16"
+          className="hero-panel scroll-lens-section scroll-mt-24 w-full rounded-[2rem] border px-8 py-12 backdrop-blur sm:px-12 sm:py-16"
         >
           <div className="grid gap-8 xl:grid-cols-[1.35fr_1fr] xl:items-start">
             <div className="flex h-full flex-col justify-between gap-10">
@@ -247,7 +307,7 @@ export default function Home() {
 
         <section
           id="projects"
-          className="theme-panel scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
           <p className="eyebrow text-xs uppercase tracking-[0.32em]">
             Projects
@@ -264,7 +324,7 @@ export default function Home() {
 
         <section
           id="experience"
-          className="theme-panel scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
           <p className="eyebrow text-xs uppercase tracking-[0.32em]">
             Experience
@@ -281,7 +341,7 @@ export default function Home() {
 
         <section
           id="awards"
-          className="theme-panel scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
           <p className="eyebrow text-xs uppercase tracking-[0.32em]">
             Awards
@@ -298,7 +358,7 @@ export default function Home() {
 
         <section
           id="about-me"
-          className="theme-panel scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
             <div className="sub-panel rounded-[1.5rem] border p-6">
@@ -391,7 +451,7 @@ export default function Home() {
 
         <section
           id="contact"
-          className="theme-panel scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
           <p className="eyebrow text-xs uppercase tracking-[0.32em]">
             Contact
