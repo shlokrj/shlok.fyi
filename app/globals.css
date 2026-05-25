@@ -39,6 +39,18 @@
     0 24px 70px rgba(26, 10, 5, 0.42),
     0 0 34px rgba(235, 96, 45, 0.22),
     inset 0 1px 0 rgba(255, 220, 205, 0.14);
+  --course-line: rgba(255, 188, 160, 0.28);
+  --course-background: rgba(255, 205, 190, 0.045);
+  --course-background-hover: rgba(181, 50, 26, 0.14);
+  --course-border: rgba(255, 205, 190, 0.13);
+  --course-border-hover: rgba(255, 173, 94, 0.32);
+  --course-code: rgba(255, 188, 160, 0.8);
+  --course-title: rgba(255, 231, 222, 0.92);
+  --course-hover-shadow: 0 13px 30px rgba(26, 10, 5, 0.2), 0 0 20px rgba(209, 67, 33, 0.12);
+  --status-background: rgba(255, 205, 190, 0.08);
+  --status-border: rgba(255, 205, 190, 0.16);
+  --status-upcoming-background: rgba(255, 236, 150, 0.1);
+  --status-upcoming-border: rgba(255, 236, 150, 0.24);
   --nav-hover: #ffffff;
   --divider-line: rgba(255, 188, 160, 0.34);
   --divider-text: rgba(255, 188, 160, 0.58);
@@ -83,6 +95,18 @@
     0 22px 60px rgba(98, 57, 42, 0.2),
     0 0 32px rgba(207, 104, 55, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.58);
+  --course-line: rgba(118, 48, 35, 0.18);
+  --course-background: rgba(255, 255, 255, 0.32);
+  --course-background-hover: rgba(255, 247, 238, 0.68);
+  --course-border: rgba(98, 57, 42, 0.13);
+  --course-border-hover: rgba(191, 92, 48, 0.32);
+  --course-code: rgba(149, 41, 30, 0.84);
+  --course-title: rgba(35, 18, 15, 0.86);
+  --course-hover-shadow: 0 12px 26px rgba(98, 57, 42, 0.12), 0 0 18px rgba(207, 104, 55, 0.1);
+  --status-background: rgba(118, 48, 35, 0.06);
+  --status-border: rgba(118, 48, 35, 0.14);
+  --status-upcoming-background: rgba(143, 103, 10, 0.08);
+  --status-upcoming-border: rgba(143, 103, 10, 0.2);
   --nav-hover: #7d211b;
   --divider-line: rgba(118, 48, 35, 0.24);
   --divider-text: rgba(118, 48, 35, 0.56);
@@ -290,6 +314,67 @@ html[data-theme="light"] .theme-toggle__moon {
 
 .album-accent {
   color: var(--album-accent);
+}
+
+.course-term {
+  min-width: 0;
+}
+
+.course-term__line {
+  background: linear-gradient(90deg, var(--course-line), transparent);
+  transition: background 220ms ease;
+}
+
+.course-status {
+  flex-shrink: 0;
+  border: 1px solid var(--status-border);
+  border-radius: 999px;
+  background: var(--status-background);
+  color: var(--eyebrow);
+  padding: 0.35rem 0.55rem;
+  font-size: 0.64rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.course-status--upcoming {
+  border-color: var(--status-upcoming-border);
+  background: var(--status-upcoming-background);
+  color: var(--accent);
+}
+
+.course-item {
+  min-height: 5.3rem;
+  border: 1px solid var(--course-border);
+  border-radius: 0.5rem;
+  background: var(--course-background);
+  padding: 0.95rem 1rem;
+  transition:
+    transform 230ms ease,
+    border-color 230ms ease,
+    background 230ms ease,
+    box-shadow 230ms ease;
+}
+
+.course-code {
+  color: var(--course-code);
+}
+
+.course-title {
+  color: var(--course-title);
+}
+
+.scroll-lens-active .course-term {
+  animation: course-term-rise 430ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.scroll-lens-active .course-term:nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.scroll-lens-active .course-term:nth-child(3) {
+  animation-delay: 120ms;
 }
 
 .uw-outline {
@@ -556,6 +641,28 @@ html[data-theme="light"] .theme-toggle__moon {
     opacity: 0.9;
     transform: translateY(-2px) scale(0.972);
   }
+
+  .course-term:hover .course-term__line {
+    background: linear-gradient(90deg, var(--course-border-hover), transparent);
+  }
+
+  .course-item:hover {
+    border-color: var(--course-border-hover);
+    background: var(--course-background-hover);
+    box-shadow: var(--course-hover-shadow);
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes course-term-rise {
+  from {
+    opacity: 0.5;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -574,6 +681,12 @@ html[data-theme="light"] .theme-toggle__moon {
   .scroll-lens-section {
     opacity: 1;
     transform: none;
+    transition: none;
+  }
+
+  .course-term,
+  .course-item {
+    animation: none;
     transition: none;
   }
 }

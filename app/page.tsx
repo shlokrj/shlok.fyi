@@ -15,6 +15,39 @@ const navItems = [
   { href: "contact", label: "Contact" },
 ];
 
+const relevantCoursework = [
+  {
+    term: "Fall 2025",
+    status: "Completed",
+    courses: [
+      { code: "STAT 240", title: "Data Science Modeling I" },
+      { code: "COMP SCI 300", title: "Programming II" },
+    ],
+  },
+  {
+    term: "Spring 2026",
+    status: "Completed",
+    courses: [
+      { code: "COMP SCI 252", title: "Intro to Computer Engineering" },
+      { code: "COMP SCI 400", title: "Programming III" },
+      { code: "STAT 340", title: "Data Science Modeling II" },
+    ],
+  },
+  {
+    term: "Fall 2026",
+    status: "Upcoming",
+    courses: [
+      { code: "COMP SCI 320", title: "Data Science Programming II" },
+      { code: "MATH 240", title: "Intro to Discrete Mathematics" },
+      {
+        code: "BME 603",
+        title: "Special Topics in Bioinstrumentation and Medical Devices",
+      },
+      { code: "COMP SCI 354", title: "Machine Organization and Programming" },
+    ],
+  },
+];
+
 function useScrollLens() {
   useEffect(() => {
     let frame: number | null = globalThis.requestAnimationFrame(updateActiveSection);
@@ -345,11 +378,41 @@ export default function Home() {
             Courses
           </p>
           <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
-            Coming soon...
+            Relevant Coursework
           </h2>
-          <p className="theme-muted mt-5 max-w-3xl text-lg leading-8">
-            Coming soon: relevant coursework in computer science, data science, and related areas!
+          <p className="theme-muted mt-4 max-w-3xl text-lg leading-8">
+            Selected courses supporting my interests in computer science and data science.
           </p>
+
+          <div className="coursework-grid mt-9 grid gap-7 lg:grid-cols-3">
+            {relevantCoursework.map((semester) => (
+              <div key={semester.term} className="course-term">
+                <div className="course-term__header flex items-center justify-between gap-3">
+                  <h3 className="theme-heading text-2xl leading-tight">
+                    {semester.term}
+                  </h3>
+                  <span
+                    className={`course-status${semester.status === "Upcoming" ? " course-status--upcoming" : ""}`}
+                  >
+                    {semester.status}
+                  </span>
+                </div>
+                <div className="course-term__line mt-4 h-px" />
+                <ul className="mt-4 grid gap-3">
+                  {semester.courses.map((course) => (
+                    <li key={course.code} className="course-item">
+                      <p className="course-code text-xs uppercase tracking-[0.24em]">
+                        {course.code}
+                      </p>
+                      <p className="course-title mt-2 text-lg leading-snug">
+                        {course.title}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </section>
 
         <SectionDivider label="Awards" />
