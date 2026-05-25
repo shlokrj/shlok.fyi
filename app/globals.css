@@ -51,6 +51,13 @@
   --status-border: rgba(255, 205, 190, 0.16);
   --status-upcoming-background: rgba(255, 236, 150, 0.1);
   --status-upcoming-border: rgba(255, 236, 150, 0.24);
+  --award-background: rgba(255, 205, 190, 0.045);
+  --award-feature-background: linear-gradient(145deg, rgba(181, 50, 26, 0.12), rgba(0, 0, 0, 0.13));
+  --award-border: rgba(255, 205, 190, 0.14);
+  --award-border-hover: rgba(255, 173, 94, 0.32);
+  --award-hover-shadow: 0 15px 34px rgba(26, 10, 5, 0.22), 0 0 26px rgba(209, 67, 33, 0.14);
+  --award-link-background: rgba(255, 205, 190, 0.07);
+  --award-distinction: #ffec96;
   --nav-hover: #ffffff;
   --divider-line: rgba(255, 188, 160, 0.34);
   --divider-text: rgba(255, 188, 160, 0.58);
@@ -107,6 +114,13 @@
   --status-border: rgba(118, 48, 35, 0.14);
   --status-upcoming-background: rgba(143, 103, 10, 0.08);
   --status-upcoming-border: rgba(143, 103, 10, 0.2);
+  --award-background: rgba(255, 255, 255, 0.32);
+  --award-feature-background: linear-gradient(145deg, rgba(255, 255, 255, 0.42), rgba(231, 200, 181, 0.3));
+  --award-border: rgba(98, 57, 42, 0.14);
+  --award-border-hover: rgba(191, 92, 48, 0.32);
+  --award-hover-shadow: 0 14px 30px rgba(98, 57, 42, 0.13), 0 0 22px rgba(207, 104, 55, 0.1);
+  --award-link-background: rgba(149, 41, 30, 0.05);
+  --award-distinction: #956100;
   --nav-hover: #7d211b;
   --divider-line: rgba(118, 48, 35, 0.24);
   --divider-text: rgba(118, 48, 35, 0.56);
@@ -375,6 +389,114 @@ html[data-theme="light"] .theme-toggle__moon {
 
 .scroll-lens-active .course-term:nth-child(3) {
   animation-delay: 120ms;
+}
+
+.award-feature {
+  border: 1px solid var(--award-border);
+  border-radius: 0.5rem;
+  background: var(--award-feature-background);
+  transition:
+    transform 250ms ease,
+    border-color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.award-photo {
+  overflow: hidden;
+  border-left: 1px solid var(--award-border);
+}
+
+.award-photo img {
+  transition: transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.award-date {
+  flex-shrink: 0;
+  border: 1px solid var(--status-border);
+  border-radius: 999px;
+  background: var(--status-background);
+  color: var(--eyebrow);
+  padding: 0.42rem 0.62rem;
+  font-size: 0.67rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.award-org {
+  color: var(--course-code);
+}
+
+.award-link {
+  border: 1px solid var(--award-border);
+  border-radius: 0.5rem;
+  background: var(--award-link-background);
+  color: var(--link);
+  padding: 0.85rem 1rem;
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.award-link__icon {
+  transition: transform 220ms ease;
+}
+
+.award-card {
+  min-width: 0;
+  min-height: 19.5rem;
+  border: 1px solid var(--award-border);
+  border-radius: 0.5rem;
+  background: var(--award-background);
+  transition:
+    transform 250ms ease,
+    border-color 250ms ease,
+    background 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.award-brand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.award-brand--samsung {
+  height: 2.8rem;
+  width: 2.8rem;
+  overflow: hidden;
+  border-radius: 0.4rem;
+}
+
+.award-brand--jaxa {
+  height: 2.7rem;
+  width: 6.2rem;
+}
+
+.award-distinction {
+  color: var(--award-distinction);
+}
+
+.scroll-lens-active .award-feature-entry {
+  animation: award-rise 470ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.scroll-lens-active .award-card-entry {
+  animation: award-rise 430ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.scroll-lens-active .award-card-entry:nth-child(1) {
+  animation-delay: 60ms;
+}
+
+.scroll-lens-active .award-card-entry:nth-child(2) {
+  animation-delay: 110ms;
+}
+
+.scroll-lens-active .award-card-entry:nth-child(3) {
+  animation-delay: 160ms;
 }
 
 .uw-outline {
@@ -652,12 +774,50 @@ html[data-theme="light"] .theme-toggle__moon {
     box-shadow: var(--course-hover-shadow);
     transform: translateY(-3px);
   }
+
+  .award-feature:hover {
+    border-color: var(--award-border-hover);
+    box-shadow: var(--award-hover-shadow);
+    transform: translateY(-3px);
+  }
+
+  .award-feature:hover .award-photo img {
+    transform: scale(1.035);
+  }
+
+  .award-link:hover {
+    border-color: var(--award-border-hover);
+    color: var(--nav-hover);
+    box-shadow: var(--award-hover-shadow);
+    transform: translateY(-2px);
+  }
+
+  .award-link:hover .award-link__icon {
+    transform: translate(2px, -2px);
+  }
+
+  .award-card:hover {
+    border-color: var(--award-border-hover);
+    box-shadow: var(--award-hover-shadow);
+    transform: translateY(-4px);
+  }
 }
 
 @keyframes course-term-rise {
   from {
     opacity: 0.5;
     transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes award-rise {
+  from {
+    opacity: 0.48;
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -685,9 +845,20 @@ html[data-theme="light"] .theme-toggle__moon {
   }
 
   .course-term,
-  .course-item {
+  .course-item,
+  .award-feature-entry,
+  .award-card-entry,
+  .award-photo img,
+  .award-link {
     animation: none;
     transition: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .award-photo {
+    border-top: 1px solid var(--award-border);
+    border-left: 0;
   }
 }
 

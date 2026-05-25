@@ -48,6 +48,38 @@ const relevantCoursework = [
   },
 ];
 
+const supportingAwards = [
+  {
+    title: "Samsung Solve for Tomorrow 2024",
+    distinction: "California State Finalist",
+    issuer: "Samsung Electronics",
+    date: "Dec 2024",
+    detail: "Competing under XR EDU, our proposed idea was an application that could diagnose diabetic retinopathy in underprivileged communities using AI. We were awarded a $2,500 prize package of Samsung products for our school.",
+    logo: "/awards/samsung-mark.png",
+    logoAlt: "Samsung",
+    brand: "samsung",
+  },
+  {
+    title: "Kibo Robotics Programming Challenge",
+    distinction: "1st High School & 2nd Overall in the USA",
+    issuer: "JAXA in cooperation with NASA STEM",
+    date: "Jul 2024",
+    detail: "Competing with the same NASA ADC group, we wrote code to control free-flying robots (like Astrobee) aboard the International Space Station (ISS). We placed 1st among high school teams and 2nd among high school and undergraduate teams in the USA.",
+    logo: "/awards/jaxa-logo.svg",
+    logoAlt: "JAXA",
+    brand: "jaxa",
+  },
+  {
+    title: "Samsung Solve for Tomorrow 2023",
+    distinction: "California State Finalist",
+    date: "Dec 2023",
+    detail: "Competing under XR EDU, our proposed idea was a wristband device that could be used for communication and emergency situations for homeless youth in the Bay Area. We were awarded a $2,500 prize package of Samsung products for our school.",
+    logo: "/awards/samsung-mark.png",
+    logoAlt: "Samsung",
+    brand: "samsung",
+  },
+];
+
 function useScrollLens() {
   useEffect(() => {
     let frame: number | null = globalThis.requestAnimationFrame(updateActiveSection);
@@ -217,9 +249,14 @@ export default function Home() {
   ) => {
     event.preventDefault();
 
-    document.getElementById(sectionId)?.scrollIntoView({
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    const isLongSection = section.getBoundingClientRect().height > globalThis.innerHeight * 0.84;
+
+    section.scrollIntoView({
       behavior: "smooth",
-      block: "center",
+      block: isLongSection ? "start" : "center",
     });
   };
 
@@ -381,7 +418,11 @@ export default function Home() {
             Relevant Coursework
           </h2>
           <p className="theme-muted mt-4 max-w-3xl text-lg leading-8">
-            Selected courses supporting my interests in computer science and data science.
+            Selected courses supporting my 
+              {" "}<span className="font-semibold">Computer Science</span>{" "}
+              and
+              {" "}<span className="font-semibold">Data Science</span>{" "}
+              focus.
           </p>
 
           <div className="coursework-grid mt-9 grid gap-7 lg:grid-cols-3">
@@ -425,11 +466,105 @@ export default function Home() {
             Awards
           </p>
           <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
-            Coming soon...
+            Honors &amp; Recognition
           </h2>
-          <p className="theme-muted mt-5 max-w-3xl text-lg leading-8">
-            Coming soon: a list of awards and honors I have received throughout my academic career!
+          <p className="theme-muted mt-4 max-w-3xl text-lg leading-8">
+            Recognition for building and competing in STEM-related competitions.
           </p>
+
+          <div className="award-feature-entry mt-9">
+            <article className="award-feature grid overflow-hidden lg:grid-cols-[1.03fr_0.97fr]">
+              <div className="award-feature__content flex flex-col justify-between gap-7 p-6 sm:p-8">
+                <div>
+                  <div className="flex items-center justify-between gap-4">
+                    <Image
+                      src="/awards/nasa-logo.png"
+                      alt="NASA"
+                      width={121}
+                      height={102}
+                      className="award-nasa-logo h-14 w-auto object-contain"
+                    />
+                    <span className="award-date">Apr 2024</span>
+                  </div>
+                  <p className="award-org mt-5 text-xs uppercase tracking-[0.3em]">
+                    NASA STEM
+                  </p>
+                  <h3 className="theme-heading mt-3 text-3xl leading-tight sm:text-[2.2rem]">
+                    NASA App Development Challenge Top Team
+                  </h3>
+                  <p className="theme-muted mt-4 text-lg leading-8">
+                    Alongside some friends, we were selected as a top team and invited to present at Johnson Space Center in Houston, Texas. We worked on an app that visualizes the Moon's South Pole region and displays information for navigating the lunar surface.
+                  </p>
+                </div>
+                <a
+                  href="https://www.nasa.gov/general/nasa-challenge-gives-artemis-generation-coders-a-chance-to-shine/"
+                  target="_blank"
+                  rel="noreferrer"
+                className="award-link inline-flex w-fit items-center gap-3 text-sm uppercase tracking-[0.18em]"
+              >
+                Read the NASA Feature
+                <svg
+                  aria-hidden="true"
+                  className="award-link__icon h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.8"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M15 3h6v6" />
+                  <path d="M10 14 21 3" />
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                </svg>
+              </a>
+              </div>
+              <figure className="award-photo relative min-h-[18rem] lg:min-h-full">
+                <Image
+                  src="/awards/nasa-adc-team.jpg"
+                  alt="NASA App Development Challenge top teams at Johnson Space Center in 2024"
+                  fill
+                sizes="(min-width: 1024px) 30rem, calc(100vw - 4rem)"
+                className="object-cover"
+              />
+            </figure>
+            </article>
+          </div>
+
+          <div className="awards-grid mt-6 grid gap-4 lg:grid-cols-3">
+            {supportingAwards.map((award) => (
+              <div key={award.title} className="award-card-entry">
+                <article className="award-card flex h-full flex-col p-5 sm:p-6">
+                  <div className="flex min-h-12 items-start justify-between gap-4">
+                    <div className={`award-brand award-brand--${award.brand}`}>
+                      <Image
+                        src={award.logo}
+                        alt={award.logoAlt}
+                        width={140}
+                        height={48}
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+                    <span className="award-date">{award.date}</span>
+                  </div>
+                  <h3 className="theme-heading mt-6 text-2xl leading-tight">
+                    {award.title}
+                  </h3>
+                  {"distinction" in award ? (
+                    <p className="award-distinction mt-3 text-lg leading-snug">
+                      {award.distinction}
+                    </p>
+                  ) : null}
+                  <p className="award-org mt-4 text-xs uppercase tracking-[0.22em]">
+                    {award.issuer}
+                  </p>
+                  <p className="theme-muted mt-4 text-base leading-7">
+                    {award.detail}
+                  </p>
+                </article>
+              </div>
+            ))}
+          </div>
         </section>
 
         <SectionDivider label="About Me" />
