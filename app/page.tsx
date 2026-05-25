@@ -494,7 +494,7 @@ export default function Home() {
                     NASA App Development Challenge Top Team
                   </h3>
                   <p className="theme-muted mt-4 text-lg leading-8">
-                    Alongside some friends, we were selected as a top team and invited to present at Johnson Space Center in Houston, Texas. We worked on an app that visualizes the Moon's South Pole region and displays information for navigating the lunar surface.
+                    Alongside some friends, we worked on an app that visualizes the Moon's South Pole region and displays information for navigating the lunar surface. We were selected as a top team and invited to present at the Johnson Space Center in Houston, Texas!
                   </p>
                 </div>
                 <a
