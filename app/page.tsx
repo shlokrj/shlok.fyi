@@ -72,6 +72,7 @@ const supportingAwards = [
   {
     title: "Samsung Solve for Tomorrow 2023",
     distinction: "California State Finalist",
+    issuer: "Samsung Electronics",
     date: "Dec 2023",
     detail: "Competing under XR EDU, our proposed idea was a wristband device that could be used for communication and emergency situations for homeless youth in the Bay Area. We were awarded a $2,500 prize package of Samsung products for our school.",
     logo: "/awards/samsung-mark.png",
