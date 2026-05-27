@@ -345,6 +345,7 @@ export default function Home() {
   const [hasNightwatchPreviewOpened, setHasNightwatchPreviewOpened] = useState(false);
   const [isResumePreviewOpen, setIsResumePreviewOpen] = useState(false);
   const [hasResumePreviewOpened, setHasResumePreviewOpened] = useState(false);
+  const [isAboutMoreOpen, setIsAboutMoreOpen] = useState(false);
   const nameFlareRef = useRef<HTMLSpanElement>(null);
 
   const handleNameFlare = () => {
@@ -1197,7 +1198,7 @@ export default function Home() {
           id="about-me"
           className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
-          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+          <div className="about-top-grid grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="sub-panel about-copy-panel rounded-[1.5rem] border p-6">
               <p className="eyebrow text-xs uppercase tracking-[0.32em]">
                 About Me
@@ -1210,27 +1211,10 @@ export default function Home() {
                 I was born and raised in San Ramon, California, which is in the Bay Area. 
                 I moved to Wisconsin for college in 2025, and despite the cold, I&apos;ve really enjoyed my time here so far!
               </p>
-              <p className="theme-muted mt-4 max-w-2xl text-base leading-8">
-                I realized pretty early on that college isn&apos;t just about classes and grades for me, but it&apos;s also a lifestyle and what you make of it.
-                Outside of class, I&apos;m involved in research and a few student orgs on campus, and I also love to build projects for fun.
-                I love keeping myself busy, and I&apos;m a firm believer that there are always things to learn, people to meet, places to explore, etc.
-              </p>
-              <p className="theme-muted mt-4 max-w-2xl text-base leading-8">
-                In my free time, I like to stay busy with a mix of hobbies. 
-                Music is a big part of my day, and I&apos;ve been listening to artists like greek, Luna Li, Osamason, and slayr lately.
-                I also enjoy playing games and sports, something that&apos;s been part of my life since I was young, from playing on my sister&apos;s DS to our family Wii.
-                I&apos;m a huge Pokémon fan and can recognize almost every single one (maybe not so much anymore).
-                Sports have been another constant in my life; I&apos;ve played and followed them for as long as I can remember.
-                Basketball is probably my favorite sport, and I&apos;ve been a dedicated Golden State Warriors fan since I was a kid.
-                For a little over a decade, I practiced Taekwondo, which shaped not just my work ethic but also a big part of who I am.
-                Since starting college, I&apos;ve gotten into weightlifting and enjoy pushing toward new PRs.
-                Outside of that, traveling has always been a major part of my life. 
-                I&apos;ve been lucky to visit many different places growing up, and I&apos;m especially excited to explore countries like Egypt, Singapore, and Switzerland in the future.
-              </p>
             </div>
 
             <div className="sub-panel about-photo-panel rounded-[1.5rem] border p-5">
-              <div className="placeholder-panel about-photo relative aspect-[4/5] overflow-hidden rounded-[1.2rem] border">
+              <div className="placeholder-panel about-photo relative overflow-hidden rounded-[1.2rem] border">
                 <Image
                   src="/profile-photo.jpeg"
                   alt="Shlok Jadhav overlooking the Bay Bridge at sunset"
@@ -1238,6 +1222,56 @@ export default function Home() {
                   sizes="(min-width: 1024px) 24rem, (min-width: 640px) 34rem, calc(100vw - 5rem)"
                   className="object-cover"
                 />
+              </div>
+            </div>
+          </div>
+
+          <div className="about-more-actions mt-6">
+            <button
+              type="button"
+              className={`about-more-toggle${isAboutMoreOpen ? " about-more-toggle--open" : ""}`}
+              aria-expanded={isAboutMoreOpen}
+              aria-controls="about-more"
+              onClick={() => setIsAboutMoreOpen((open) => !open)}
+            >
+              {isAboutMoreOpen ? "Show less" : "Read more"}
+              <svg
+                aria-hidden="true"
+                className="about-more-toggle__icon h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                viewBox="0 0 24 24"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            id="about-more"
+            className={`about-more${isAboutMoreOpen ? " about-more--open" : ""}`}
+            aria-hidden={!isAboutMoreOpen}
+          >
+            <div className="about-more__inner">
+              <div className="about-more__content">
+                <p className="theme-muted text-base leading-8">
+                  I realized pretty early on that college isn&apos;t just about classes and grades for me, but it&apos;s also a lifestyle and what you make of it.
+                  Outside of class, I&apos;m involved in research and a few student orgs on campus, and I also love to build projects for fun.
+                  I love keeping myself busy, and I&apos;m a firm believer that there are always things to learn, people to meet, places to explore, etc.
+                </p>
+                <p className="theme-muted mt-4 text-base leading-8">
+                  In my free time, I like to stay busy with a mix of hobbies. 
+                  Music is a big part of my day, and I&apos;ve been listening to artists like greek, Luna Li, Osamason, and slayr lately.
+                  I also enjoy playing games and sports, something that&apos;s been part of my life since I was young, from playing on my sister&apos;s DS to our family Wii.
+                  I&apos;m a huge Pokémon fan and can recognize almost every single one (maybe not so much anymore).
+                  Sports have been another constant in my life; I&apos;ve played and followed them for as long as I can remember.
+                  Basketball is probably my favorite sport, and I&apos;ve been a dedicated Golden State Warriors fan since I was a kid.
+                  For a little over a decade, I practiced Taekwondo, which shaped not just my work ethic but also a big part of who I am.
+                  Since starting college, I&apos;ve gotten into weightlifting and enjoy pushing toward new PRs.
+                  Outside of that, traveling has always been a major part of my life. 
+                  I&apos;ve been lucky to visit many different places growing up, and I&apos;m especially excited to explore countries like Egypt, Singapore, and Switzerland in the future.
+                </p>
               </div>
             </div>
           </div>
