@@ -1263,7 +1263,7 @@ export default function Home() {
                 <p className="theme-muted mt-4 text-base leading-8">
                   In my free time, I like to stay busy with a mix of hobbies. 
                   Music is a big part of my day, and I&apos;ve been listening to artists like greek, Luna Li, Osamason, and slayr lately.
-                  I also enjoy playing games and sports, something that&apos;s been part of my life since I was young, from playing on my sister&apos;s DS to our family Wii.
+                  I also enjoy playing video games, something that&apos;s been part of my life since I was young, from playing on my sister&apos;s DS to our family Wii.
                   I&apos;m a huge Pokémon fan and can recognize almost every single one (maybe not so much anymore).
                   Sports have been another constant in my life; I&apos;ve played and followed them for as long as I can remember.
                   Basketball is probably my favorite sport, and I&apos;ve been a dedicated Golden State Warriors fan since I was a kid.
