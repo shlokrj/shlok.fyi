@@ -343,6 +343,8 @@ export default function Home() {
   const [isHighSchoolOpen, setIsHighSchoolOpen] = useState(false);
   const [isNightwatchPreviewOpen, setIsNightwatchPreviewOpen] = useState(false);
   const [hasNightwatchPreviewOpened, setHasNightwatchPreviewOpened] = useState(false);
+  const [isResumePreviewOpen, setIsResumePreviewOpen] = useState(false);
+  const [hasResumePreviewOpened, setHasResumePreviewOpened] = useState(false);
   const nameFlareRef = useRef<HTMLSpanElement>(null);
 
   const handleNameFlare = () => {
@@ -1280,6 +1282,106 @@ export default function Home() {
                     </svg>
                   </a>
                 ))}
+              </div>
+            </div>
+            <div className="contact-card resume-card sm:col-span-2">
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <p className="theme-soft text-sm uppercase tracking-[0.24em]">
+                    Resume
+                  </p>
+                  <h3 className="theme-heading mt-3 text-2xl leading-tight">
+                    Shlok Jadhav Resume
+                  </h3>
+                  <p className="theme-soft mt-2 text-sm">
+                    Last updated: May 24, 2026
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href="/documents/Shlok_Jadhav_Resume.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="resume-action resume-action--primary"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      className="h-5 w-5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.8"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M6 2h8l4 4v16H6Z" />
+                      <path d="M14 2v6h6" />
+                      <path d="M9 13h6" />
+                      <path d="M9 17h6" />
+                    </svg>
+                    Open Resume
+                    <svg
+                      aria-hidden="true"
+                      className="resume-action__arrow h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M7 17 17 7" />
+                      <path d="M8 7h9v9" />
+                    </svg>
+                  </a>
+                  <button
+                    type="button"
+                    className={`resume-action resume-toggle${isResumePreviewOpen ? " resume-toggle--open" : ""}`}
+                    aria-expanded={isResumePreviewOpen}
+                    aria-controls="resume-preview"
+                    onClick={() => {
+                      setHasResumePreviewOpened(true);
+                      setIsResumePreviewOpen((open) => !open);
+                    }}
+                  >
+                    Preview
+                    <svg
+                      aria-hidden="true"
+                      className="resume-toggle__icon h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                id="resume-preview"
+                className={`resume-preview${isResumePreviewOpen ? " resume-preview--open" : ""}`}
+                aria-hidden={!isResumePreviewOpen}
+              >
+                <div className="resume-preview__inner">
+                  {hasResumePreviewOpened ? (
+                    <a
+                      href="/documents/Shlok_Jadhav_Resume.pdf"
+                      target="_blank"
+                      rel="noreferrer"
+                      tabIndex={isResumePreviewOpen ? undefined : -1}
+                      className="resume-preview__link"
+                      aria-label="Open the full Shlok Jadhav resume PDF"
+                    >
+                      <Image
+                        src="/documents/Shlok_Jadhav_Resume-preview.png"
+                        alt="Preview of Shlok Jadhav's resume"
+                        width={612}
+                        height={792}
+                        sizes="(min-width: 768px) 48rem, calc(100vw - 7rem)"
+                        className="resume-preview__page"
+                      />
+                    </a>
+                  ) : null}
+                </div>
               </div>
             </div>
           </div>

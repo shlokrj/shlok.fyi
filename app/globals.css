@@ -327,6 +327,78 @@ a {
   transition: transform 220ms ease;
 }
 
+.resume-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.58rem;
+  border: 1px solid var(--panel-border);
+  border-radius: 0.5rem;
+  background: var(--award-link-background);
+  padding: 0.76rem 0.94rem;
+  color: var(--link);
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    color 220ms ease;
+}
+
+.resume-action--primary {
+  border-color: transparent;
+  background: var(--link);
+  color: var(--background);
+}
+
+.resume-action__arrow,
+.resume-toggle__icon {
+  transition: transform 250ms ease;
+}
+
+.resume-toggle--open .resume-toggle__icon {
+  transform: rotate(180deg);
+}
+
+.resume-preview {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 480ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.resume-preview--open {
+  grid-template-rows: 1fr;
+}
+
+.resume-preview__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.resume-preview__link {
+  display: block;
+  width: min(100%, 48rem);
+  margin: 1.4rem auto 0;
+  outline: none;
+}
+
+.resume-preview__page {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--panel-border);
+  border-radius: 0.5rem;
+  background: #ffffff;
+  box-shadow: 0 12px 30px var(--shadow);
+  transition:
+    border-color 250ms ease,
+    box-shadow 250ms ease,
+    transform 250ms ease;
+}
+
+.resume-preview__link:focus-visible .resume-preview__page {
+  border-color: var(--section-hover-border);
+  box-shadow: var(--experience-hover-shadow);
+}
+
 .mini-card {
   border-color: var(--panel-border);
   background: var(--card-background);
@@ -869,6 +941,10 @@ html[data-theme="light"] .theme-toggle__moon {
   animation-delay: 120ms;
 }
 
+.scroll-lens-active .contact-card:nth-child(4) {
+  animation-delay: 175ms;
+}
+
 .scroll-lens-active .course-term {
   animation: course-term-rise 430ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
@@ -1372,6 +1448,36 @@ html[data-theme="light"] .theme-toggle__moon {
     transform: translate(2px, -2px);
   }
 
+  .resume-action:hover {
+    border-color: var(--section-hover-border);
+    box-shadow: var(--experience-hover-shadow);
+    color: var(--nav-hover);
+    transform: translateY(-3px);
+  }
+
+  .resume-action--primary:hover {
+    border-color: transparent;
+    color: var(--background);
+  }
+
+  .resume-action:hover .resume-action__arrow {
+    transform: translate(2px, -2px);
+  }
+
+  .resume-toggle:hover .resume-toggle__icon {
+    transform: translateY(2px);
+  }
+
+  .resume-toggle--open:hover .resume-toggle__icon {
+    transform: rotate(180deg) translateY(2px);
+  }
+
+  .resume-preview__link:hover .resume-preview__page {
+    border-color: var(--section-hover-border);
+    box-shadow: var(--experience-hover-shadow);
+    transform: translateY(-3px);
+  }
+
   .course-term:hover .course-term__line {
     background: linear-gradient(90deg, var(--course-border-hover), transparent);
   }
@@ -1645,6 +1751,11 @@ html[data-theme="light"] .theme-toggle__moon {
   .nav-social-link,
   .social-profile-link,
   .social-profile-link__arrow,
+  .resume-action,
+  .resume-action__arrow,
+  .resume-toggle__icon,
+  .resume-preview,
+  .resume-preview__page,
   .school-group,
   .school-group__content,
   .school-group__toggle,
