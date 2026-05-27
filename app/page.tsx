@@ -764,6 +764,68 @@ export default function Home() {
               </div>
             </article>
           </div>
+
+          <div className="project-feature-entry mt-5">
+            <article className="project-feature project-wip">
+              <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
+                <div>
+                  <p className="eyebrow text-xs uppercase">Currently Working On</p>
+                  <div className="mt-3 flex flex-wrap items-center gap-3">
+                    <h3 className="theme-heading text-4xl leading-tight">
+                      Cuego
+                    </h3>
+                    <span className="project-status">In progress</span>
+                  </div>
+                  <p className="theme-muted mt-4 text-base leading-8 sm:text-lg">
+                    A hands-free music control app that uses webcam-based hand
+                    tracking to turn gestures into media controls. The goal is
+                    to make play, pause, skipping, and going back feel natural
+                    while coding, working out, or studying.
+                  </p>
+                  <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                    {[
+                      { label: "Open palm", action: "Play / pause" },
+                      { label: "Swipe right", action: "Next track" },
+                      { label: "Swipe left", action: "Previous track" },
+                    ].map((gesture) => (
+                      <div key={gesture.label} className="gesture-card">
+                        <span className="gesture-card__mark" aria-hidden="true" />
+                        <p className="theme-heading text-base leading-tight">
+                          {gesture.label}
+                        </p>
+                        <p className="theme-soft mt-1 text-sm leading-6">
+                          {gesture.action}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="project-stack">
+                  <p className="eyebrow text-xs uppercase">Planned Stack</p>
+                  <ul className="mt-4 flex flex-wrap gap-2" aria-label="Cuego planned technologies">
+                    {[
+                      "Python",
+                      "OpenCV",
+                      "MediaPipe",
+                      "Gesture Logic",
+                      "AppleScript",
+                      "Media Keys",
+                      "Spotify API",
+                    ].map((tool) => (
+                      <li key={tool} className="project-chip">
+                        {tool}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="theme-soft mt-5 text-sm leading-7">
+                    Gesture recognition through real-time hand landmarks,
+                    coordinate motion analysis, and system-level music control.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
         </section>
 
         <SectionDivider label="Experience" />

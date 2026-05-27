@@ -528,6 +528,65 @@ html[data-theme="light"] .theme-toggle__moon {
     box-shadow 250ms ease;
 }
 
+.project-wip {
+  position: relative;
+}
+
+.project-wip::before {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 5.2rem;
+  height: 5.2rem;
+  content: "";
+  background:
+    linear-gradient(90deg, transparent 48%, var(--project-border-hover) 50%, transparent 52%),
+    linear-gradient(0deg, transparent 48%, var(--project-border-hover) 50%, transparent 52%);
+  border-radius: 999px;
+  opacity: 0.13;
+  transform: rotate(12deg);
+  transition:
+    opacity 260ms ease,
+    transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-status {
+  border: 1px solid var(--status-upcoming-border);
+  border-radius: 999px;
+  background: var(--status-upcoming-background);
+  color: var(--accent);
+  padding: 0.42rem 0.62rem;
+  font-size: 0.68rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.gesture-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 7rem;
+  border: 1px solid var(--project-chip-border);
+  border-radius: 0.5rem;
+  background: var(--project-chip-background);
+  padding: 1rem;
+  transition:
+    transform 230ms ease,
+    border-color 230ms ease,
+    box-shadow 230ms ease;
+}
+
+.gesture-card__mark {
+  display: block;
+  width: 2.35rem;
+  height: 0.18rem;
+  margin-bottom: 1rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--link), transparent);
+  transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 .project-banner {
   border-top: 1px solid var(--project-border);
 }
@@ -1494,6 +1553,21 @@ html[data-theme="light"] .theme-toggle__moon {
     box-shadow: var(--project-hover-shadow);
   }
 
+  .project-wip:hover::before {
+    opacity: 0.28;
+    transform: rotate(32deg) scale(1.05);
+  }
+
+  .gesture-card:hover {
+    border-color: var(--project-border-hover);
+    box-shadow: var(--project-hover-shadow);
+    transform: translateY(-3px);
+  }
+
+  .gesture-card:hover .gesture-card__mark {
+    transform: scaleX(1.45);
+  }
+
   .project-banner:hover .project-banner__image {
     filter: brightness(1.04);
     transform: scale(1.027);
@@ -1727,6 +1801,9 @@ html[data-theme="light"] .theme-toggle__moon {
   .course-item,
   .project-feature-entry,
   .project-feature,
+  .project-wip::before,
+  .gesture-card,
+  .gesture-card__mark,
   .project-banner__image,
   .project-banner__label,
   .project-action,
