@@ -800,6 +800,27 @@ export default function Home() {
                       </div>
                     ))}
                   </div>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    <a
+                      href="https://github.com/shlokrj/cuey"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-action"
+                    >
+                      GitHub Repo
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                      >
+                        <path d="M7 17 17 7" />
+                        <path d="M8 7h9v9" />
+                      </svg>
+                    </a>
+                  </div>
                 </div>
 
                 <div className="project-stack">
