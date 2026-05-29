@@ -773,7 +773,7 @@ export default function Home() {
                   <p className="eyebrow text-xs uppercase">Currently Working On</p>
                   <div className="mt-3 flex flex-wrap items-center gap-3">
                     <h3 className="theme-heading text-4xl leading-tight">
-                      Cuego
+                      Cuey
                     </h3>
                     <span className="project-status">In progress</span>
                   </div>
@@ -804,7 +804,7 @@ export default function Home() {
 
                 <div className="project-stack">
                   <p className="eyebrow text-xs uppercase">Planned Stack</p>
-                  <ul className="mt-4 flex flex-wrap gap-2" aria-label="Cuego planned technologies">
+                  <ul className="mt-4 flex flex-wrap gap-2" aria-label="Cuey planned technologies">
                     {[
                       "Python",
                       "OpenCV",
