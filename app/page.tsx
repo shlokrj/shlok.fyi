@@ -308,6 +308,25 @@ function MoonIcon() {
   );
 }
 
+function MusicNoteIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.8"
+      viewBox="0 0 24 24"
+    >
+      <path d="M9 18V5l12-2v13" />
+      <circle cx="6" cy="18" r="3" />
+      <circle cx="18" cy="16" r="3" />
+    </svg>
+  );
+}
+
 function SocialIcon({ platform }: Readonly<{ platform: "linkedin" | "github" }>) {
   if (platform === "linkedin") {
     return (
@@ -616,12 +635,15 @@ export default function Home() {
             All Projects
           </h2>
           <p className="theme-muted mt-4 max-w-3xl text-lg leading-8">
-            Things that I am working on across data, design,
-            useful software, and more.
+            Personal projects and useful tools across data, design,
+            computer vision, and more.
           </p>
 
           <div className="project-feature-entry mt-9">
-            <article className="project-feature">
+            <article className="project-feature project-nightwatch">
+              <span className="project-orb project-orb--moon" aria-hidden="true">
+                <MoonIcon />
+              </span>
               <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
                 <div>
                   <p className="eyebrow text-xs uppercase">Full-Stack Astronomy App</p>
@@ -767,39 +789,22 @@ export default function Home() {
           </div>
 
           <div className="project-feature-entry mt-5">
-            <article className="project-feature project-wip">
+            <article className="project-feature project-cuey">
+              <span className="project-orb project-orb--music" aria-hidden="true">
+                <MusicNoteIcon />
+              </span>
               <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
                 <div>
-                  <p className="eyebrow text-xs uppercase">Currently Working On</p>
-                  <div className="mt-3 flex flex-wrap items-center gap-3">
-                    <h3 className="theme-heading text-4xl leading-tight">
-                      Cuey
-                    </h3>
-                    <span className="project-status">In progress</span>
-                  </div>
+                  <p className="eyebrow text-xs uppercase">Computer Vision Music Controller App</p>
+                  <h3 className="theme-heading mt-3 text-4xl leading-tight">
+                    cuey
+                  </h3>
                   <p className="theme-muted mt-4 text-base leading-8 sm:text-lg">
                     A hands-free music control app that uses webcam-based hand
-                    tracking to turn gestures into media controls. The goal is
-                    to make play, pause, skipping, and going back feel natural
-                    while coding, working out, or studying.
+                    tracking to turn gestures into Spotify controls. It makes
+                    play, pause, skipping, and going back feel natural while
+                    working on your computer.
                   </p>
-                  <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                    {[
-                      { label: "Open palm", action: "Play / pause" },
-                      { label: "Swipe right", action: "Next track" },
-                      { label: "Swipe left", action: "Previous track" },
-                    ].map((gesture) => (
-                      <div key={gesture.label} className="gesture-card">
-                        <span className="gesture-card__mark" aria-hidden="true" />
-                        <p className="theme-heading text-base leading-tight">
-                          {gesture.label}
-                        </p>
-                        <p className="theme-soft mt-1 text-sm leading-6">
-                          {gesture.action}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
                   <div className="mt-6 flex flex-wrap gap-3">
                     <a
                       href="https://github.com/shlokrj/cuey"
@@ -824,16 +829,14 @@ export default function Home() {
                 </div>
 
                 <div className="project-stack">
-                  <p className="eyebrow text-xs uppercase">Planned Stack</p>
-                  <ul className="mt-4 flex flex-wrap gap-2" aria-label="Cuey planned technologies">
+                  <p className="eyebrow text-xs uppercase">Key Technologies</p>
+                  <ul className="mt-4 flex flex-wrap gap-2" aria-label="Cuey technologies">
                     {[
-                      "Python",
-                      "OpenCV",
+                      "Python 3",
                       "MediaPipe",
-                      "Gesture Logic",
-                      "AppleScript",
-                      "Media Keys",
-                      "Spotify API",
+                      "OpenCV",
+                      "AppleScript / osascript",
+                      "Pillow",
                     ].map((tool) => (
                       <li key={tool} className="project-chip">
                         {tool}
@@ -841,8 +844,9 @@ export default function Home() {
                     ))}
                   </ul>
                   <p className="theme-soft mt-5 text-sm leading-7">
-                    Gesture recognition through real-time hand landmarks,
-                    coordinate motion analysis, and system-level music control.
+                    Built around real-time hand landmark detection, motion
+                    analysis, anti-aliased OpenCV UI rendering, and macOS
+                    Spotify control through AppleScript.
                   </p>
                 </div>
               </div>
