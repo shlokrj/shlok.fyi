@@ -361,6 +361,8 @@ export default function Home() {
   const [isHighSchoolOpen, setIsHighSchoolOpen] = useState(false);
   const [isNightwatchPreviewOpen, setIsNightwatchPreviewOpen] = useState(false);
   const [hasNightwatchPreviewOpened, setHasNightwatchPreviewOpened] = useState(false);
+  const [isCueyPreviewOpen, setIsCueyPreviewOpen] = useState(false);
+  const [hasCueyPreviewOpened, setHasCueyPreviewOpened] = useState(false);
   const [isResumePreviewOpen, setIsResumePreviewOpen] = useState(false);
   const [hasResumePreviewOpened, setHasResumePreviewOpened] = useState(false);
   const [isAboutMoreOpen, setIsAboutMoreOpen] = useState(false);
@@ -811,6 +813,28 @@ export default function Home() {
                         <path d="M8 7h9v9" />
                       </svg>
                     </a>
+                    <button
+                      type="button"
+                      className={`project-action project-preview-toggle${isCueyPreviewOpen ? " project-preview-toggle--open" : ""}`}
+                      aria-expanded={isCueyPreviewOpen}
+                      aria-controls="cuey-preview"
+                      onClick={() => {
+                        setHasCueyPreviewOpened(true);
+                        setIsCueyPreviewOpen((open) => !open);
+                      }}
+                    >
+                      Preview
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        className="project-preview-toggle__icon h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                      >
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
 
@@ -834,6 +858,30 @@ export default function Home() {
                     analysis, anti-aliased OpenCV UI rendering, and macOS
                     Spotify control through AppleScript.
                   </p>
+                </div>
+              </div>
+
+              <div
+                id="cuey-preview"
+                className={`project-preview${isCueyPreviewOpen ? " project-preview--open" : ""}`}
+                aria-hidden={!isCueyPreviewOpen}
+              >
+                <div className="project-preview__inner">
+                  {hasCueyPreviewOpened ? (
+                    <div className="project-banner relative block overflow-hidden">
+                      <Image
+                        src="/projects/cuey-banner.png"
+                        alt="Cuey displaying real-time hand tracking with gesture controls overlaid on a webcam feed."
+                        width={2940}
+                        height={1782}
+                        sizes="(min-width: 1024px) 60rem, calc(100vw - 4rem)"
+                        className="project-banner__image w-full"
+                      />
+                      <span className="project-banner__label">
+                        Demo coming soon
+                      </span>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </article>
