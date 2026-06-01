@@ -818,7 +818,7 @@ export default function Home() {
                   <p className="eyebrow text-xs uppercase">Key Technologies</p>
                   <ul className="mt-4 flex flex-wrap gap-2" aria-label="Cuey technologies">
                     {[
-                      "Python 3",
+                      "Python",
                       "MediaPipe",
                       "OpenCV",
                       "AppleScript / osascript",
