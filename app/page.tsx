@@ -358,7 +358,6 @@ function applyTheme(theme: Theme) {
 }
 
 export default function Home() {
-  const [showCurtain, setShowCurtain] = useState(true);
   const [isHighSchoolOpen, setIsHighSchoolOpen] = useState(false);
   const [isNightwatchPreviewOpen, setIsNightwatchPreviewOpen] = useState(false);
   const [hasNightwatchPreviewOpened, setHasNightwatchPreviewOpened] = useState(false);
@@ -377,12 +376,6 @@ export default function Home() {
 
   useEffect(() => {
     applyTheme(getPreferredTheme());
-
-    const timer = globalThis.setTimeout(() => {
-      setShowCurtain(false);
-    }, 1650);
-
-    return () => globalThis.clearTimeout(timer);
   }, []);
 
   const toggleTheme = () => {
@@ -467,13 +460,6 @@ export default function Home() {
 
   return (
     <main className="site-shell relative overflow-hidden px-6 py-8 sm:px-10 sm:py-10">
-      {showCurtain ? (
-        <div aria-hidden="true" className="hero-curtain">
-          <h1 className="hero-curtain__title text-[5.2rem] leading-[0.9] tracking-[-0.055em] text-[var(--foreground)] sm:text-[6.8rem] xl:text-[8.4rem]">
-            <span className="hero-curtain__text">Shlok Jadhav.</span>
-          </h1>
-        </div>
-      ) : null}
       <div id="top" />
       <div className="site-ambient pointer-events-none absolute inset-0" />
       <div className="site-glow pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
@@ -797,7 +783,7 @@ export default function Home() {
                 <div>
                   <p className="eyebrow text-xs uppercase">Computer Vision Music Controller App</p>
                   <h3 className="theme-heading mt-3 text-4xl leading-tight">
-                    cuey
+                    Cuey
                   </h3>
                   <p className="theme-muted mt-4 text-base leading-8 sm:text-lg">
                     A hands-free music control app that uses webcam-based hand
@@ -1369,10 +1355,10 @@ export default function Home() {
                 School
               </p>
               <a
-                href="mailto:shlok.jadhav@wisc.edu"
+                href="mailto:srjadhav2@wisc.edu"
                 className="theme-link mt-2 inline-block border-b text-2xl leading-tight transition-colors transition-[border-color,color] duration-200"
               >
-                shlok.jadhav@wisc.edu
+                srjadhav2@wisc.edu
               </a>
             </div>
             <div className="contact-card contact-profiles-card sm:col-span-2">
