@@ -1003,7 +1003,7 @@ export default function Home() {
                   <span className="theme-heading block text-xl leading-snug sm:text-2xl">
                     Dougherty Valley High School
                   </span>
-                  <span className="theme-muted mt-1 block text-sm uppercase tracking-[0.18em]">
+                  <span className="theme-muted mt-1 block text-xs uppercase tracking-[0.12em] sm:text-sm sm:tracking-[0.18em]">
                     High school extracurricular leadership
                   </span>
                   <span className="theme-soft mt-1 block text-sm leading-snug">
