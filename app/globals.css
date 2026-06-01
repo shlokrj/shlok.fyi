@@ -611,8 +611,17 @@ html[data-theme="light"] .theme-toggle__moon {
   animation: project-music-bounce 3.6s ease-in-out infinite;
 }
 
-.project-feature > .grid,
+.project-feature > .project-content-grid,
 .project-feature > .project-preview {
+  position: relative;
+  z-index: 1;
+}
+
+.project-content-grid {
+  overflow: hidden;
+}
+
+.project-content-grid > :not(.project-orb) {
   position: relative;
   z-index: 1;
 }
@@ -629,6 +638,12 @@ html[data-theme="light"] .theme-toggle__moon {
   transition:
     transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1),
     filter 300ms ease;
+}
+
+.project-banner__image--cuey {
+  aspect-ratio: 2940 / 1782;
+  object-fit: contain;
+  object-position: center;
 }
 
 .project-banner__label {
@@ -648,6 +663,27 @@ html[data-theme="light"] .theme-toggle__moon {
     transform 230ms ease,
     box-shadow 230ms ease,
     color 230ms ease;
+}
+
+.project-banner__label--soon {
+  overflow: hidden;
+}
+
+.project-banner__label--soon::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.22) 45%, transparent 70%);
+  opacity: 0;
+  transform: translateX(-120%);
+  transition:
+    opacity 230ms ease,
+    transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-banner__label--soon > * {
+  position: relative;
+  z-index: 1;
 }
 
 .project-action {
@@ -1599,6 +1635,17 @@ html[data-theme="light"] .theme-toggle__moon {
     box-shadow: var(--project-hover-shadow);
     color: var(--nav-hover);
     transform: translateY(-2px);
+  }
+
+  .project-banner:hover .project-banner__label--soon {
+    border-color: var(--project-border-hover);
+    color: var(--nav-hover);
+    transform: translateY(-3px) scale(1.02);
+  }
+
+  .project-banner:hover .project-banner__label--soon::before {
+    opacity: 1;
+    transform: translateX(120%);
   }
 
   .project-preview-toggle:hover .project-preview-toggle__icon {

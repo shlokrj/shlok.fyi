@@ -629,10 +629,10 @@ export default function Home() {
 
           <div className="project-feature-entry mt-9">
             <article className="project-feature project-nightwatch">
-              <span className="project-orb project-orb--moon" aria-hidden="true">
-                <MoonIcon />
-              </span>
-              <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
+              <div className="project-content-grid grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
+                <span className="project-orb project-orb--moon" aria-hidden="true">
+                  <MoonIcon />
+                </span>
                 <div>
                   <p className="eyebrow text-xs uppercase">Full-Stack Astronomy App</p>
                   <h3 className="theme-heading mt-3 text-4xl leading-tight">
@@ -778,10 +778,10 @@ export default function Home() {
 
           <div className="project-feature-entry mt-5">
             <article className="project-feature project-cuey">
-              <span className="project-orb project-orb--music" aria-hidden="true">
-                <MusicNoteIcon />
-              </span>
-              <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
+              <div className="project-content-grid grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
+                <span className="project-orb project-orb--music" aria-hidden="true">
+                  <MusicNoteIcon />
+                </span>
                 <div>
                   <p className="eyebrow text-xs uppercase">Computer Vision Music Controller App</p>
                   <h3 className="theme-heading mt-3 text-4xl leading-tight">
@@ -868,17 +868,29 @@ export default function Home() {
               >
                 <div className="project-preview__inner">
                   {hasCueyPreviewOpened ? (
-                    <div className="project-banner relative block overflow-hidden">
+                    <div className="project-banner project-banner--cuey relative block overflow-hidden">
                       <Image
                         src="/projects/cuey-banner.png"
                         alt="Cuey displaying real-time hand tracking with gesture controls overlaid on a webcam feed."
                         width={2940}
                         height={1782}
                         sizes="(min-width: 1024px) 60rem, calc(100vw - 4rem)"
-                        className="project-banner__image w-full"
+                        className="project-banner__image project-banner__image--cuey w-full"
                       />
-                      <span className="project-banner__label">
+                      <span className="project-banner__label project-banner__label--soon">
                         Demo coming soon
+                        <svg
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                          className="h-4 w-4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                        >
+                          <path d="M9 18V5l12-2v13" />
+                          <circle cx="6" cy="18" r="3" />
+                          <circle cx="18" cy="16" r="3" />
+                        </svg>
                       </span>
                     </div>
                   ) : null}
