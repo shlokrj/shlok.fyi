@@ -1553,6 +1553,56 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <footer className="site-footer">
+          <div className="site-footer__socials" aria-label="Social links">
+            {socialProfiles.map((profile) => (
+              <a
+                key={profile.platform}
+                href={profile.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open Shlok Jadhav's ${profile.label}`}
+                title={profile.label}
+                className="site-footer__social"
+              >
+                <SocialIcon platform={profile.platform} />
+              </a>
+            ))}
+          </div>
+
+          <nav className="site-footer__nav" aria-label="Footer navigation">
+            {navItems.map((item) => (
+              <a key={item.href} href={`#${item.href}`} className="site-footer__link">
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="site-footer__meta">
+            <p className="site-footer__name">Shlok Jadhav</p>
+            <p className="site-footer__detail">
+              Computer Science + Data Science at UW-Madison
+            </p>
+          </div>
+
+          <div className="site-footer__actions">
+            <a href="mailto:srjadhav2@wisc.edu" className="site-footer__pill">
+              Email
+            </a>
+            <a
+              href="/documents/Shlok_Jadhav_Resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="site-footer__pill"
+            >
+              Resume
+            </a>
+            <a href="#top" onClick={scrollToTop} className="site-footer__top">
+              Top
+            </a>
+          </div>
+        </footer>
       </div>
 
       <a
