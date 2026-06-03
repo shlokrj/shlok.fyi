@@ -116,49 +116,6 @@ const professionalExperience = [
   },
 ];
 
-const highSchoolActivities = [
-  {
-    role: "Founder & Secretary",
-    organization: "NASA STEM Club",
-    dates: "Aug 2024 - Jun 2025",
-    detail:
-      "Mentored selected students of 60+ applicants in weekly meetings to compete in NASA STEM Challenges.",
-    context:
-      "Founded after NASA ADC and JAXA Kibo Robotics to help other students participate in these challenges.",
-    logo: "/logos/experience/nasa-stem.png",
-    logoAlt: "NASA STEM DVHS",
-    awardLinks: [
-      { label: "NASA ADC Top Team", target: "award-nasa-adc" },
-      { label: "JAXA Kibo Robotics", target: "award-kibo" },
-    ],
-  },
-  {
-    role: "Treasurer",
-    organization: "XR EDU Club",
-    dates: "Aug 2021 - Jun 2025",
-    detail:
-      "Developed XR solutions for social good, helped manage club finances, and ran weekly meetings.",
-    context: "In association with Samsung Solve for Tomorrow finalist projects.",
-    logo: "/logos/experience/xr-edu.png",
-    logoAlt: "XR EDU",
-    awardLinks: [
-      { label: "Samsung 2024", target: "award-samsung-2024" },
-      { label: "Samsung 2023", target: "award-samsung-2023" },
-    ],
-  },
-  {
-    role: "Secretary & Outreach Officer",
-    organization: "Coding for SDG Club",
-    dates: "Jun 2024 - Jun 2025",
-    detail:
-      "Helped organize two hackathons (Hack the Planet 2024 and Hack the Planet 2025) centered on Sustainable Development Goals with 100+ competitors and $5,000+ in sponsored prizes across both events.",
-    context: "",
-    logo: "/logos/experience/coding-sdg.png",
-    logoAlt: "Coding for SDG",
-    awardLinks: [],
-  },
-];
-
 const supportingAwards = [
   {
     id: "award-samsung-2024",
@@ -358,7 +315,6 @@ function applyTheme(theme: Theme) {
 }
 
 export default function Home() {
-  const [isHighSchoolOpen, setIsHighSchoolOpen] = useState(false);
   const [isNightwatchPreviewOpen, setIsNightwatchPreviewOpen] = useState(false);
   const [hasNightwatchPreviewOpened, setHasNightwatchPreviewOpened] = useState(false);
   const [isCueyPreviewOpen, setIsCueyPreviewOpen] = useState(false);
@@ -981,118 +937,6 @@ export default function Home() {
             ))}
           </div>
 
-          <div className={`school-group mt-4${isHighSchoolOpen ? " school-group--open" : ""}`}>
-            <button
-              type="button"
-              className="school-group__trigger flex w-full items-center justify-between gap-5 p-5 text-left sm:p-6"
-              aria-expanded={isHighSchoolOpen}
-              aria-controls="high-school-activities"
-              onClick={() => setIsHighSchoolOpen((open) => !open)}
-            >
-              <span className="flex min-w-0 items-center gap-4">
-                <span className="school-logo relative block shrink-0">
-                  <Image
-                    src="/logos/experience/dvhs.png"
-                    alt="Dougherty Valley High School"
-                    fill
-                    sizes="72px"
-                    className="object-contain"
-                  />
-                </span>
-                <span className="min-w-0">
-                  <span className="theme-heading block text-xl leading-snug sm:text-2xl">
-                    Dougherty Valley High School
-                  </span>
-                  <span className="theme-muted mt-1 block text-xs uppercase tracking-[0.12em] sm:text-sm sm:tracking-[0.18em]">
-                    High school extracurricular leadership
-                  </span>
-                  <span className="theme-soft mt-1 block text-sm leading-snug">
-                    San Ramon, California · On-site
-                  </span>
-                </span>
-              </span>
-              <span className="school-group__toggle" aria-hidden="true">
-                <svg
-                  className="h-5 w-5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
-              </span>
-            </button>
-
-            <div id="high-school-activities" className="school-group__content">
-              <div className="school-group__inner grid gap-4 px-5 pb-5 sm:px-6 sm:pb-6">
-                {highSchoolActivities.map((activity) => (
-                  <article
-                    key={activity.organization}
-                    className="activity-card grid gap-4 p-4 sm:grid-cols-[3.75rem_1fr] sm:p-5"
-                  >
-                    <div className="activity-logo relative">
-                      <Image
-                        src={activity.logo}
-                        alt={activity.logoAlt}
-                        fill
-                        sizes="60px"
-                        className="object-contain"
-                      />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                        <h3 className="theme-heading text-xl leading-tight">
-                          {activity.organization}
-                        </h3>
-                        <span className="experience-date">{activity.dates}</span>
-                      </div>
-                      <p className="activity-role mt-1 text-sm uppercase tracking-[0.2em]">
-                        {activity.role}
-                      </p>
-                      <p className="theme-muted mt-3 text-base leading-7">
-                        {activity.detail}
-                      </p>
-                      {activity.context ? (
-                        <p className="activity-context mt-3 text-sm leading-6">
-                          {activity.context}
-                        </p>
-                      ) : null}
-                      {activity.awardLinks.length > 0 ? (
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          {activity.awardLinks.map((link) => (
-                            <a
-                              key={link.target}
-                              href={`#${link.target}`}
-                              onClick={(event) => scrollToAward(event, link.target)}
-                              className="activity-award-link inline-flex items-center gap-2"
-                            >
-                              {link.label}
-                              <svg
-                                aria-hidden="true"
-                                className="h-3.5 w-3.5"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="1.8"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                viewBox="0 0 24 24"
-                              >
-                                <path d="M12 5v14" />
-                                <path d="m19 12-7 7-7-7" />
-                              </svg>
-                            </a>
-                          ))}
-                        </div>
-                      ) : null}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
         </section>
 
         <SectionDivider label="Courses" />
