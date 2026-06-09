@@ -1426,7 +1426,7 @@ export default function Home() {
           <div className="site-footer__meta">
             <p className="site-footer__name">Shlok Jadhav</p>
             <p className="site-footer__detail">
-              Computer Science + Data Science at UW-Madison
+              Computer Science & Data Science @ UW-Madison
             </p>
           </div>
 
