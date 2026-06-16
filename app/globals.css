@@ -369,7 +369,6 @@ a {
   padding: 2rem;
   text-align: center;
   box-shadow: 0 18px 50px var(--shadow);
-  animation: footer-rise 560ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
   transition:
     transform 250ms ease,
     border-color 250ms ease,
@@ -1082,7 +1081,7 @@ html[data-theme="light"] .theme-toggle__moon {
   border-radius: 0.5rem;
   background: var(--activity-background);
   opacity: 0;
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   transition:
     opacity 250ms ease,
     transform 280ms ease,
@@ -1200,6 +1199,22 @@ html[data-theme="light"] .theme-toggle__moon {
 
 .scroll-lens-active .course-term:nth-child(3) {
   animation-delay: 120ms;
+}
+
+.scroll-lens-active.site-footer .site-footer__socials {
+  animation: detail-rise 380ms cubic-bezier(0.22, 0.75, 0.24, 1) backwards;
+}
+
+.scroll-lens-active.site-footer .site-footer__nav {
+  animation: detail-rise 380ms 45ms cubic-bezier(0.22, 0.75, 0.24, 1) backwards;
+}
+
+.scroll-lens-active.site-footer .site-footer__meta {
+  animation: detail-rise 380ms 90ms cubic-bezier(0.22, 0.75, 0.24, 1) backwards;
+}
+
+.scroll-lens-active.site-footer .site-footer__actions {
+  animation: detail-rise 380ms 135ms cubic-bezier(0.22, 0.75, 0.24, 1) backwards;
 }
 
 .award-feature {
@@ -1576,12 +1591,12 @@ html[data-theme="light"] .theme-toggle__moon {
 
 
 .scroll-lens-section {
-  opacity: 0.86;
-  transform: scale(0.972);
+  opacity: 0.92;
+  transform: scale(0.986);
   transform-origin: center center;
   transition:
     opacity 280ms ease,
-    transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 380ms cubic-bezier(0.22, 0.75, 0.24, 1),
     border-color 240ms ease,
     box-shadow 280ms ease;
   will-change: transform;
@@ -1589,12 +1604,12 @@ html[data-theme="light"] .theme-toggle__moon {
 
 .scroll-lens-section.scroll-lens-active {
   opacity: 1;
-  transform: scale(1.018);
+  transform: scale(1.007);
 }
 
 .scroll-lens-section.scroll-lens-resting {
-  opacity: 0.78;
-  transform: scale(0.965);
+  opacity: 0.86;
+  transform: scale(0.982);
 }
 
 @media (hover: hover) {
@@ -1611,12 +1626,12 @@ html[data-theme="light"] .theme-toggle__moon {
   }
 
   .scroll-lens-section.scroll-lens-active:hover {
-    transform: translateY(-2px) scale(1.018);
+    transform: translateY(-1px) scale(1.008);
   }
 
   .scroll-lens-section.scroll-lens-resting:hover {
-    opacity: 0.9;
-    transform: translateY(-2px) scale(0.972);
+    opacity: 0.94;
+    transform: translateY(-1px) scale(0.986);
   }
 
   .home-photo-panel:hover,
@@ -1627,19 +1642,19 @@ html[data-theme="light"] .theme-toggle__moon {
   .contact-card:hover {
     border-color: var(--section-hover-border);
     box-shadow: var(--experience-hover-shadow);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 
   .home-photo-panel:hover .home-photo img,
   .about-photo-panel:hover .about-photo img {
-    transform: scale(1.035);
+    transform: scale(1.018);
   }
 
   .about-more-toggle:hover {
     border-color: var(--section-hover-border);
     box-shadow: var(--experience-hover-shadow);
     color: var(--nav-hover);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
 
   .about-more-toggle:hover .about-more-toggle__icon {
@@ -1653,7 +1668,7 @@ html[data-theme="light"] .theme-toggle__moon {
   .about-more__content:hover {
     border-color: var(--section-hover-border);
     box-shadow: var(--experience-hover-shadow);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 
   .focus-link:hover {
@@ -1674,14 +1689,14 @@ html[data-theme="light"] .theme-toggle__moon {
     background: var(--award-link-background);
     box-shadow: var(--experience-hover-shadow);
     color: var(--nav-hover);
-    transform: translateY(-2px) scale(1.06);
+    transform: translateY(-1px) scale(1.025);
   }
 
   .social-profile-link:hover {
     border-color: var(--section-hover-border);
     box-shadow: var(--experience-hover-shadow);
     color: var(--nav-hover);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 
   .social-profile-link:hover .social-profile-link__arrow {
@@ -1691,7 +1706,6 @@ html[data-theme="light"] .theme-toggle__moon {
   .site-footer:hover {
     border-color: var(--section-hover-border);
     box-shadow: var(--section-hover-glow);
-    transform: translateY(-2px);
   }
 
   .site-footer__social:hover,
@@ -1700,19 +1714,19 @@ html[data-theme="light"] .theme-toggle__moon {
     border-color: var(--section-hover-border);
     box-shadow: var(--experience-hover-shadow);
     color: var(--nav-hover);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 
   .site-footer__link:hover {
     color: var(--nav-hover);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
 
   .resume-action:hover {
     border-color: var(--section-hover-border);
     box-shadow: var(--experience-hover-shadow);
     color: var(--nav-hover);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 
   .resume-action--primary:hover {
@@ -1735,7 +1749,7 @@ html[data-theme="light"] .theme-toggle__moon {
   .resume-preview__link:hover .resume-preview__page {
     border-color: var(--section-hover-border);
     box-shadow: var(--experience-hover-shadow);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 
   .course-term:hover .course-term__line {
@@ -1746,7 +1760,7 @@ html[data-theme="light"] .theme-toggle__moon {
     border-color: var(--course-border-hover);
     background: var(--course-background-hover);
     box-shadow: var(--course-hover-shadow);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 
   .project-feature:hover {
@@ -1759,16 +1773,16 @@ html[data-theme="light"] .theme-toggle__moon {
   }
 
   .project-nightwatch:hover .project-orb--moon {
-    transform: translateY(-4px) rotate(-9deg) scale(1.06);
+    transform: translateY(-2px) rotate(-5deg) scale(1.03);
   }
 
   .project-cuey:hover .project-orb--music {
-    transform: translateY(-5px) rotate(8deg) scale(1.08);
+    transform: translateY(-3px) rotate(5deg) scale(1.035);
   }
 
   .project-banner:hover .project-banner__image {
     filter: brightness(1.04);
-    transform: scale(1.027);
+    transform: scale(1.014);
   }
 
   .project-banner:hover .project-banner__label {
@@ -1780,7 +1794,7 @@ html[data-theme="light"] .theme-toggle__moon {
   .project-banner:hover .project-banner__label--soon {
     border-color: var(--project-border-hover);
     color: var(--nav-hover);
-    transform: translateY(-3px) scale(1.02);
+    transform: translateY(-2px) scale(1.01);
   }
 
   .project-banner:hover .project-banner__label--soon::before {
@@ -1818,7 +1832,7 @@ html[data-theme="light"] .theme-toggle__moon {
   .experience-card:hover {
     border-color: var(--experience-border-hover);
     box-shadow: var(--experience-hover-shadow);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 
   .experience-card:hover::after {
@@ -1827,7 +1841,7 @@ html[data-theme="light"] .theme-toggle__moon {
   }
 
   .experience-card:hover .experience-logo-link {
-    transform: translateY(-2px) scale(1.04);
+    transform: translateY(-1px) scale(1.02);
   }
 
   .experience-logo-link:hover .experience-logo__launch {
@@ -1842,7 +1856,7 @@ html[data-theme="light"] .theme-toggle__moon {
   }
 
   .school-group__trigger:hover .school-logo {
-    transform: rotate(-3deg) scale(1.04);
+    transform: rotate(-2deg) scale(1.02);
   }
 
   .school-group__trigger:hover .school-group__toggle {
@@ -1857,7 +1871,7 @@ html[data-theme="light"] .theme-toggle__moon {
   }
 
   .activity-card:hover .activity-logo {
-    transform: scale(1.05) rotate(-2deg);
+    transform: scale(1.025) rotate(-1deg);
   }
 
   .activity-award-link:hover {
@@ -1870,11 +1884,11 @@ html[data-theme="light"] .theme-toggle__moon {
   .award-feature:hover {
     border-color: var(--award-border-hover);
     box-shadow: var(--award-hover-shadow);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
   }
 
   .award-feature:hover .award-photo img {
-    transform: scale(1.035);
+    transform: scale(1.018);
   }
 
   .award-link:hover {
@@ -1891,14 +1905,14 @@ html[data-theme="light"] .theme-toggle__moon {
   .award-card:hover {
     border-color: var(--award-border-hover);
     box-shadow: var(--award-hover-shadow);
-    transform: translateY(-4px);
+    transform: translateY(-2px);
   }
 }
 
 @keyframes project-rise {
   from {
-    opacity: 0.48;
-    transform: translateY(12px);
+    opacity: 0.68;
+    transform: translateY(7px);
   }
   to {
     opacity: 1;
@@ -1909,20 +1923,20 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes project-moon-drift {
   0%,
   100% {
-    transform: translateY(0) rotate(-5deg);
+    transform: translateY(0) rotate(-3deg);
   }
   50% {
-    transform: translateY(-6px) rotate(5deg);
+    transform: translateY(-3px) rotate(3deg);
   }
 }
 
 @keyframes project-music-bounce {
   0%,
   100% {
-    transform: translateY(0) rotate(4deg);
+    transform: translateY(0) rotate(3deg);
   }
   45% {
-    transform: translateY(-7px) rotate(-7deg);
+    transform: translateY(-4px) rotate(-4deg);
   }
 }
 
@@ -1932,8 +1946,8 @@ html[data-theme="light"] .theme-toggle__moon {
 
 @keyframes experience-rise {
   from {
-    opacity: 0.45;
-    transform: translateY(12px);
+    opacity: 0.68;
+    transform: translateY(7px);
   }
   to {
     opacity: 1;
@@ -1943,19 +1957,8 @@ html[data-theme="light"] .theme-toggle__moon {
 
 @keyframes detail-rise {
   from {
-    opacity: 0.52;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes footer-rise {
-  from {
-    opacity: 0.5;
-    transform: translateY(14px);
+    opacity: 0.72;
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -1978,8 +1981,8 @@ html[data-theme="light"] .theme-toggle__moon {
 
 @keyframes course-term-rise {
   from {
-    opacity: 0.5;
-    transform: translateY(8px);
+    opacity: 0.72;
+    transform: translateY(5px);
   }
   to {
     opacity: 1;
@@ -1989,8 +1992,8 @@ html[data-theme="light"] .theme-toggle__moon {
 
 @keyframes award-rise {
   from {
-    opacity: 0.48;
-    transform: translateY(10px);
+    opacity: 0.7;
+    transform: translateY(6px);
   }
   to {
     opacity: 1;

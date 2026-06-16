@@ -1398,7 +1398,7 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="site-footer">
+        <footer className="site-footer scroll-lens-section">
           <div className="site-footer__socials" aria-label="Social links">
             {socialProfiles.map((profile) => (
               <a
@@ -1441,9 +1441,6 @@ export default function Home() {
               className="site-footer__pill"
             >
               Resume
-            </a>
-            <a href="#top" onClick={scrollToTop} className="site-footer__top">
-              Top
             </a>
           </div>
         </footer>
