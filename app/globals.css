@@ -1783,7 +1783,7 @@ html[data-theme="light"] .theme-toggle__moon {
   }
 
   .project-retra:hover .project-orb--eye {
-    transform: translateY(-2px) scale(1.025);
+    animation: project-eye-hover 1.15s ease-in-out infinite;
   }
 
   .project-nightwatch:hover .project-orb--moon {
@@ -1961,6 +1961,19 @@ html[data-theme="light"] .theme-toggle__moon {
   }
   50% {
     transform: translateY(-2px) scale(1.02);
+  }
+}
+
+@keyframes project-eye-hover {
+  0%,
+  100% {
+    transform: translateY(-1px) scale(1.02);
+  }
+  45% {
+    transform: translateY(-4px) scale(1.08);
+  }
+  70% {
+    transform: translateY(-2px) scale(1.04);
   }
 }
 
