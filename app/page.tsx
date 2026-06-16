@@ -284,6 +284,24 @@ function MusicNoteIcon() {
   );
 }
 
+function EyeIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.8"
+      viewBox="0 0 24 24"
+    >
+      <path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
 function SocialIcon({ platform }: Readonly<{ platform: "linkedin" | "github" }>) {
   if (platform === "linkedin") {
     return (
@@ -315,6 +333,8 @@ function applyTheme(theme: Theme) {
 }
 
 export default function Home() {
+  const [isRetraPreviewOpen, setIsRetraPreviewOpen] = useState(false);
+  const [hasRetraPreviewOpened, setHasRetraPreviewOpened] = useState(false);
   const [isNightwatchPreviewOpen, setIsNightwatchPreviewOpen] = useState(false);
   const [hasNightwatchPreviewOpened, setHasNightwatchPreviewOpened] = useState(false);
   const [isCueyPreviewOpen, setIsCueyPreviewOpen] = useState(false);
@@ -584,6 +604,279 @@ export default function Home() {
           </p>
 
           <div className="project-feature-entry mt-9">
+            <article className="project-feature project-retra">
+              <div className="project-content-grid grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
+                <span className="project-orb project-orb--eye" aria-hidden="true">
+                  <EyeIcon />
+                </span>
+                <div>
+                  <p className="eyebrow text-xs uppercase">Computer Vision Retinal Screening App</p>
+                  <h3 className="theme-heading mt-3 text-4xl leading-tight">
+                    Retra
+                  </h3>
+                  <p className="theme-muted mt-4 text-base leading-8 sm:text-lg">
+                    An explainable diabetic retinopathy screening platform that
+                    reads retinal fundus images, predicts severity, and shows
+                    Grad-CAM heatmaps behind the model&apos;s reasoning.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    <a
+                      href="https://retra-screening.vercel.app/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-action project-action--primary"
+                    >
+                      Live Demo
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                      >
+                        <path d="M7 17 17 7" />
+                        <path d="M8 7h9v9" />
+                      </svg>
+                    </a>
+                    <a
+                      href="https://github.com/shlokrj/retra"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-action"
+                    >
+                      GitHub Repo
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                      >
+                        <path d="M7 17 17 7" />
+                        <path d="M8 7h9v9" />
+                      </svg>
+                    </a>
+                    <button
+                      type="button"
+                      className={`project-action project-preview-toggle${isRetraPreviewOpen ? " project-preview-toggle--open" : ""}`}
+                      aria-expanded={isRetraPreviewOpen}
+                      aria-controls="retra-preview"
+                      onClick={() => {
+                        setHasRetraPreviewOpened(true);
+                        setIsRetraPreviewOpen((open) => !open);
+                      }}
+                    >
+                      Preview
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        className="project-preview-toggle__icon h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                      >
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="project-stack">
+                  <p className="eyebrow text-xs uppercase">Key Technologies</p>
+                  <ul className="mt-4 flex flex-wrap gap-2" aria-label="Retra technologies">
+                    {[
+                      "Next.js",
+                      "Tailwind CSS",
+                      "FastAPI",
+                      "PyTorch",
+                      "timm",
+                      "EfficientNet-B3",
+                      "OpenCV",
+                      "Grad-CAM",
+                    ].map((tool) => (
+                      <li key={tool} className="project-chip">
+                        {tool}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="theme-soft mt-5 text-sm leading-7">
+                    Built around an EfficientNet-B3 classifier, Ben Graham
+                    preprocessing, confidence outputs, and Grad-CAM overlays for
+                    readable retina reports.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                id="retra-preview"
+                className={`project-preview${isRetraPreviewOpen ? " project-preview--open" : ""}`}
+                aria-hidden={!isRetraPreviewOpen}
+              >
+                <div className="project-preview__inner">
+                  {hasRetraPreviewOpened ? (
+                    <a
+                      href="https://retra-screening.vercel.app/"
+                      target="_blank"
+                      rel="noreferrer"
+                      tabIndex={isRetraPreviewOpen ? undefined : -1}
+                      className="project-banner relative block overflow-hidden"
+                      aria-label="Open the live Retra application"
+                    >
+                      <Image
+                        src="/projects/retra-banner.png"
+                        alt="Retra showing an explainable retinal screening page with a Grad-CAM preview report."
+                        width={2940}
+                        height={1602}
+                        sizes="(min-width: 1024px) 60rem, calc(100vw - 4rem)"
+                        className="project-banner__image project-banner__image--retra w-full"
+                      />
+                      <span className="project-banner__label">
+                        View live app
+                        <svg
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                          className="h-4 w-4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                        >
+                          <path d="M7 17 17 7" />
+                          <path d="M8 7h9v9" />
+                        </svg>
+                      </span>
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div className="project-feature-entry mt-5">
+            <article className="project-feature project-cuey">
+              <div className="project-content-grid grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
+                <span className="project-orb project-orb--music" aria-hidden="true">
+                  <MusicNoteIcon />
+                </span>
+                <div>
+                  <p className="eyebrow text-xs uppercase">Computer Vision Music Controller App</p>
+                  <h3 className="theme-heading mt-3 text-4xl leading-tight">
+                    Cuey
+                  </h3>
+                  <p className="theme-muted mt-4 text-base leading-8 sm:text-lg">
+                    A hands-free music control app that uses webcam-based hand
+                    tracking to turn gestures into Spotify controls. It makes
+                    play, pause, skipping, and going back feel natural while
+                    working on your computer.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    <a
+                      href="https://github.com/shlokrj/cuey"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-action"
+                    >
+                      GitHub Repo
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                      >
+                        <path d="M7 17 17 7" />
+                        <path d="M8 7h9v9" />
+                      </svg>
+                    </a>
+                    <button
+                      type="button"
+                      className={`project-action project-preview-toggle${isCueyPreviewOpen ? " project-preview-toggle--open" : ""}`}
+                      aria-expanded={isCueyPreviewOpen}
+                      aria-controls="cuey-preview"
+                      onClick={() => {
+                        setHasCueyPreviewOpened(true);
+                        setIsCueyPreviewOpen((open) => !open);
+                      }}
+                    >
+                      Preview
+                      <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        className="project-preview-toggle__icon h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                      >
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="project-stack">
+                  <p className="eyebrow text-xs uppercase">Key Technologies</p>
+                  <ul className="mt-4 flex flex-wrap gap-2" aria-label="Cuey technologies">
+                    {[
+                      "Python",
+                      "MediaPipe",
+                      "OpenCV",
+                      "AppleScript / osascript",
+                      "Pillow",
+                    ].map((tool) => (
+                      <li key={tool} className="project-chip">
+                        {tool}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="theme-soft mt-5 text-sm leading-7">
+                    Built around real-time hand landmark detection, motion
+                    analysis, anti-aliased OpenCV UI rendering, and macOS
+                    Spotify control through AppleScript.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                id="cuey-preview"
+                className={`project-preview${isCueyPreviewOpen ? " project-preview--open" : ""}`}
+                aria-hidden={!isCueyPreviewOpen}
+              >
+                <div className="project-preview__inner">
+                  {hasCueyPreviewOpened ? (
+                    <div className="project-banner project-banner--cuey relative block overflow-hidden">
+                      <Image
+                        src="/projects/cuey-banner.png"
+                        alt="Cuey displaying real-time hand tracking with gesture controls overlaid on a webcam feed."
+                        width={2940}
+                        height={1782}
+                        sizes="(min-width: 1024px) 60rem, calc(100vw - 4rem)"
+                        className="project-banner__image project-banner__image--cuey w-full"
+                      />
+                      <span className="project-banner__label project-banner__label--soon">
+                        Demo coming soon
+                        <svg
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                          className="h-4 w-4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                        >
+                          <path d="M9 18V5l12-2v13" />
+                          <circle cx="6" cy="18" r="3" />
+                          <circle cx="18" cy="16" r="3" />
+                        </svg>
+                      </span>
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div className="project-feature-entry mt-5">
             <article className="project-feature project-nightwatch">
               <div className="project-content-grid grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
                 <span className="project-orb project-orb--moon" aria-hidden="true">
@@ -726,129 +1019,6 @@ export default function Home() {
                         </svg>
                       </span>
                     </a>
-                  ) : null}
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div className="project-feature-entry mt-5">
-            <article className="project-feature project-cuey">
-              <div className="project-content-grid grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
-                <span className="project-orb project-orb--music" aria-hidden="true">
-                  <MusicNoteIcon />
-                </span>
-                <div>
-                  <p className="eyebrow text-xs uppercase">Computer Vision Music Controller App</p>
-                  <h3 className="theme-heading mt-3 text-4xl leading-tight">
-                    Cuey
-                  </h3>
-                  <p className="theme-muted mt-4 text-base leading-8 sm:text-lg">
-                    A hands-free music control app that uses webcam-based hand
-                    tracking to turn gestures into Spotify controls. It makes
-                    play, pause, skipping, and going back feel natural while
-                    working on your computer.
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <a
-                      href="https://github.com/shlokrj/cuey"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-action"
-                    >
-                      GitHub Repo
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        className="h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                      >
-                        <path d="M7 17 17 7" />
-                        <path d="M8 7h9v9" />
-                      </svg>
-                    </a>
-                    <button
-                      type="button"
-                      className={`project-action project-preview-toggle${isCueyPreviewOpen ? " project-preview-toggle--open" : ""}`}
-                      aria-expanded={isCueyPreviewOpen}
-                      aria-controls="cuey-preview"
-                      onClick={() => {
-                        setHasCueyPreviewOpened(true);
-                        setIsCueyPreviewOpen((open) => !open);
-                      }}
-                    >
-                      Preview
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        className="project-preview-toggle__icon h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                      >
-                        <path d="m6 9 6 6 6-6" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="project-stack">
-                  <p className="eyebrow text-xs uppercase">Key Technologies</p>
-                  <ul className="mt-4 flex flex-wrap gap-2" aria-label="Cuey technologies">
-                    {[
-                      "Python",
-                      "MediaPipe",
-                      "OpenCV",
-                      "AppleScript / osascript",
-                      "Pillow",
-                    ].map((tool) => (
-                      <li key={tool} className="project-chip">
-                        {tool}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="theme-soft mt-5 text-sm leading-7">
-                    Built around real-time hand landmark detection, motion
-                    analysis, anti-aliased OpenCV UI rendering, and macOS
-                    Spotify control through AppleScript.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                id="cuey-preview"
-                className={`project-preview${isCueyPreviewOpen ? " project-preview--open" : ""}`}
-                aria-hidden={!isCueyPreviewOpen}
-              >
-                <div className="project-preview__inner">
-                  {hasCueyPreviewOpened ? (
-                    <div className="project-banner project-banner--cuey relative block overflow-hidden">
-                      <Image
-                        src="/projects/cuey-banner.png"
-                        alt="Cuey displaying real-time hand tracking with gesture controls overlaid on a webcam feed."
-                        width={2940}
-                        height={1782}
-                        sizes="(min-width: 1024px) 60rem, calc(100vw - 4rem)"
-                        className="project-banner__image project-banner__image--cuey w-full"
-                      />
-                      <span className="project-banner__label project-banner__label--soon">
-                        Demo coming soon
-                        <svg
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                          className="h-4 w-4"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.8"
-                        >
-                          <path d="M9 18V5l12-2v13" />
-                          <circle cx="6" cy="18" r="3" />
-                          <circle cx="18" cy="16" r="3" />
-                        </svg>
-                      </span>
-                    </div>
                   ) : null}
                 </div>
               </div>

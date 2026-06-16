@@ -730,6 +730,10 @@ html[data-theme="light"] .theme-toggle__moon {
   animation: project-music-bounce 3.6s ease-in-out infinite;
 }
 
+.project-orb--eye {
+  animation: project-eye-focus 4.8s ease-in-out infinite;
+}
+
 .project-feature > .project-content-grid,
 .project-feature > .project-preview {
   position: relative;
@@ -763,6 +767,12 @@ html[data-theme="light"] .theme-toggle__moon {
   aspect-ratio: 2940 / 1782;
   object-fit: contain;
   object-position: center;
+}
+
+.project-banner__image--retra {
+  aspect-ratio: 2940 / 1602;
+  object-fit: contain;
+  object-position: center top;
 }
 
 .project-banner__label {
@@ -1772,6 +1782,10 @@ html[data-theme="light"] .theme-toggle__moon {
     opacity: 0.28;
   }
 
+  .project-retra:hover .project-orb--eye {
+    transform: translateY(-2px) scale(1.025);
+  }
+
   .project-nightwatch:hover .project-orb--moon {
     transform: translateY(-2px) rotate(-5deg) scale(1.03);
   }
@@ -1937,6 +1951,16 @@ html[data-theme="light"] .theme-toggle__moon {
   }
   45% {
     transform: translateY(-4px) rotate(-4deg);
+  }
+}
+
+@keyframes project-eye-focus {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-2px) scale(1.02);
   }
 }
 
