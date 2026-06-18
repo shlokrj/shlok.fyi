@@ -535,12 +535,12 @@ export default function Home() {
               <div className="sub-panel home-photo-panel w-full rounded-[1.75rem] border p-4">
                 <div className="placeholder-panel home-photo relative h-full min-h-[18rem] overflow-hidden rounded-[1.35rem] border">
                   <Image
-                    src="/profile-photo.jpeg"
-                    alt="Shlok Jadhav overlooking the Bay Bridge at sunset"
+                    src="/profile-top.jpeg"
+                    alt="Shlok Jadhav portrait for the home section"
                     fill
                     priority
                     sizes="(min-width: 1280px) 28rem, (min-width: 640px) 34rem, calc(100vw - 5rem)"
-                    className="object-cover"
+                    className="object-cover object-[50%_65%]"
                   />
                 </div>
               </div>
@@ -1301,11 +1301,11 @@ export default function Home() {
             <div className="sub-panel about-photo-panel rounded-[1.5rem] border p-5">
               <div className="placeholder-panel about-photo relative overflow-hidden rounded-[1.2rem] border">
                 <Image
-                  src="/profile-photo.jpeg"
-                  alt="Shlok Jadhav overlooking the Bay Bridge at sunset"
+                  src="/profile-top.jpeg"
+                  alt="Shlok Jadhav portrait for the about-me section"
                   fill
                   sizes="(min-width: 1024px) 24rem, (min-width: 640px) 34rem, calc(100vw - 5rem)"
-                  className="object-cover"
+                  className="object-cover object-[50%_65%]"
                 />
               </div>
             </div>
