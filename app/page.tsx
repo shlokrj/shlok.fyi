@@ -1475,7 +1475,7 @@ export default function Home() {
                     Shlok Jadhav Resume
                   </h3>
                   <p className="theme-soft mt-2 text-sm">
-                    Last updated: May 24, 2026
+                    Last updated: June 18, 2026
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3">
