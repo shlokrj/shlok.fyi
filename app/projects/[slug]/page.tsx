@@ -39,46 +39,6 @@ function ArrowIcon() {
   );
 }
 
-function FluxVisual() {
-  return (
-    <div className="flux-visual" aria-label="Stylized preview of the Flux system dashboard">
-      <div className="flux-visual__bar">
-        <span>Flux</span>
-        <span className="flux-visual__live"><i /> Live</span>
-      </div>
-      <div className="flux-visual__metrics">
-        {[
-          ["CPU", "18%"],
-          ["Memory", "11.4 GB"],
-          ["Battery", "82%"],
-          ["Network", "2.4 MB/s"],
-        ].map(([label, value]) => (
-          <div key={label}>
-            <span>{label}</span>
-            <strong>{value}</strong>
-          </div>
-        ))}
-      </div>
-      <div className="flux-visual__chart">
-        <div className="flux-visual__chart-head">
-          <span>Activity</span>
-          <span>5 min</span>
-        </div>
-        <svg aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 600 150">
-          <defs>
-            <linearGradient id="fluxArea" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0" stopColor="currentColor" stopOpacity=".32" />
-              <stop offset="1" stopColor="currentColor" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <path className="flux-visual__area" d="M0 120 C55 118 70 75 120 84 S190 126 240 94 S305 44 355 72 S420 112 470 83 S540 26 600 45 L600 150 L0 150Z" />
-          <path className="flux-visual__line" d="M0 120 C55 118 70 75 120 84 S190 126 240 94 S305 44 355 72 S420 112 470 83 S540 26 600 45" />
-        </svg>
-      </div>
-    </div>
-  );
-}
-
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProject(slug);
@@ -119,8 +79,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </header>
 
-        <section className="project-detail-visual">
-          {project.image ? (
+        {project.image ? (
+          <section className={`project-detail-visual${project.secondaryImage ? " project-detail-visual--gallery" : ""}`}>
             <Image
               alt={project.image.alt}
               className={`project-detail-visual__image ${project.image.className ?? ""}`}
@@ -130,10 +90,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               src={project.image.src}
               width={project.image.width}
             />
-          ) : (
-            <FluxVisual />
-          )}
-        </section>
+            {project.secondaryImage ? (
+              <Image
+                alt={project.secondaryImage.alt}
+                className="project-detail-visual__image project-detail-visual__image--secondary"
+                height={project.secondaryImage.height}
+                sizes="(min-width: 1024px) 16rem, 40vw"
+                src={project.secondaryImage.src}
+                width={project.secondaryImage.width}
+              />
+            ) : null}
+          </section>
+        ) : null}
 
         <div className="project-detail__body grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
           <section className="project-detail__panel">

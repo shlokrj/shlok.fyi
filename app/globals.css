@@ -744,6 +744,7 @@ html[data-theme="light"] .theme-toggle__moon {
 }
 
 .project-card--retra .project-card__image,
+.project-card--flux .project-card__image,
 .project-card--cuey .project-card__image {
   object-fit: contain;
   background: #07090b;
@@ -2322,6 +2323,10 @@ html[data-theme="light"] .theme-toggle__moon {
   .course-item,
   .project-feature-entry,
   .project-feature,
+  .project-card,
+  .project-card__image,
+  .project-card__reveal,
+  .project-card__title-row svg,
   .project-orb,
   .project-banner__image,
   .project-banner__label,
@@ -2533,6 +2538,23 @@ html[data-theme="light"] .theme-toggle__moon {
   object-fit: contain;
 }
 
+.project-detail-visual--gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(11rem, 0.26fr);
+  align-items: stretch;
+  gap: clamp(0.65rem, 2vw, 1.25rem);
+}
+
+.project-detail-visual--gallery .project-detail-visual__image {
+  height: 100%;
+  max-height: 23rem;
+  background: #050505;
+}
+
+.project-detail-visual__image--secondary {
+  object-fit: contain;
+}
+
 .project-detail__body {
   margin-top: 0.5rem;
 }
@@ -2564,110 +2586,6 @@ html[data-theme="light"] .theme-toggle__moon {
   letter-spacing: 0.16em;
 }
 
-.flux-visual {
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 0.75rem;
-  background: #111315;
-  padding: clamp(1rem, 3vw, 2rem);
-  color: #f1eee8;
-  font-family: ui-sans-serif, system-ui, sans-serif;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
-}
-
-.flux-visual__bar,
-.flux-visual__chart-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.flux-visual__bar {
-  font-size: 1.2rem;
-  font-weight: 650;
-}
-
-.flux-visual__live {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  color: #999b9d;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.flux-visual__live i {
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 999px;
-  background: #ff7a54;
-  box-shadow: 0 0 12px rgba(255, 122, 84, 0.6);
-}
-
-.flux-visual__metrics {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin-top: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.55rem;
-  background: #181a1c;
-}
-
-.flux-visual__metrics > div {
-  display: grid;
-  gap: 0.35rem;
-  padding: 1rem;
-}
-
-.flux-visual__metrics > div + div {
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.flux-visual__metrics span,
-.flux-visual__chart-head span:last-child {
-  color: #898c8f;
-  font-size: 0.7rem;
-}
-
-.flux-visual__metrics strong {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: clamp(0.8rem, 2vw, 1rem);
-  font-weight: 500;
-}
-
-.flux-visual__chart {
-  margin-top: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.55rem;
-  background: #181a1c;
-  padding: 1rem;
-  color: #ff7955;
-}
-
-.flux-visual__chart-head {
-  color: #e8e6e1;
-  font-size: 0.82rem;
-}
-
-.flux-visual__chart svg {
-  display: block;
-  width: 100%;
-  height: clamp(8rem, 23vw, 15rem);
-  margin-top: 1rem;
-  overflow: visible;
-}
-
-.flux-visual__area {
-  fill: url(#fluxArea);
-}
-
-.flux-visual__line {
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 3;
-}
-
 @media (hover: hover) and (pointer: fine) {
   .project-detail__back:hover {
     color: var(--nav-hover);
@@ -2686,16 +2604,11 @@ html[data-theme="light"] .theme-toggle__moon {
 }
 
 @media (max-width: 639px) {
-  .flux-visual__metrics {
-    grid-template-columns: repeat(2, 1fr);
+  .project-detail-visual--gallery {
+    grid-template-columns: 1fr;
   }
 
-  .flux-visual__metrics > div:nth-child(3) {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-left: 0;
-  }
-
-  .flux-visual__metrics > div:nth-child(4) {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  .project-detail-visual--gallery .project-detail-visual__image {
+    height: auto;
   }
 }

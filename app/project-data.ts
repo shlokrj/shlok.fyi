@@ -20,6 +20,12 @@ export type Project = {
     height: number;
     className?: string;
   };
+  secondaryImage?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
   visual: "flux" | "retra" | "nightwatch" | "cuey";
 };
 
@@ -65,6 +71,19 @@ export const projects: Project[] = [
         primary: true,
       },
     ],
+    image: {
+      src: "/projects/flux-dashboard.png",
+      alt: "Flux dashboard showing live system metrics and a five-minute CPU activity chart.",
+      width: 2940,
+      height: 1002,
+      className: "project-detail-visual__image--contain",
+    },
+    secondaryImage: {
+      src: "/projects/flux-menubar.png",
+      alt: "Flux menu bar panel showing CPU, memory, battery, network, and active app metrics.",
+      width: 540,
+      height: 610,
+    },
     visual: "flux",
   },
   {

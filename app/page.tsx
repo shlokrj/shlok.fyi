@@ -269,7 +269,11 @@ function MoonIcon() {
 
 function ProjectCard({ project, index }: Readonly<{ project: Project; index: number }>) {
   return (
-    <Link className={`project-card project-card--${project.visual}`} href={`/projects/${project.slug}`}>
+    <Link
+      aria-label={`Read more about ${project.name}`}
+      className={`project-card project-card--${project.visual}`}
+      href={`/projects/${project.slug}`}
+    >
       <article>
         <div className="project-card__visual">
           {project.image ? (
@@ -410,26 +414,6 @@ export default function Home() {
       behavior: "smooth",
       block: isLongSection ? "start" : "center",
     });
-  };
-
-  const scrollToAward = (
-    event: React.MouseEvent<HTMLAnchorElement>,
-    awardId: string,
-  ) => {
-    event.preventDefault();
-
-    const award = document.getElementById(awardId);
-    if (!award) return;
-
-    globalThis.history.replaceState(null, "", `#${awardId}`);
-    award.classList.remove("award-reference-flash");
-    void award.offsetWidth;
-    award.classList.add("award-reference-flash");
-    award.scrollIntoView({ behavior: "smooth", block: "center" });
-
-    globalThis.setTimeout(() => {
-      award.classList.remove("award-reference-flash");
-    }, 1900);
   };
 
   const scrollToExperience = (
