@@ -688,6 +688,234 @@ html[data-theme="light"] .theme-toggle__moon {
   color: var(--album-accent);
 }
 
+.project-section__intro {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.project-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.project-card {
+  display: block;
+  min-width: 0;
+  border: 1px solid var(--project-border);
+  border-radius: 0.6rem;
+  background: var(--project-background);
+  outline: none;
+  overflow: hidden;
+  transition:
+    border-color 250ms ease,
+    box-shadow 250ms ease,
+    transform 250ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-card:focus-visible {
+  border-color: var(--project-border-hover);
+  box-shadow: var(--project-hover-shadow);
+}
+
+.project-card:focus-visible .project-card__reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card article {
+  height: 100%;
+}
+
+.project-card__visual {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-bottom: 1px solid var(--project-border);
+  background: rgba(8, 10, 13, 0.74);
+}
+
+.project-card__image {
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(0.86) contrast(0.96);
+  transition:
+    filter 400ms ease,
+    transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-card--retra .project-card__image,
+.project-card--cuey .project-card__image {
+  object-fit: contain;
+  background: #07090b;
+}
+
+.project-card__number {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 999px;
+  background: rgba(10, 11, 13, 0.72);
+  padding: 0.34rem 0.48rem;
+  color: rgba(255, 255, 255, 0.74);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(8px);
+}
+
+.project-card__reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(180deg, rgba(8, 10, 13, 0.12), rgba(8, 10, 13, 0.94));
+  padding: 1.2rem;
+  color: #f5eee8;
+  opacity: 0;
+  transform: translateY(0.65rem);
+  transition:
+    opacity 260ms ease,
+    transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-card__reveal span {
+  color: rgba(255, 196, 166, 0.82);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.project-card__reveal p {
+  margin-top: 0.45rem;
+  max-width: 28rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.project-card__content {
+  padding: 1.3rem;
+}
+
+.project-card__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+.project-card__title-row svg {
+  flex: 0 0 auto;
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--link);
+  transition: transform 250ms ease;
+}
+
+.project-card__summary {
+  margin-top: 0.9rem;
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+.project-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1.15rem;
+}
+
+.project-card__chips li {
+  border: 1px solid var(--project-chip-border);
+  border-radius: 999px;
+  background: var(--project-chip-background);
+  padding: 0.35rem 0.55rem;
+  color: var(--text-soft);
+  font-size: 0.7rem;
+}
+
+.project-card__flux {
+  position: absolute;
+  inset: 0;
+  padding: clamp(0.85rem, 3vw, 1.35rem);
+  background:
+    radial-gradient(circle at 80% 18%, rgba(255, 112, 73, 0.12), transparent 28%),
+    #111315;
+  color: #efede8;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.project-card__flux-top,
+.project-card__flux-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-card__flux-top strong {
+  font-size: clamp(0.78rem, 2vw, 1rem);
+}
+
+.project-card__flux-top > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #8c8e90;
+  font-size: 0.56rem;
+}
+
+.project-card__flux-top i {
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 999px;
+  background: #ff7955;
+}
+
+.project-card__flux-stats {
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+}
+
+.project-card__flux-stats > span {
+  display: grid;
+  flex: 1;
+  gap: 0.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 0.35rem;
+  background: #181a1c;
+  padding: 0.5rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(0.58rem, 1.5vw, 0.72rem);
+}
+
+.project-card__flux-stats small {
+  color: #777a7d;
+  font-size: 0.48rem;
+}
+
+.project-card__flux > svg {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.6rem;
+  left: 1rem;
+  width: calc(100% - 2rem);
+  height: 37%;
+  overflow: visible;
+}
+
+.project-card__flux > svg path {
+  fill: none;
+  stroke: #ff7955;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 5px rgba(255, 121, 85, 0.28));
+}
+
 .project-feature {
   position: relative;
   overflow: hidden;
@@ -1644,6 +1872,26 @@ html[data-theme="light"] .theme-toggle__moon {
     transform: translateY(-1px) scale(0.986);
   }
 
+  .project-card:hover {
+    border-color: var(--project-border-hover);
+    box-shadow: var(--project-hover-shadow);
+    transform: translateY(-4px);
+  }
+
+  .project-card:hover .project-card__image {
+    filter: saturate(1) contrast(1);
+    transform: scale(1.025);
+  }
+
+  .project-card:hover .project-card__reveal {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .project-card:hover .project-card__title-row svg {
+    transform: translateX(3px);
+  }
+
   .home-photo-panel:hover,
   .focus-panel:hover,
   .about-copy-panel:hover,
@@ -2154,6 +2402,10 @@ html[data-theme="light"] .theme-toggle__moon {
     font-size: 0.78rem;
   }
 
+  .project-card__content {
+    padding: 1.1rem;
+  }
+
   .site-footer {
     padding: 1.55rem 1.1rem;
   }
@@ -2180,6 +2432,17 @@ html[data-theme="light"] .theme-toggle__moon {
     border-left: 1px solid var(--project-border);
     padding-top: 0;
     padding-left: 2rem;
+  }
+
+  .project-section__intro {
+    grid-template-columns: 0.88fr 1.12fr;
+    align-items: end;
+  }
+}
+
+@media (min-width: 700px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

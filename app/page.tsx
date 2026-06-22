@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { projects, type Project } from "@/app/project-data";
 
 type Theme = "dark" | "light";
 
@@ -265,40 +267,60 @@ function MoonIcon() {
   );
 }
 
-function MusicNoteIcon() {
+function ProjectCard({ project, index }: Readonly<{ project: Project; index: number }>) {
   return (
-    <svg
-      aria-hidden="true"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-      viewBox="0 0 24 24"
-    >
-      <path d="M9 18V5l12-2v13" />
-      <circle cx="6" cy="18" r="3" />
-      <circle cx="18" cy="16" r="3" />
-    </svg>
-  );
-}
+    <Link className={`project-card project-card--${project.visual}`} href={`/projects/${project.slug}`}>
+      <article>
+        <div className="project-card__visual">
+          {project.image ? (
+            <Image
+              alt=""
+              className="project-card__image"
+              fill
+              sizes="(min-width: 1024px) 29rem, (min-width: 640px) 44vw, calc(100vw - 5rem)"
+              src={project.image.src}
+            />
+          ) : (
+            <div className="project-card__flux" aria-hidden="true">
+              <div className="project-card__flux-top">
+                <strong>Flux</strong>
+                <span><i /> Live</span>
+              </div>
+              <div className="project-card__flux-stats">
+                <span><small>CPU</small>18%</span>
+                <span><small>MEM</small>71%</span>
+                <span><small>NET</small>2.4</span>
+              </div>
+              <svg preserveAspectRatio="none" viewBox="0 0 320 76">
+                <path d="M0 61 C35 64 44 30 78 38 S132 68 166 44 S215 19 246 39 S285 54 320 17" />
+              </svg>
+            </div>
+          )}
+          <span className="project-card__number">0{index + 1}</span>
+          <div className="project-card__reveal">
+            <span>Peek inside</span>
+            <p>{project.highlights[0].detail}</p>
+          </div>
+        </div>
 
-function EyeIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-      viewBox="0 0 24 24"
-    >
-      <path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z" />
-      <circle cx="12" cy="12" r="3" />
-    </svg>
+        <div className="project-card__content">
+          <p className="eyebrow text-[0.68rem] uppercase tracking-[0.2em]">{project.eyebrow}</p>
+          <div className="project-card__title-row">
+            <h3 className="theme-heading text-3xl leading-none">{project.name}</h3>
+            <svg aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </div>
+          <p className="theme-muted project-card__summary">{project.summary}</p>
+          <ul className="project-card__chips" aria-label={`${project.name} technologies`}>
+            {project.technologies.slice(0, 3).map((technology) => (
+              <li key={technology}>{technology}</li>
+            ))}
+          </ul>
+        </div>
+      </article>
+    </Link>
   );
 }
 
@@ -333,12 +355,6 @@ function applyTheme(theme: Theme) {
 }
 
 export default function Home() {
-  const [isRetraPreviewOpen, setIsRetraPreviewOpen] = useState(false);
-  const [hasRetraPreviewOpened, setHasRetraPreviewOpened] = useState(false);
-  const [isNightwatchPreviewOpen, setIsNightwatchPreviewOpen] = useState(false);
-  const [hasNightwatchPreviewOpened, setHasNightwatchPreviewOpened] = useState(false);
-  const [isCueyPreviewOpen, setIsCueyPreviewOpen] = useState(false);
-  const [hasCueyPreviewOpened, setHasCueyPreviewOpened] = useState(false);
   const [isResumePreviewOpen, setIsResumePreviewOpen] = useState(false);
   const [hasResumePreviewOpened, setHasResumePreviewOpened] = useState(false);
   const [isAboutMoreOpen, setIsAboutMoreOpen] = useState(false);
@@ -592,437 +608,25 @@ export default function Home() {
           id="projects"
           className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
-          <p className="eyebrow text-xs uppercase tracking-[0.32em]">
-            Projects
-          </p>
-          <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
-            All Projects
-          </h2>
-          <p className="theme-muted mt-4 max-w-3xl text-lg leading-8">
-            Personal projects and useful tools across data, design,
-            computer vision, and more.
-          </p>
-
-          <div className="project-feature-entry mt-9">
-            <article className="project-feature project-retra">
-              <div className="project-content-grid grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
-                <span className="project-orb project-orb--eye" aria-hidden="true">
-                  <EyeIcon />
-                </span>
-                <div>
-                  <p className="eyebrow text-xs uppercase">Computer Vision Retinal Screening App</p>
-                  <h3 className="theme-heading mt-3 text-4xl leading-tight">
-                    Retra
-                  </h3>
-                  <p className="theme-muted mt-4 text-base leading-8 sm:text-lg">
-                    An explainable diabetic retinopathy screening platform that
-                    reads retinal fundus images, predicts severity, and shows
-                    Grad-CAM heatmaps behind the model&apos;s reasoning.
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <a
-                      href="https://retra-screening.vercel.app/"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-action project-action--primary"
-                    >
-                      Live Demo
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        className="h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                      >
-                        <path d="M7 17 17 7" />
-                        <path d="M8 7h9v9" />
-                      </svg>
-                    </a>
-                    <a
-                      href="https://github.com/shlokrj/retra"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-action"
-                    >
-                      GitHub Repo
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        className="h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                      >
-                        <path d="M7 17 17 7" />
-                        <path d="M8 7h9v9" />
-                      </svg>
-                    </a>
-                    <button
-                      type="button"
-                      className={`project-action project-preview-toggle${isRetraPreviewOpen ? " project-preview-toggle--open" : ""}`}
-                      aria-expanded={isRetraPreviewOpen}
-                      aria-controls="retra-preview"
-                      onClick={() => {
-                        setHasRetraPreviewOpened(true);
-                        setIsRetraPreviewOpen((open) => !open);
-                      }}
-                    >
-                      Preview
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        className="project-preview-toggle__icon h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                      >
-                        <path d="m6 9 6 6 6-6" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="project-stack">
-                  <p className="eyebrow text-xs uppercase">Key Technologies</p>
-                  <ul className="mt-4 flex flex-wrap gap-2" aria-label="Retra technologies">
-                    {[
-                      "Next.js",
-                      "Tailwind CSS",
-                      "FastAPI",
-                      "PyTorch",
-                      "timm",
-                      "EfficientNet-B3",
-                      "OpenCV",
-                      "Grad-CAM",
-                    ].map((tool) => (
-                      <li key={tool} className="project-chip">
-                        {tool}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="theme-soft mt-5 text-sm leading-7">
-                    Built around an EfficientNet-B3 classifier, Ben Graham
-                    preprocessing, confidence outputs, and Grad-CAM overlays for
-                    readable retina reports.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                id="retra-preview"
-                className={`project-preview${isRetraPreviewOpen ? " project-preview--open" : ""}`}
-                aria-hidden={!isRetraPreviewOpen}
-              >
-                <div className="project-preview__inner">
-                  {hasRetraPreviewOpened ? (
-                    <a
-                      href="https://retra-screening.vercel.app/"
-                      target="_blank"
-                      rel="noreferrer"
-                      tabIndex={isRetraPreviewOpen ? undefined : -1}
-                      className="project-banner relative block overflow-hidden"
-                      aria-label="Open the live Retra application"
-                    >
-                      <Image
-                        src="/projects/retra-banner.png"
-                        alt="Retra showing an explainable retinal screening page with a Grad-CAM preview report."
-                        width={2940}
-                        height={1602}
-                        sizes="(min-width: 1024px) 60rem, calc(100vw - 4rem)"
-                        className="project-banner__image project-banner__image--retra w-full"
-                      />
-                      <span className="project-banner__label">
-                        View live app
-                        <svg
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                          className="h-4 w-4"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.8"
-                        >
-                          <path d="M7 17 17 7" />
-                          <path d="M8 7h9v9" />
-                        </svg>
-                      </span>
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-            </article>
+          <div className="project-section__intro">
+            <div>
+              <p className="eyebrow text-xs uppercase tracking-[0.32em]">
+                Projects
+              </p>
+              <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
+                Things I&apos;ve built
+              </h2>
+            </div>
+            <p className="theme-muted max-w-xl text-base leading-7 sm:text-lg sm:leading-8">
+              A smaller shelf of projects across native apps, machine learning,
+              computer vision, and data. Hover for a peek, or open one for the full story.
+            </p>
           </div>
 
-          <div className="project-feature-entry mt-5">
-            <article className="project-feature project-cuey">
-              <div className="project-content-grid grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
-                <span className="project-orb project-orb--music" aria-hidden="true">
-                  <MusicNoteIcon />
-                </span>
-                <div>
-                  <p className="eyebrow text-xs uppercase">Computer Vision Music Controller App</p>
-                  <h3 className="theme-heading mt-3 text-4xl leading-tight">
-                    Cuey
-                  </h3>
-                  <p className="theme-muted mt-4 text-base leading-8 sm:text-lg">
-                    A hands-free music control app that uses webcam-based hand
-                    tracking to turn gestures into Spotify controls. It makes
-                    play, pause, skipping, and going back feel natural while
-                    working on your computer.
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <a
-                      href="https://github.com/shlokrj/cuey"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-action"
-                    >
-                      GitHub Repo
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        className="h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                      >
-                        <path d="M7 17 17 7" />
-                        <path d="M8 7h9v9" />
-                      </svg>
-                    </a>
-                    <button
-                      type="button"
-                      className={`project-action project-preview-toggle${isCueyPreviewOpen ? " project-preview-toggle--open" : ""}`}
-                      aria-expanded={isCueyPreviewOpen}
-                      aria-controls="cuey-preview"
-                      onClick={() => {
-                        setHasCueyPreviewOpened(true);
-                        setIsCueyPreviewOpen((open) => !open);
-                      }}
-                    >
-                      Preview
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        className="project-preview-toggle__icon h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                      >
-                        <path d="m6 9 6 6 6-6" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="project-stack">
-                  <p className="eyebrow text-xs uppercase">Key Technologies</p>
-                  <ul className="mt-4 flex flex-wrap gap-2" aria-label="Cuey technologies">
-                    {[
-                      "Python",
-                      "MediaPipe",
-                      "OpenCV",
-                      "AppleScript / osascript",
-                      "Pillow",
-                    ].map((tool) => (
-                      <li key={tool} className="project-chip">
-                        {tool}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="theme-soft mt-5 text-sm leading-7">
-                    Built around real-time hand landmark detection, motion
-                    analysis, anti-aliased OpenCV UI rendering, and macOS
-                    Spotify control through AppleScript.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                id="cuey-preview"
-                className={`project-preview${isCueyPreviewOpen ? " project-preview--open" : ""}`}
-                aria-hidden={!isCueyPreviewOpen}
-              >
-                <div className="project-preview__inner">
-                  {hasCueyPreviewOpened ? (
-                    <div className="project-banner project-banner--cuey relative block overflow-hidden">
-                      <Image
-                        src="/projects/cuey-banner.png"
-                        alt="Cuey displaying real-time hand tracking with gesture controls overlaid on a webcam feed."
-                        width={2940}
-                        height={1782}
-                        sizes="(min-width: 1024px) 60rem, calc(100vw - 4rem)"
-                        className="project-banner__image project-banner__image--cuey w-full"
-                      />
-                      <span className="project-banner__label project-banner__label--soon">
-                        Demo coming soon
-                        <svg
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                          className="h-4 w-4"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.8"
-                        >
-                          <path d="M9 18V5l12-2v13" />
-                          <circle cx="6" cy="18" r="3" />
-                          <circle cx="18" cy="16" r="3" />
-                        </svg>
-                      </span>
-                    </div>
-                  ) : null}
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div className="project-feature-entry mt-5">
-            <article className="project-feature project-nightwatch">
-              <div className="project-content-grid grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.08fr_0.92fr]">
-                <span className="project-orb project-orb--moon" aria-hidden="true">
-                  <MoonIcon />
-                </span>
-                <div>
-                  <p className="eyebrow text-xs uppercase">Full-Stack Astronomy App</p>
-                  <h3 className="theme-heading mt-3 text-4xl leading-tight">
-                    Nightwatch
-                  </h3>
-                  <p className="theme-muted mt-4 text-base leading-8 sm:text-lg">
-                    A local night sky guide that combines astronomy calculations
-                    and weather conditions to show visible planets, moon phase,
-                    twilight times, and the best viewing window for tonight.
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <a
-                      href="https://nightwatch-psi.vercel.app/"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-action project-action--primary"
-                    >
-                      Live Demo
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        className="h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                      >
-                        <path d="M7 17 17 7" />
-                        <path d="M8 7h9v9" />
-                      </svg>
-                    </a>
-                    <a
-                      href="https://github.com/shlokrj/nightwatch"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-action"
-                    >
-                      GitHub Repo
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        className="h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                      >
-                        <path d="M7 17 17 7" />
-                        <path d="M8 7h9v9" />
-                      </svg>
-                    </a>
-                    <button
-                      type="button"
-                      className={`project-action project-preview-toggle${isNightwatchPreviewOpen ? " project-preview-toggle--open" : ""}`}
-                      aria-expanded={isNightwatchPreviewOpen}
-                      aria-controls="nightwatch-preview"
-                      onClick={() => {
-                        setHasNightwatchPreviewOpened(true);
-                        setIsNightwatchPreviewOpen((open) => !open);
-                      }}
-                    >
-                      Preview
-                      <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                        className="project-preview-toggle__icon h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                      >
-                        <path d="m6 9 6 6 6-6" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="project-stack">
-                  <p className="eyebrow text-xs uppercase">Key Technologies</p>
-                  <ul className="mt-4 flex flex-wrap gap-2" aria-label="Nightwatch technologies">
-                    {[
-                      "React",
-                      "Vite",
-                      "Tailwind CSS",
-                      "Python",
-                      "FastAPI",
-                      "Skyfield",
-                      "Open-Meteo",
-                      "Vercel",
-                    ].map((tool) => (
-                      <li key={tool} className="project-chip">
-                        {tool}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="theme-soft mt-5 text-sm leading-7">
-                    Built with place search, timezone detection, astronomy
-                    ephemerides, and weather-aware sky scoring.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                id="nightwatch-preview"
-                className={`project-preview${isNightwatchPreviewOpen ? " project-preview--open" : ""}`}
-                aria-hidden={!isNightwatchPreviewOpen}
-              >
-                <div className="project-preview__inner">
-                  {hasNightwatchPreviewOpened ? (
-                    <a
-                      href="https://nightwatch-psi.vercel.app/"
-                      target="_blank"
-                      rel="noreferrer"
-                      tabIndex={isNightwatchPreviewOpen ? undefined : -1}
-                      className="project-banner relative block overflow-hidden"
-                      aria-label="Open the live Nightwatch application"
-                    >
-                      <Image
-                        src="/projects/nightwatch-banner.png"
-                        alt="Nightwatch displaying a Madison stargazing report and best viewing window."
-                        width={1440}
-                        height={1100}
-                        sizes="(min-width: 1024px) 60rem, calc(100vw - 4rem)"
-                        className="project-banner__image w-full"
-                      />
-                      <span className="project-banner__label">
-                        View live app
-                        <svg
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                          className="h-4 w-4"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.8"
-                        >
-                          <path d="M7 17 17 7" />
-                          <path d="M8 7h9v9" />
-                        </svg>
-                      </span>
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-            </article>
+          <div className="project-grid mt-9">
+            {projects.map((project, index) => (
+              <ProjectCard index={index} key={project.slug} project={project} />
+            ))}
           </div>
         </section>
 
