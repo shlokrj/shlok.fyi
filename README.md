@@ -1,6 +1,6 @@
 # Shlok Jadhav — Portfolio
 
-My personal portfolio website.
+My personal portfolio website. Check it out at [shlok.fyi](https://shlok.fyi).
 
 ## Tech Stack
 
