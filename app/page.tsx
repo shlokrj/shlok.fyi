@@ -421,8 +421,7 @@ export default function Home() {
               </h2>
             </div>
             <p className="theme-muted max-w-xl text-base leading-7 sm:text-lg sm:leading-8">
-              A smaller shelf of projects across native apps, machine learning,
-              computer vision, and data. Hover for a peek, or open one for the full story.
+              Some of my personal projects that I&apos;ve worked on. <br />Hover for a peek or click to read more!
             </p>
           </div>
 
