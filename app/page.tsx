@@ -3,32 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { FloatingNav } from "@/app/components/FloatingNav";
+import { SocialIcon } from "@/app/components/SocialIcon";
 import { projects, type Project } from "@/app/project-data";
-
-type Theme = "dark" | "light";
-
-const navItems = [
-  { href: "home", label: "Home" },
-  { href: "projects", label: "Projects" },
-  { href: "experience", label: "Experience" },
-  { href: "courses", label: "Courses" },
-  { href: "awards", label: "Awards" },
-  { href: "about-me", label: "About Me" },
-  { href: "contact", label: "Contact" },
-];
-
-const socialProfiles = [
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/shlokjadhav/",
-    platform: "linkedin",
-  },
-  {
-    label: "GitHub",
-    href: "https://github.com/shlokrj",
-    platform: "github",
-  },
-] as const;
+import { socialProfiles } from "@/app/site-data";
 
 const relevantCoursework = [
   {
@@ -225,48 +203,6 @@ function SectionDivider({ label }: Readonly<{ label: string }>) {
   );
 }
 
-function SunIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-      viewBox="0 0 24 24"
-    >
-      <circle cx="12" cy="12" r="4" />
-      <path d="M12 2v2" />
-      <path d="M12 20v2" />
-      <path d="m4.93 4.93 1.41 1.41" />
-      <path d="m17.66 17.66 1.41 1.41" />
-      <path d="M2 12h2" />
-      <path d="M20 12h2" />
-      <path d="m6.34 17.66-1.41 1.41" />
-      <path d="m19.07 4.93-1.41 1.41" />
-    </svg>
-  );
-}
-
-function MoonIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-5 w-5"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-      viewBox="0 0 24 24"
-    >
-      <path d="M20.99 12.52A8.5 8.5 0 1 1 11.48 3.01 6.5 6.5 0 0 0 20.99 12.52Z" />
-    </svg>
-  );
-}
-
 function ProjectCard({ project }: Readonly<{ project: Project }>) {
   return (
     <Link
@@ -327,36 +263,6 @@ function ProjectCard({ project }: Readonly<{ project: Project }>) {
   );
 }
 
-function SocialIcon({ platform }: Readonly<{ platform: "linkedin" | "github" }>) {
-  if (platform === "linkedin") {
-    return (
-      <svg aria-hidden="true" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.03-1.85-3.03-1.85 0-2.13 1.44-2.13 2.93v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm1.78 13.02H3.56V9h3.56v11.45Z" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg aria-hidden="true" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.17c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.16 1.18a10.98 10.98 0 0 1 5.75 0C17.04 4.9 18 5.21 18 5.21c.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.42-2.69 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.18c0 .31.21.67.79.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
-    </svg>
-  );
-}
-
-function getPreferredTheme(): Theme {
-  const savedTheme = globalThis.localStorage.getItem("theme");
-
-  return savedTheme === "light" || savedTheme === "dark"
-    ? savedTheme
-    : "light";
-}
-
-function applyTheme(theme: Theme) {
-  document.documentElement.dataset.theme = theme;
-  document.documentElement.style.colorScheme = theme;
-  globalThis.localStorage.setItem("theme", theme);
-}
-
 export default function Home() {
   const [isResumePreviewOpen, setIsResumePreviewOpen] = useState(false);
   const [hasResumePreviewOpened, setHasResumePreviewOpened] = useState(false);
@@ -371,49 +277,7 @@ export default function Home() {
     el.classList.add("fireplace-name__flare-active");
   };
 
-  useEffect(() => {
-    applyTheme(getPreferredTheme());
-  }, []);
-
-  const toggleTheme = () => {
-    const currentTheme = document.documentElement.dataset.theme;
-    const nextTheme: Theme = currentTheme === "light" ? "dark" : "light";
-
-    applyTheme(nextTheme);
-  };
-
   useScrollLens();
-
-  const scrollToTop = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-
-    document.documentElement.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  const scrollToSection = (
-    event: React.MouseEvent<HTMLAnchorElement>,
-    sectionId: string,
-  ) => {
-    event.preventDefault();
-
-    const section = document.getElementById(sectionId);
-    if (!section) return;
-
-    const isLongSection = section.getBoundingClientRect().height > globalThis.innerHeight * 0.84;
-
-    section.scrollIntoView({
-      behavior: "smooth",
-      block: isLongSection ? "start" : "center",
-    });
-  };
 
   const scrollToExperience = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -436,61 +300,17 @@ export default function Home() {
   };
 
   return (
-    <main className="site-shell relative overflow-hidden px-6 py-8 sm:px-10 sm:py-10">
-      <div id="top" />
+    <main className="site-shell relative overflow-hidden px-6 pb-10 pt-20 sm:px-10 sm:pb-10 sm:pt-24">
       <div className="site-ambient pointer-events-none absolute inset-0" />
       <div className="site-glow pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
-      <button
-        type="button"
-        onClick={toggleTheme}
-        aria-label="Toggle color theme"
-        title="Toggle color theme"
-        className="control-button fixed right-4 top-4 z-30 flex h-11 w-11 items-center justify-center rounded-full border backdrop-blur transition duration-200 ease-out hover:-translate-y-0.5 sm:right-6 sm:top-6"
-      >
-        <span className="theme-toggle__icon theme-toggle__sun">
-          <SunIcon />
-        </span>
-        <span className="theme-toggle__icon theme-toggle__moon">
-          <MoonIcon />
-        </span>
-      </button>
+      <FloatingNav />
 
       <div className="relative mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8">
-        <nav className="sticky top-3 z-10 mx-auto mb-4 flex w-full justify-center">
-          <div className="nav-panel flex flex-wrap items-center justify-center gap-3 rounded-full border px-4 py-3 text-sm uppercase tracking-[0.24em] backdrop-blur sm:px-6">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={`#${item.href}`}
-                onClick={(event) => scrollToSection(event, item.href)}
-                className="nav-link rounded-full px-2 py-1 transition duration-200 ease-out hover:-translate-y-0.5"
-              >
-                {item.label}
-              </a>
-            ))}
-            <span className="nav-socials flex items-center gap-1">
-              {socialProfiles.map((profile) => (
-                <a
-                  key={profile.platform}
-                  href={profile.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Open Shlok Jadhav's ${profile.label}`}
-                  title={profile.label}
-                  className="nav-social-link"
-                >
-                  <SocialIcon platform={profile.platform} />
-                </a>
-              ))}
-            </span>
-          </div>
-        </nav>
-
         <SectionDivider label="Home" />
 
         <section
           id="home"
-          className="hero-panel scroll-lens-section scroll-mt-24 w-full rounded-[2rem] border px-8 py-12 backdrop-blur sm:px-12 sm:py-16"
+          className="hero-panel scroll-lens-section w-full rounded-[2rem] border px-8 py-12 backdrop-blur sm:px-12 sm:py-16"
         >
           <div className="grid gap-8 xl:grid-cols-[1.35fr_1fr] xl:items-start">
             <div className="flex h-full flex-col justify-between gap-10">
@@ -589,7 +409,7 @@ export default function Home() {
 
         <section
           id="projects"
-          className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
           <div className="project-section__intro">
             <div>
@@ -617,7 +437,7 @@ export default function Home() {
 
         <section
           id="experience"
-          className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
           <p className="eyebrow text-xs uppercase tracking-[0.32em]">
             Experience
@@ -700,7 +520,7 @@ export default function Home() {
 
         <section
           id="courses"
-          className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
           <p className="eyebrow text-xs uppercase tracking-[0.32em]">
             Courses
@@ -751,7 +571,7 @@ export default function Home() {
 
         <section
           id="awards"
-          className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
           <p className="eyebrow text-xs uppercase tracking-[0.32em]">
             Awards
@@ -868,7 +688,7 @@ export default function Home() {
 
         <section
           id="about-me"
-          className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
           <div className="about-top-grid grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="sub-panel about-copy-panel rounded-[1.5rem] border p-6">
@@ -994,7 +814,7 @@ export default function Home() {
 
         <section
           id="contact"
-          className="theme-panel scroll-lens-section scroll-mt-24 w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
           <p className="eyebrow text-xs uppercase tracking-[0.32em]">
             Contact
@@ -1155,62 +975,7 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="site-footer scroll-lens-section">
-          <div className="site-footer__socials" aria-label="Social links">
-            {socialProfiles.map((profile) => (
-              <a
-                key={profile.platform}
-                href={profile.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Open Shlok Jadhav's ${profile.label}`}
-                title={profile.label}
-                className="site-footer__social"
-              >
-                <SocialIcon platform={profile.platform} />
-              </a>
-            ))}
-          </div>
-
-          <nav className="site-footer__nav" aria-label="Footer navigation">
-            {navItems.map((item) => (
-              <a key={item.href} href={`#${item.href}`} className="site-footer__link">
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="site-footer__meta">
-            <p className="site-footer__name">Shlok Jadhav</p>
-            <p className="site-footer__detail">
-              Computer Science & Data Science @ UW-Madison
-            </p>
-          </div>
-
-          <div className="site-footer__actions">
-            <a href="mailto:srjadhav2@wisc.edu" className="site-footer__pill">
-              Email
-            </a>
-            <a
-              href="/documents/Shlok_Jadhav_Resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="site-footer__pill"
-            >
-              Resume
-            </a>
-          </div>
-        </footer>
       </div>
-
-      <a
-        href="#top"
-        aria-label="Back to top"
-        onClick={scrollToTop}
-        className="control-button fixed bottom-6 right-6 z-20 flex h-12 w-12 items-center justify-center rounded-full border text-2xl backdrop-blur transition duration-200 ease-out hover:-translate-y-0.5"
-      >
-        ↑
-      </a>
     </main>
   );
 }
