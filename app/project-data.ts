@@ -11,6 +11,7 @@ export type Project = {
   summary: string;
   description: string;
   technologies: string[];
+  cardTechnologies: string[];
   highlights: { label: string; detail: string }[];
   links: ProjectLink[];
   image?: {
@@ -47,6 +48,7 @@ export const projects: Project[] = [
       "Mach APIs",
       "IOKit",
     ],
+    cardTechnologies: ["Swift", "Mach APIs", "SQLite"],
     highlights: [
       {
         label: "Live system view",
@@ -103,6 +105,7 @@ export const projects: Project[] = [
       "OpenCV",
       "Grad-CAM",
     ],
+    cardTechnologies: ["PyTorch", "OpenCV", "Grad-CAM"],
     highlights: [
       {
         label: "Explainable predictions",
@@ -154,6 +157,7 @@ export const projects: Project[] = [
       "Skyfield",
       "Open-Meteo",
     ],
+    cardTechnologies: ["Python", "Skyfield", "Open-Meteo"],
     highlights: [
       {
         label: "Local sky report",
@@ -202,6 +206,7 @@ export const projects: Project[] = [
       "AppleScript",
       "Pillow",
     ],
+    cardTechnologies: ["MediaPipe", "OpenCV", "AppleScript"],
     highlights: [
       {
         label: "Real-time tracking",

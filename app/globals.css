@@ -750,22 +750,6 @@ html[data-theme="light"] .theme-toggle__moon {
   background: #07090b;
 }
 
-.project-card__number {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  z-index: 2;
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  border-radius: 999px;
-  background: rgba(10, 11, 13, 0.72);
-  padding: 0.34rem 0.48rem;
-  color: rgba(255, 255, 255, 0.74);
-  font-family: "Courier New", Courier, monospace;
-  font-size: 0.64rem;
-  letter-spacing: 0.08em;
-  backdrop-filter: blur(8px);
-}
-
 .project-card__reveal {
   position: absolute;
   inset: 0;

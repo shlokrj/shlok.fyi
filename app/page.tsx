@@ -267,7 +267,7 @@ function MoonIcon() {
   );
 }
 
-function ProjectCard({ project, index }: Readonly<{ project: Project; index: number }>) {
+function ProjectCard({ project }: Readonly<{ project: Project }>) {
   return (
     <Link
       aria-label={`Read more about ${project.name}`}
@@ -300,9 +300,8 @@ function ProjectCard({ project, index }: Readonly<{ project: Project; index: num
               </svg>
             </div>
           )}
-          <span className="project-card__number">0{index + 1}</span>
           <div className="project-card__reveal">
-            <span>Peek inside</span>
+            <span>What it does</span>
             <p>{project.highlights[0].detail}</p>
           </div>
         </div>
@@ -318,7 +317,7 @@ function ProjectCard({ project, index }: Readonly<{ project: Project; index: num
           </div>
           <p className="theme-muted project-card__summary">{project.summary}</p>
           <ul className="project-card__chips" aria-label={`${project.name} technologies`}>
-            {project.technologies.slice(0, 3).map((technology) => (
+            {project.cardTechnologies.map((technology) => (
               <li key={technology}>{technology}</li>
             ))}
           </ul>
@@ -608,8 +607,8 @@ export default function Home() {
           </div>
 
           <div className="project-grid mt-9">
-            {projects.map((project, index) => (
-              <ProjectCard index={index} key={project.slug} project={project} />
+            {projects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
         </section>
