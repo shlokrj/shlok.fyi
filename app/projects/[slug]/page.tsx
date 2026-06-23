@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   if (!project) return {};
 
   return {
-    title: `${project.name} — Shlok Jadhav`,
+    title: `Shlok Jadhav - ${project.name}`,
     description: project.summary,
   };
 }
