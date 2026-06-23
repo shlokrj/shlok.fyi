@@ -190,6 +190,33 @@ function clearScrollLens(elements: HTMLElement[]) {
   elements.forEach((el) => el.classList.remove("scroll-lens-active", "scroll-lens-resting"));
 }
 
+function SectionBreak() {
+  return (
+    <div aria-hidden="true" className="section-break mx-auto w-full max-w-4xl px-4">
+      <div className="section-break__line" />
+    </div>
+  );
+}
+
+function SectionHeading({
+  title,
+  description,
+}: Readonly<{
+  title: string;
+  description: string;
+}>) {
+  return (
+    <div className="section-heading">
+      <h2 className="theme-heading section-heading__title text-4xl leading-tight sm:text-5xl">
+        {title}
+      </h2>
+      <p className="section-heading__note mt-2 max-w-2xl text-sm leading-6 sm:text-base">
+        {description}
+      </p>
+    </div>
+  );
+}
+
 function ProjectCard({ project }: Readonly<{ project: Project }>) {
   return (
     <Link
@@ -390,13 +417,16 @@ export default function Home() {
           </div>
         </section>
 
+        <SectionBreak />
+
         <section
           id="projects"
           className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
-          <h2 className="theme-heading text-4xl leading-tight sm:text-5xl">
-            Projects
-          </h2>
+          <SectionHeading
+            title="Projects"
+            description="A compact look at the systems, ML tools, and apps I’ve been building."
+          />
 
           <div className="project-grid mt-9">
             {projects.map((project) => (
@@ -405,13 +435,16 @@ export default function Home() {
           </div>
         </section>
 
+        <SectionBreak />
+
         <section
           id="experience"
           className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
-          <h2 className="theme-heading text-4xl leading-tight sm:text-5xl">
-            Experience
-          </h2>
+          <SectionHeading
+            title="Experience"
+            description="Work, research, and campus roles that shape how I build and collaborate."
+          />
 
           <div className="experience-timeline mt-9 grid gap-4">
             {professionalExperience.map((experience) => (
@@ -480,18 +513,16 @@ export default function Home() {
 
         </section>
 
+        <SectionBreak />
+
         <section
           id="courses"
           className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
-          <h2 className="theme-heading text-4xl leading-tight sm:text-5xl">
-            Relevant Coursework
-          </h2>
-          <p className="theme-muted mt-4 max-w-3xl text-lg leading-8">
-            Supporting my{" "}
-            <span className="font-semibold">Computer Science</span> and{" "}
-            <span className="font-semibold">Data Science</span> focus.
-          </p>
+          <SectionHeading
+            title="Relevant Coursework"
+            description="Classes supporting my Computer Science and Data Science focus."
+          />
 
           <div className="coursework-grid mt-9 grid gap-7 lg:grid-cols-3">
             {relevantCoursework.map((semester) => (
@@ -524,13 +555,16 @@ export default function Home() {
           </div>
         </section>
 
+        <SectionBreak />
+
         <section
           id="awards"
           className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
-          <h2 className="theme-heading text-4xl leading-tight sm:text-5xl">
-            Awards
-          </h2>
+          <SectionHeading
+            title="Awards"
+            description="Recognition from competitions and teams I’ve been lucky to build with."
+          />
 
           <div className="award-feature-entry mt-9">
             <article
@@ -633,14 +667,21 @@ export default function Home() {
           </div>
         </section>
 
+        <SectionBreak />
+
         <section
           id="about-me"
           className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
-          <div className="about-top-grid grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+          <SectionHeading
+            title="About Me"
+            description="A little context on who I am outside the project cards and resume bullets."
+          />
+
+          <div className="about-top-grid mt-9 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="sub-panel about-copy-panel rounded-[1.5rem] border p-6">
               <p className="eyebrow text-xs uppercase tracking-[0.32em]">
-                About Me
+                Background
               </p>
               <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
                 Hi! My name is Shlok Jadhav,
@@ -757,14 +798,18 @@ export default function Home() {
           </div>
         </section>
 
+        <SectionBreak />
+
         <section
           id="contact"
           className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
-          <p className="eyebrow text-xs uppercase tracking-[0.32em]">
-            Contact
-          </p>
-          <div className="mt-5 grid gap-5 sm:grid-cols-2">
+          <SectionHeading
+            title="Contact"
+            description="Email, profiles, and resume links if you want to reach out."
+          />
+
+          <div className="mt-9 grid gap-5 sm:grid-cols-2">
             <div className="contact-card">
               <p className="theme-soft text-sm uppercase tracking-[0.24em]">
                 Personal

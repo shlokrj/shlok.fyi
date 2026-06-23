@@ -79,6 +79,9 @@
   --nav-item-border: rgba(255, 205, 190, 0.14);
   --nav-utility-background: rgba(255, 205, 190, 0.052);
   --nav-utility-border: rgba(255, 205, 190, 0.13);
+  --section-break-line: rgba(255, 188, 160, 0.25);
+  --section-heading-rule: rgba(255, 188, 160, 0.68);
+  --section-heading-copy: rgba(214, 211, 209, 0.62);
 }
 
 [data-theme="light"] {
@@ -160,6 +163,9 @@
   --nav-item-border: rgba(98, 57, 42, 0.13);
   --nav-utility-background: rgba(149, 41, 30, 0.038);
   --nav-utility-border: rgba(98, 57, 42, 0.13);
+  --section-break-line: rgba(118, 48, 35, 0.2);
+  --section-heading-rule: rgba(149, 41, 30, 0.52);
+  --section-heading-copy: rgba(72, 51, 44, 0.58);
 }
 
 @theme inline {
@@ -205,6 +211,42 @@ a {
 
 .site-glow {
   background: var(--center-glow);
+}
+
+.section-break {
+  color: var(--section-break-line);
+}
+
+.section-break__line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor 18%, currentColor 82%, transparent);
+  box-shadow: 0 0 18px currentColor;
+  opacity: 0.75;
+}
+
+.section-heading {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.section-heading::before {
+  position: absolute;
+  top: 0.38rem;
+  bottom: 0.32rem;
+  left: 0;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--section-heading-rule), transparent);
+  content: "";
+}
+
+.section-heading__title {
+  letter-spacing: -0.035em;
+}
+
+.section-heading__note {
+  color: var(--section-heading-copy);
+  font-style: italic;
 }
 
 .theme-panel {
