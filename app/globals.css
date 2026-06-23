@@ -506,16 +506,22 @@ a {
   min-width: 0;
   align-items: center;
   justify-self: start;
-  gap: 0.46rem;
+  justify-content: center;
+  width: clamp(9.4rem, 12vw, 10.6rem);
+  min-height: 2.38rem;
+  border-radius: 999px;
+  background: var(--nav-utility-background);
+  padding: 0.16rem;
+  box-shadow: inset 0 0 0 1px var(--nav-utility-border);
 }
 
 .floating-nav__brand {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.15rem;
-  border-radius: 0.7rem;
-  padding: 0 0.36rem;
+  min-height: 1.95rem;
+  border-radius: 999px;
+  padding: 0 0.7rem;
   color: var(--heading);
   font-size: clamp(1rem, 1vw, 1.08rem);
   font-weight: 700;
@@ -568,8 +574,10 @@ a {
 }
 
 .floating-nav__actions {
-  justify-content: flex-end;
+  justify-content: center;
   justify-self: end;
+  width: clamp(9.4rem, 12vw, 10.6rem);
+  min-height: 2.38rem;
   gap: 0.06rem;
   border-radius: 999px;
   background: var(--nav-utility-background);
@@ -2473,6 +2481,16 @@ html[data-theme="light"] .theme-toggle__moon {
 
   .floating-nav__actions {
     justify-self: end;
+    width: auto;
+    min-height: 0;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .floating-nav__identity {
+    width: auto;
+    min-height: 0;
     background: transparent;
     padding: 0;
     box-shadow: none;
