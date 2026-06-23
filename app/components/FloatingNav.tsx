@@ -105,8 +105,6 @@ export function FloatingNav() {
     applyTheme(currentTheme === "light" ? "dark" : "light");
   };
 
-  const activeLabel = navItems.find(({ id }) => id === activeSection)?.label ?? "Home";
-
   return (
     <header className="floating-nav-shell" ref={shellRef}>
       <div className="floating-nav-shell__inner">
@@ -116,7 +114,7 @@ export function FloatingNav() {
           href="#home"
           onClick={(event) => scrollToSection(event, "home")}
         >
-          SJ
+          Shlok
         </a>
 
         <nav aria-label="Primary navigation" className="floating-nav__desktop">
@@ -170,9 +168,16 @@ export function FloatingNav() {
             onClick={() => setIsMenuOpen((open) => !open)}
             type="button"
           >
-            <span>{activeLabel}</span>
+            <span>{isMenuOpen ? "Close" : "Menu"}</span>
             <svg aria-hidden="true" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" viewBox="0 0 24 24">
-              <path d="M4 8h16M4 16h16" />
+              {isMenuOpen ? (
+                <>
+                  <path d="M6 6l12 12" />
+                  <path d="M18 6 6 18" />
+                </>
+              ) : (
+                <path d="M4 8h16M4 16h16" />
+              )}
             </svg>
           </button>
         </div>
@@ -196,6 +201,30 @@ export function FloatingNav() {
                 </svg>
               </a>
             ))}
+          </div>
+          <div className="floating-nav__menu-socials" role="group" aria-label="Social profiles and display controls">
+            {socialProfiles.map((profile) => (
+              <a
+                key={profile.platform}
+                href={profile.href}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <SocialIcon platform={profile.platform} />
+                <span>{profile.label}</span>
+              </a>
+            ))}
+            <button
+              className="floating-nav__menu-theme"
+              onClick={toggleTheme}
+              type="button"
+            >
+              <span className="floating-nav__menu-theme-icon">
+                <span className="theme-toggle__icon theme-toggle__sun"><SunIcon /></span>
+                <span className="theme-toggle__icon theme-toggle__moon"><MoonIcon /></span>
+              </span>
+              <span>Theme</span>
+            </button>
           </div>
         </nav>
       ) : null}

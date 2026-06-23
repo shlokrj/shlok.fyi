@@ -10,13 +10,13 @@ export const navItems = [
 
 export const socialProfiles = [
   {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/shlokjadhav/",
-    platform: "linkedin",
-  },
-  {
     label: "GitHub",
     href: "https://github.com/shlokrj",
     platform: "github",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/shlokjadhav/",
+    platform: "linkedin",
   },
 ] as const;
