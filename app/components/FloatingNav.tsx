@@ -117,22 +117,6 @@ export function FloatingNav() {
           >
             Shlok Jadhav
           </a>
-
-          <div className="floating-nav__socials" role="group" aria-label="Social profiles">
-            {socialProfiles.map((profile) => (
-              <a
-                key={profile.platform}
-                aria-label={`Open Shlok Jadhav's ${profile.label}`}
-                className="nav-social-link"
-                href={profile.href}
-                rel="noreferrer"
-                target="_blank"
-                title={profile.label}
-              >
-                <SocialIcon platform={profile.platform} />
-              </a>
-            ))}
-          </div>
         </div>
 
         <nav aria-label="Primary navigation" className="floating-nav__desktop">
@@ -150,6 +134,22 @@ export function FloatingNav() {
         </nav>
 
         <div className="floating-nav__actions">
+          <div className="floating-nav__socials" role="group" aria-label="Social profiles">
+            {socialProfiles.map((profile) => (
+              <a
+                key={profile.platform}
+                aria-label={`Open Shlok Jadhav's ${profile.label}`}
+                className="nav-social-link"
+                href={profile.href}
+                rel="noreferrer"
+                target="_blank"
+                title={profile.label}
+              >
+                <SocialIcon platform={profile.platform} />
+              </a>
+            ))}
+          </div>
+
           <button
             aria-label="Toggle color theme"
             className="floating-nav__theme"
