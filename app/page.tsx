@@ -425,7 +425,7 @@ export default function Home() {
         >
           <SectionHeading
             title="Projects"
-            description="A compact look at the systems, ML tools, and apps I’ve been building."
+            description="Some things that I’ve been building."
           />
 
           <div className="project-grid mt-9">
@@ -443,7 +443,7 @@ export default function Home() {
         >
           <SectionHeading
             title="Experience"
-            description="Work, research, and campus roles that shape how I build and collaborate."
+            description="Work, research, campus roles, and other professional experiences."
           />
 
           <div className="experience-timeline mt-9 grid gap-4">
@@ -520,8 +520,8 @@ export default function Home() {
           className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
           <SectionHeading
-            title="Relevant Coursework"
-            description="Classes supporting my Computer Science and Data Science focus."
+            title="Courses"
+            description="Relevant coursework supporting my Computer Science and Data Science focus."
           />
 
           <div className="coursework-grid mt-9 grid gap-7 lg:grid-cols-3">
@@ -563,7 +563,7 @@ export default function Home() {
         >
           <SectionHeading
             title="Awards"
-            description="Recognition from competitions and teams I’ve been lucky to build with."
+            description="Recognition from competitions and events."
           />
 
           <div className="award-feature-entry mt-9">
@@ -675,7 +675,7 @@ export default function Home() {
         >
           <SectionHeading
             title="About Me"
-            description="A little context on who I am outside the project cards and resume bullets."
+            description="A little bit more about me."
           />
 
           <div className="about-top-grid mt-9 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
