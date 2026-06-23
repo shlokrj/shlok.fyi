@@ -79,8 +79,6 @@
   --nav-item-border: rgba(255, 205, 190, 0.14);
   --nav-utility-background: rgba(255, 205, 190, 0.052);
   --nav-utility-border: rgba(255, 205, 190, 0.13);
-  --divider-line: rgba(255, 188, 160, 0.34);
-  --divider-text: rgba(255, 188, 160, 0.58);
 }
 
 [data-theme="light"] {
@@ -162,8 +160,6 @@
   --nav-item-border: rgba(98, 57, 42, 0.13);
   --nav-utility-background: rgba(149, 41, 30, 0.038);
   --nav-utility-border: rgba(98, 57, 42, 0.13);
-  --divider-line: rgba(118, 48, 35, 0.24);
-  --divider-text: rgba(118, 48, 35, 0.56);
 }
 
 @theme inline {
@@ -209,18 +205,6 @@ a {
 
 .site-glow {
   background: var(--center-glow);
-}
-
-.section-divider {
-  color: var(--divider-text);
-}
-
-.section-divider__line {
-  background: linear-gradient(90deg, transparent, var(--divider-line));
-}
-
-.section-divider__line--right {
-  background: linear-gradient(90deg, var(--divider-line), transparent);
 }
 
 .theme-panel {

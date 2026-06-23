@@ -190,19 +190,6 @@ function clearScrollLens(elements: HTMLElement[]) {
   elements.forEach((el) => el.classList.remove("scroll-lens-active", "scroll-lens-resting"));
 }
 
-function SectionDivider({ label }: Readonly<{ label: string }>) {
-  return (
-    <div
-      aria-hidden="true"
-      className="section-divider mx-auto flex w-full max-w-4xl items-center gap-4 px-4"
-    >
-      <div className="section-divider__line h-px flex-1" />
-      <span className="text-xs uppercase tracking-[0.38em]">{label}</span>
-      <div className="section-divider__line--right h-px flex-1" />
-    </div>
-  );
-}
-
 function ProjectCard({ project }: Readonly<{ project: Project }>) {
   return (
     <Link
@@ -306,8 +293,6 @@ export default function Home() {
       <FloatingNav />
 
       <div className="relative mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8">
-        <SectionDivider label="Home" />
-
         <section
           id="home"
           className="hero-panel scroll-lens-section w-full rounded-[2rem] border px-8 py-12 backdrop-blur sm:px-12 sm:py-16"
@@ -405,8 +390,6 @@ export default function Home() {
           </div>
         </section>
 
-        <SectionDivider label="Projects" />
-
         <section
           id="projects"
           className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
@@ -421,8 +404,6 @@ export default function Home() {
             ))}
           </div>
         </section>
-
-        <SectionDivider label="Experience" />
 
         <section
           id="experience"
@@ -499,8 +480,6 @@ export default function Home() {
 
         </section>
 
-        <SectionDivider label="Courses" />
-
         <section
           id="courses"
           className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
@@ -544,8 +523,6 @@ export default function Home() {
             ))}
           </div>
         </section>
-
-        <SectionDivider label="Awards" />
 
         <section
           id="awards"
@@ -655,8 +632,6 @@ export default function Home() {
             ))}
           </div>
         </section>
-
-        <SectionDivider label="About Me" />
 
         <section
           id="about-me"
@@ -781,8 +756,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <SectionDivider label="Contact" />
 
         <section
           id="contact"
