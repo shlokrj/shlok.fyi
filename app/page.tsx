@@ -411,19 +411,9 @@ export default function Home() {
           id="projects"
           className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
-          <div className="project-section__intro">
-            <div>
-              <p className="eyebrow text-xs uppercase tracking-[0.32em]">
-                Projects
-              </p>
-              <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
-                Things I&apos;ve built
-              </h2>
-            </div>
-            <p className="theme-muted max-w-xl text-base leading-7 sm:text-lg sm:leading-8">
-              Some of my personal projects that I&apos;ve worked on. <br />Hover for a peek or click to read more!
-            </p>
-          </div>
+          <h2 className="theme-heading text-4xl leading-tight sm:text-5xl">
+            Projects
+          </h2>
 
           <div className="project-grid mt-9">
             {projects.map((project) => (
@@ -438,15 +428,9 @@ export default function Home() {
           id="experience"
           className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
-          <p className="eyebrow text-xs uppercase tracking-[0.32em]">
+          <h2 className="theme-heading text-4xl leading-tight sm:text-5xl">
             Experience
-          </p>
-          <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
-            Work &amp; Leadership
           </h2>
-          <p className="theme-muted mt-4 max-w-3xl text-lg leading-8">
-            Roles across internships, work, and leadership opportunities.
-          </p>
 
           <div className="experience-timeline mt-9 grid gap-4">
             {professionalExperience.map((experience) => (
@@ -521,18 +505,13 @@ export default function Home() {
           id="courses"
           className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
-          <p className="eyebrow text-xs uppercase tracking-[0.32em]">
-            Courses
-          </p>
-          <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
+          <h2 className="theme-heading text-4xl leading-tight sm:text-5xl">
             Relevant Coursework
           </h2>
           <p className="theme-muted mt-4 max-w-3xl text-lg leading-8">
-            Selected courses supporting my 
-              {" "}<span className="font-semibold">Computer Science</span>{" "}
-              and
-              {" "}<span className="font-semibold">Data Science</span>{" "}
-              focus.
+            Supporting my{" "}
+            <span className="font-semibold">Computer Science</span> and{" "}
+            <span className="font-semibold">Data Science</span> focus.
           </p>
 
           <div className="coursework-grid mt-9 grid gap-7 lg:grid-cols-3">
@@ -572,15 +551,9 @@ export default function Home() {
           id="awards"
           className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
         >
-          <p className="eyebrow text-xs uppercase tracking-[0.32em]">
+          <h2 className="theme-heading text-4xl leading-tight sm:text-5xl">
             Awards
-          </p>
-          <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
-            Honors &amp; Recognition
           </h2>
-          <p className="theme-muted mt-4 max-w-3xl text-lg leading-8">
-            Recognition for building and competing in STEM-related competitions.
-          </p>
 
           <div className="award-feature-entry mt-9">
             <article
