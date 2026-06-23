@@ -108,14 +108,32 @@ export function FloatingNav() {
   return (
     <header className="floating-nav-shell" ref={shellRef}>
       <div className="floating-nav-shell__inner">
-        <a
-          aria-label="Go to home"
-          className="floating-nav__brand"
-          href="#home"
-          onClick={(event) => scrollToSection(event, "home")}
-        >
-          Shlok
-        </a>
+        <div className="floating-nav__identity">
+          <a
+            aria-label="Go to home"
+            className="floating-nav__brand"
+            href="#home"
+            onClick={(event) => scrollToSection(event, "home")}
+          >
+            Shlok Jadhav
+          </a>
+
+          <div className="floating-nav__socials" role="group" aria-label="Social profiles">
+            {socialProfiles.map((profile) => (
+              <a
+                key={profile.platform}
+                aria-label={`Open Shlok Jadhav's ${profile.label}`}
+                className="nav-social-link"
+                href={profile.href}
+                rel="noreferrer"
+                target="_blank"
+                title={profile.label}
+              >
+                <SocialIcon platform={profile.platform} />
+              </a>
+            ))}
+          </div>
+        </div>
 
         <nav aria-label="Primary navigation" className="floating-nav__desktop">
           {navItems.map((item) => (
@@ -132,22 +150,6 @@ export function FloatingNav() {
         </nav>
 
         <div className="floating-nav__actions">
-          <div className="floating-nav__socials">
-            {socialProfiles.map((profile) => (
-              <a
-                key={profile.platform}
-                aria-label={`Open Shlok Jadhav's ${profile.label}`}
-                className="nav-social-link"
-                href={profile.href}
-                rel="noreferrer"
-                target="_blank"
-                title={profile.label}
-              >
-                <SocialIcon platform={profile.platform} />
-              </a>
-            ))}
-          </div>
-
           <button
             aria-label="Toggle color theme"
             className="floating-nav__theme"
