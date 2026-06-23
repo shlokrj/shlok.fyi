@@ -5,6 +5,19 @@ import { SocialIcon } from "@/app/components/SocialIcon";
 import { navItems, socialProfiles } from "@/app/site-data";
 
 type Theme = "dark" | "light";
+type NavSectionId = (typeof navItems)[number]["id"];
+type FloatingNavProps = {
+  contextSection?: NavSectionId;
+};
+
+function getSectionHref(sectionId: NavSectionId) {
+  return `/#${sectionId}`;
+}
+
+function getPageBackedSection(pathname: string): NavSectionId | null {
+  if (pathname.startsWith("/projects")) return "projects";
+  return null;
+}
 
 function SunIcon() {
   return (
@@ -29,16 +42,27 @@ function applyTheme(theme: Theme) {
   globalThis.localStorage.setItem("theme", theme);
 }
 
-export function FloatingNav() {
-  const [activeSection, setActiveSection] = useState<(typeof navItems)[number]["id"]>("home");
+export function FloatingNav({ contextSection }: Readonly<FloatingNavProps> = {}) {
+  const [activeSection, setActiveSection] = useState<NavSectionId>(contextSection ?? "home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const shellRef = useRef<HTMLElement | null>(null);
   const toggleRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     const updateActiveSection = () => {
+      const pageBackedSection = contextSection ?? getPageBackedSection(globalThis.location.pathname);
+      if (pageBackedSection) {
+        setActiveSection(pageBackedSection);
+        return;
+      }
+
+      if (globalThis.location.pathname !== "/") {
+        setActiveSection("home");
+        return;
+      }
+
       const focusLine = globalThis.innerHeight * 0.34;
-      let nextSection: (typeof navItems)[number]["id"] = "home";
+      let nextSection: NavSectionId = "home";
 
       navItems.forEach(({ id }) => {
         const section = document.getElementById(id);
@@ -63,7 +87,7 @@ export function FloatingNav() {
       globalThis.removeEventListener("scroll", updateActiveSection);
       globalThis.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [contextSection]);
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -89,14 +113,14 @@ export function FloatingNav() {
     };
   }, [isMenuOpen]);
 
-  const scrollToSection = (event: MouseEvent<HTMLAnchorElement>, sectionId: (typeof navItems)[number]["id"]) => {
-    event.preventDefault();
+  const scrollToSection = (event: MouseEvent<HTMLAnchorElement>, sectionId: NavSectionId) => {
     const section = document.getElementById(sectionId);
-    if (!section) return;
+    if (!section || globalThis.location.pathname !== "/") return;
 
+    event.preventDefault();
     setIsMenuOpen(false);
     setActiveSection(sectionId);
-    globalThis.history.replaceState(null, "", `#${sectionId}`);
+    globalThis.history.replaceState(null, "", getSectionHref(sectionId));
     section.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -112,7 +136,7 @@ export function FloatingNav() {
           <a
             aria-label="Go to home"
             className="floating-nav__brand"
-            href="#home"
+            href={getSectionHref("home")}
             onClick={(event) => scrollToSection(event, "home")}
           >
             Shlok Jadhav
@@ -125,7 +149,7 @@ export function FloatingNav() {
               key={item.id}
               aria-current={activeSection === item.id ? "location" : undefined}
               className="nav-link"
-              href={`#${item.id}`}
+              href={getSectionHref(item.id)}
               onClick={(event) => scrollToSection(event, item.id)}
             >
               {item.label}
@@ -193,7 +217,7 @@ export function FloatingNav() {
                 key={item.id}
                 aria-current={activeSection === item.id ? "location" : undefined}
                 className="nav-link"
-                href={`#${item.id}`}
+                href={getSectionHref(item.id)}
                 onClick={(event) => scrollToSection(event, item.id)}
               >
                 <span>{item.label}</span>

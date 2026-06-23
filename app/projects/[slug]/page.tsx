@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FloatingNav } from "@/app/components/FloatingNav";
 import { getProject, projects } from "@/app/project-data";
 
 type ProjectPageProps = {
@@ -46,8 +47,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project) notFound();
 
   return (
-    <main className="project-detail-shell min-h-screen px-6 py-8 sm:px-10 sm:py-10">
+    <main className="project-detail-shell min-h-screen px-6 pb-8 pt-20 sm:px-10 sm:pb-10 sm:pt-24">
       <div className="site-ambient pointer-events-none fixed inset-0" />
+      <FloatingNav contextSection="projects" />
       <article className="project-detail relative mx-auto w-full max-w-5xl">
         <Link className="project-detail__back" href="/#projects">
           <svg aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
