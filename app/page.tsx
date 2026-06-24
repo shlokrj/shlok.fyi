@@ -678,81 +678,56 @@ export default function Home() {
             description="A little bit more about me."
           />
 
-          <div className="about-top-grid mt-9 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="sub-panel about-copy-panel rounded-[1.5rem] border p-6">
-              <p className="eyebrow text-xs uppercase tracking-[0.32em]">
-                Background
-              </p>
-              <h2 className="theme-heading mt-4 text-4xl leading-tight sm:text-5xl">
-                Hi! My name is Shlok Jadhav,
-              </h2>
-              <p className="theme-muted mt-5 max-w-2xl text-lg leading-8">
-                and I am a Computer Science and Data Science student at the University of Wisconsin-Madison.
-                I was born and raised in San Ramon, California, which is in the Bay Area. 
-                I moved to Wisconsin for college in 2025, and despite the cold, I&apos;ve really enjoyed my time here so far!
-              </p>
-            </div>
+          <div className="sub-panel about-copy-panel mt-9 rounded-[1.5rem] border p-6 sm:p-8">
+            <p className="theme-muted max-w-3xl text-lg leading-8">
+              I realized pretty early on that college isn&apos;t just about classes and grades for me, but it&apos;s also a lifestyle and what you make of it.
+              Outside of class, I&apos;m involved in research and a few student orgs on campus, and I also love to build projects for fun.
+              I love keeping myself busy, and I&apos;m a firm believer that there are always things to learn, people to meet, places to explore, etc.
+            </p>
 
-            <div className="sub-panel about-photo-panel rounded-[1.5rem] border p-5">
-              <div className="placeholder-panel about-photo relative overflow-hidden rounded-[1.2rem] border">
-                <Image
-                  src="/profile-top.jpeg"
-                  alt="Shlok Jadhav portrait for the about-me section"
-                  fill
-                  sizes="(min-width: 1024px) 24rem, (min-width: 640px) 34rem, calc(100vw - 5rem)"
-                  className="object-cover object-[50%_65%]"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="about-more-actions mt-6">
-            <button
-              type="button"
-              className={`about-more-toggle${isAboutMoreOpen ? " about-more-toggle--open" : ""}`}
-              aria-expanded={isAboutMoreOpen}
-              aria-controls="about-more"
-              onClick={() => setIsAboutMoreOpen((open) => !open)}
+            <div
+              id="about-more"
+              className={`about-more${isAboutMoreOpen ? " about-more--open" : ""}`}
+              aria-hidden={!isAboutMoreOpen}
             >
-              {isAboutMoreOpen ? "Show less" : "Read more"}
-              <svg
-                aria-hidden="true"
-                className="about-more-toggle__icon h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                viewBox="0 0 24 24"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            </button>
-          </div>
-
-          <div
-            id="about-more"
-            className={`about-more${isAboutMoreOpen ? " about-more--open" : ""}`}
-            aria-hidden={!isAboutMoreOpen}
-          >
-            <div className="about-more__inner">
-              <div className="about-more__content">
-                <p className="theme-muted text-base leading-8">
-                  I realized pretty early on that college isn&apos;t just about classes and grades for me, but it&apos;s also a lifestyle and what you make of it.
-                  Outside of class, I&apos;m involved in research and a few student orgs on campus, and I also love to build projects for fun.
-                  I love keeping myself busy, and I&apos;m a firm believer that there are always things to learn, people to meet, places to explore, etc.
-                </p>
-                <p className="theme-muted mt-4 text-base leading-8">
-                  In my free time, I like to stay busy with a mix of hobbies. 
-                  Music is a big part of my day, and I&apos;ve been listening to artists like greek, Luna Li, Osamason, and slayr lately.
-                  I also enjoy playing video games, something that&apos;s been part of my life since I was young, from playing on my sister&apos;s DS to our family Wii.
-                  I&apos;m a huge Pokémon fan and can recognize almost every single one (maybe not so much anymore).
-                  Sports have been another constant in my life; I&apos;ve played and followed them for as long as I can remember.
-                  Basketball is probably my favorite sport, and I&apos;ve been a dedicated Golden State Warriors fan since I was a kid.
-                  For a little over a decade, I practiced Taekwondo, which shaped not just my work ethic but also a big part of who I am.
-                  Since starting college, I&apos;ve gotten into weightlifting and enjoy pushing toward new PRs.
-                  Outside of that, traveling has always been a major part of my life. 
-                  I&apos;ve been lucky to visit many different places growing up, and I&apos;m especially excited to explore countries like Egypt, Singapore, and Switzerland in the future.
-                </p>
+              <div className="about-more__inner">
+                <div className="about-more__content">
+                  <p className="theme-muted text-base leading-8">
+                    In my free time, I like to stay busy with a mix of hobbies.
+                    Music is a big part of my day, and what I&apos;m listening to changes pretty often.
+                    I also enjoy playing video games, something that&apos;s been part of my life since I was young, from playing on my sister&apos;s DS to our family Wii.
+                    I&apos;m a huge Pokémon fan and can recognize almost every single one (maybe not so much anymore).
+                    Sports have been another constant in my life; I&apos;ve played and followed them for as long as I can remember.
+                    Basketball is probably my favorite sport, and I&apos;ve been a dedicated Golden State Warriors fan since I was a kid.
+                    For a little over a decade, I practiced Taekwondo, which shaped not just my work ethic but also a big part of who I am.
+                    Since starting college, I&apos;ve gotten into weightlifting and enjoy pushing toward new PRs.
+                    Outside of that, traveling has always been a major part of my life.
+                    I&apos;ve been lucky to visit many different places growing up, and I&apos;m especially excited to explore countries like Egypt, Singapore, and Switzerland in the future.
+                  </p>
+                </div>
               </div>
+            </div>
+
+            <div className="about-more-actions">
+              <button
+                type="button"
+                className={`about-more-toggle${isAboutMoreOpen ? " about-more-toggle--open" : ""}`}
+                aria-expanded={isAboutMoreOpen}
+                aria-controls="about-more"
+                onClick={() => setIsAboutMoreOpen((open) => !open)}
+              >
+                {isAboutMoreOpen ? "Show less" : "Read more"}
+                <svg
+                  aria-hidden="true"
+                  className="about-more-toggle__icon h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
             </div>
           </div>
 
@@ -763,33 +738,22 @@ export default function Home() {
               </p>
               <h2 className="mt-4 text-4xl leading-tight sm:text-5xl">
                 <span className="album-accent font-bold">
-                  <em>ACCELERATOR</em>
+                  <em>Talk To You</em>
                 </span>{" "}
-                <span className="theme-heading">by </span>
-                <span className="theme-heading font-bold">
-                  greek
+                <br />
+                <span className="text-4xl theme-heading">by </span>
+                <span className="text-4xl theme-heading font-bold">
+                  ANOTR, 54 Ultra
                 </span>
               </h2>
-              <p className="theme-muted mt-5 max-w-xl text-lg leading-8">
-                <em>ACCELERATOR</em> has been one of my favorite albums since
-                its release in June 2024.
-                <br />
-                The album is a mix of Alternative R&amp;B, Contemporary R&amp;B,
-                and Bedroom Pop.
-              </p>
-              <p className="theme-soft mt-4 max-w-xl text-sm leading-7">
-                My personal favorite songs from the album are:
-                <br />
-                <em>HOUNDS</em>, <em>SOMEDAY</em>, and <em>RIVER</em>!
-              </p>
             </div>
 
             <div className="sub-panel about-media-panel overflow-hidden rounded-[1.5rem] border p-3">
               <iframe
-                title="Spotify album"
-                src="https://open.spotify.com/embed/album/3h1UIz988QtS6gjJciFVSu?utm_source=generator"
+                title="Spotify track"
+                src="https://open.spotify.com/embed/track/0kl6Ozan3fuUdCl6TlB15v?utm_source=generator"
                 width="100%"
-                height="352"
+                height="152"
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 loading="lazy"
                 className="rounded-[1rem]"

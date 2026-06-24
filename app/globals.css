@@ -31,7 +31,7 @@
   --link: rgba(255, 188, 160, 0.95);
   --link-border: rgba(255, 188, 160, 0.55);
   --accent: #ffec96;
-  --album-accent: #e36d2f;
+  --album-accent: #ffd45a;
   --shadow: rgba(26, 10, 5, 0.3);
   --shadow-strong: rgba(26, 10, 5, 0.45);
   --section-hover-border: rgba(255, 161, 104, 0.46);
@@ -115,7 +115,7 @@
   --link: rgba(149, 41, 30, 0.96);
   --link-border: rgba(149, 41, 30, 0.42);
   --accent: #7b5a00;
-  --album-accent: #b94a20;
+  --album-accent: #b98614;
   --shadow: rgba(98, 57, 42, 0.16);
   --shadow-strong: rgba(98, 57, 42, 0.2);
   --section-hover-border: rgba(191, 92, 48, 0.36);
@@ -312,6 +312,7 @@ a {
 .about-more-actions {
   display: flex;
   justify-content: flex-start;
+  margin-top: 1.15rem;
 }
 
 .about-more-toggle {
@@ -355,17 +356,20 @@ a {
 }
 
 .about-more__content {
-  border: 1px solid var(--panel-border);
-  border-radius: 1.1rem;
-  background: var(--subpanel-background);
-  margin-top: 1rem;
-  padding: 1.45rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--panel-border);
+  margin-top: 1.15rem;
+  padding-top: 1.15rem;
+  opacity: 0;
+  transform: translateY(-0.25rem);
   transition:
+    opacity 230ms ease,
     transform 230ms ease,
-    border-color 230ms ease,
-    box-shadow 230ms ease,
-    background 230ms ease;
+    border-color 230ms ease;
+}
+
+.about-more--open .about-more__content {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .focus-link {
@@ -2043,12 +2047,6 @@ html[data-theme="light"] .theme-toggle__moon {
 
   .about-more-toggle--open:hover .about-more-toggle__icon {
     transform: rotate(180deg) translateY(2px);
-  }
-
-  .about-more__content:hover {
-    border-color: var(--section-hover-border);
-    box-shadow: var(--experience-hover-shadow);
-    transform: translateY(-2px);
   }
 
   .focus-link:hover {
