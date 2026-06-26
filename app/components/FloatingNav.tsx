@@ -61,6 +61,12 @@ export function FloatingNav({ contextSection }: Readonly<FloatingNavProps> = {})
         return;
       }
 
+      const isNearPageBottom = globalThis.innerHeight + globalThis.scrollY >= document.documentElement.scrollHeight - 24;
+      if (isNearPageBottom) {
+        setActiveSection(navItems[navItems.length - 1].id);
+        return;
+      }
+
       const focusLine = globalThis.innerHeight * 0.34;
       let nextSection: NavSectionId = "home";
 

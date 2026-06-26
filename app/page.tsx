@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { FloatingNav } from "@/app/components/FloatingNav";
+import { SiteFooter } from "@/app/components/SiteFooter";
 import { SocialIcon } from "@/app/components/SocialIcon";
 import { projects, type Project } from "@/app/project-data";
 import { socialProfiles } from "@/app/site-data";
@@ -40,6 +41,41 @@ const relevantCoursework = [
     ],
   },
 ];
+
+const courseCatalog = relevantCoursework.flatMap((semester) =>
+  semester.courses.map((course) => ({
+    ...course,
+    term: semester.term,
+    status: semester.status,
+  })),
+);
+
+const skillGroups = [
+  {
+    title: "Languages",
+    skills: ["Python", "Java", "TypeScript", "JavaScript", "SQL", "C/C++", "C#", "R"],
+  },
+  {
+    title: "Frontend",
+    skills: ["React", "Next.js", "Tailwind CSS", "HTML/CSS", "Figma"],
+  },
+  {
+    title: "Backend & Data",
+    skills: ["FastAPI", "Node.js", "REST APIs", "SQLite", "Pandas", "NumPy"],
+  },
+  {
+    title: "ML & Computer Vision",
+    skills: ["PyTorch", "scikit-learn", "OpenCV", "MediaPipe", "SIFT/ORB", "RANSAC", "Random Forests", "Grad-CAM", "PCA/UMAP", "LSTMs"],
+  },
+  {
+    title: "Native & Systems",
+    skills: ["Swift", "SwiftUI", "AppKit", "Mach APIs", "IOKit", "Linux/Bash"],
+  },
+  {
+    title: "Tools & Workflow",
+    skills: ["Git/GitHub", "Vercel", "Feature engineering", "Model evaluation", "Human-in-the-loop", "Data visualization"],
+  },
+] as const;
 
 const professionalExperience = [
   {
@@ -132,9 +168,19 @@ const supportingAwards = [
   },
 ];
 
+const favoriteTracks = [
+  { id: "52OzG7Zg3jaHnm2hW4digD", title: "Dance With", artist: "Cosmo's Demos" },
+  { id: "31JYu7pbmUPDgAQIY8JOBy", title: "In The Afternoon", artist: "The Cardigans" },
+  { id: "0kl6Ozan3fuUdCl6TlB15v", title: "Talk To You (ft. 54 Ultra)", artist: "ANOTR, 54 Ultra" },
+  { id: "2zCMUto58AaDoROYt2JCxs", title: "HOUNDS", artist: "greek" },
+  { id: "5KbEOYfLdTaUxM8KKTvDJ9", title: "Og Ginobili", artist: "Che" },
+  { id: "3WVJfN1JmGewlDXGkQf0I4", title: "Havana", artist: "Pz'" },
+] as const;
+
 function useScrollLens() {
   useEffect(() => {
     let frame: number | null = globalThis.requestAnimationFrame(updateActiveSection);
+    let previousScrollY = globalThis.scrollY || globalThis.pageYOffset;
     const reduceMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     function updateActiveSection() {
@@ -144,6 +190,8 @@ function useScrollLens() {
       if (reduceMotion) { clearScrollLens(elements); return; }
 
       const scrollY = globalThis.scrollY || globalThis.pageYOffset;
+      const scrollingUp = scrollY < previousScrollY;
+      previousScrollY = scrollY;
       const atTop = scrollY <= 4;
       const atBottom = globalThis.innerHeight + scrollY >= document.documentElement.scrollHeight - 28;
       let activeIndex = 0;
@@ -164,6 +212,18 @@ function useScrollLens() {
       }
 
       elements.forEach((el, i) => {
+        const rect = el.getBoundingClientRect();
+        const visibleHeight = Math.max(0, Math.min(rect.bottom, globalThis.innerHeight) - Math.max(rect.top, 0));
+        const visibleRatio = visibleHeight / Math.min(Math.max(rect.height, 1), globalThis.innerHeight);
+        const centerDelta = (rect.top + rect.height * 0.5 - globalThis.innerHeight * 0.5) / globalThis.innerHeight;
+        const drift = Math.max(-24, Math.min(24, centerDelta * -28));
+        const inRevealBand = rect.top < globalThis.innerHeight * 0.92 && rect.bottom > globalThis.innerHeight * 0.08;
+
+        el.style.setProperty("--section-drift", `${drift.toFixed(2)}px`);
+        el.style.setProperty("--section-visibility", visibleRatio.toFixed(3));
+        el.classList.toggle("scroll-visible", inRevealBand);
+        el.classList.toggle("scroll-enter-up", inRevealBand && scrollingUp);
+        el.classList.toggle("scroll-enter-down", inRevealBand && !scrollingUp);
         el.classList.toggle("scroll-lens-active", i === activeIndex);
         el.classList.toggle("scroll-lens-resting", i !== activeIndex);
       });
@@ -187,7 +247,11 @@ function useScrollLens() {
 }
 
 function clearScrollLens(elements: HTMLElement[]) {
-  elements.forEach((el) => el.classList.remove("scroll-lens-active", "scroll-lens-resting"));
+  elements.forEach((el) => {
+    el.classList.remove("scroll-lens-active", "scroll-lens-resting", "scroll-visible", "scroll-enter-up", "scroll-enter-down");
+    el.style.removeProperty("--section-drift");
+    el.style.removeProperty("--section-visibility");
+  });
 }
 
 function SectionBreak() {
@@ -281,7 +345,9 @@ export default function Home() {
   const [isResumePreviewOpen, setIsResumePreviewOpen] = useState(false);
   const [hasResumePreviewOpened, setHasResumePreviewOpened] = useState(false);
   const [isAboutMoreOpen, setIsAboutMoreOpen] = useState(false);
+  const [activeTrackId, setActiveTrackId] = useState<(typeof favoriteTracks)[number]["id"]>(favoriteTracks[0].id);
   const nameFlareRef = useRef<HTMLSpanElement>(null);
+  const activeTrack = favoriteTracks.find((track) => track.id === activeTrackId) ?? favoriteTracks[0];
 
   const handleNameFlare = () => {
     const el = nameFlareRef.current;
@@ -292,6 +358,20 @@ export default function Home() {
   };
 
   useScrollLens();
+
+  useEffect(() => {
+    const reduceMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+
+    const cycle = globalThis.setInterval(() => {
+      setActiveTrackId((currentId) => {
+        const currentIndex = favoriteTracks.findIndex((track) => track.id === currentId);
+        return favoriteTracks[(currentIndex + 1) % favoriteTracks.length].id;
+      });
+    }, 7000);
+
+    return () => globalThis.clearInterval(cycle);
+  }, [activeTrackId]);
 
   const scrollToExperience = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -314,23 +394,23 @@ export default function Home() {
   };
 
   return (
-    <main className="site-shell relative overflow-hidden px-6 pb-10 pt-20 sm:px-10 sm:pb-10 sm:pt-24">
+    <main className="site-shell relative overflow-hidden px-6 pb-16 pt-20 sm:px-10 sm:pb-20 sm:pt-24">
       <div className="site-ambient pointer-events-none absolute inset-0" />
       <div className="site-glow pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
       <FloatingNav />
 
-      <div className="relative mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8">
+      <div className="page-flow relative mx-auto flex min-h-screen w-full max-w-6xl flex-col">
         <section
           id="home"
-          className="hero-panel scroll-lens-section w-full rounded-[2rem] border px-8 py-12 backdrop-blur sm:px-12 sm:py-16"
+          className="hero-section scroll-lens-section w-full"
         >
-          <div className="grid gap-8 xl:grid-cols-[1.35fr_1fr] xl:items-start">
-            <div className="flex h-full flex-col justify-between gap-10">
+          <div className="hero-grid grid gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(22rem,0.9fr)]">
+            <div className="hero-copy flex h-full flex-col gap-9">
               <div>
                 <p className="display-accent hero-intro">
                   Hello! My name is
                 </p>
-                <h1 className="fireplace-name mt-3 max-w-3xl text-[4.8rem] leading-[0.86] text-[var(--foreground)] sm:text-[6.25rem] xl:text-[7.9rem]">
+                <h1 className="fireplace-name hero-title mt-3 text-[var(--foreground)]">
                   <button
                     type="button"
                     onClick={handleNameFlare}
@@ -348,46 +428,45 @@ export default function Home() {
                 </h1>
               </div>
 
-              <p className="theme-muted max-w-[42rem] text-[1.25rem] leading-[1.7] sm:text-[1.45rem] xl:text-[1.7rem]">
+              <p className="hero-blurb theme-muted">
                 I&apos;m a{" "}
                 <span className="font-semibold">Computer Science</span>{" "}
                 and{" "}
                 <span className="font-semibold">Data Science</span>{" "}
                 student at{" "}
-                <span className="font-semibold">UW-Madison</span>{" "}
-                interested in building data-driven systems related to{" "}
+                <span className="font-semibold whitespace-nowrap">UW-Madison</span>, graduating in May 2028. I&apos;m interested in building data-driven systems related to{" "}
                 <span className="font-semibold">machine learning</span>,{" "}
                 <span className="font-semibold">computer vision</span>, and{" "}
-                <span className="font-semibold">applied research</span>. I enjoy turning real-world data into tools that are useful, visual, and meaningful. My expected graduation is in May 2028!
+                <span className="font-semibold">applied research</span>. I enjoy turning real-world data into useful, visual, and meaningful tools.
               </p>
             </div>
 
-            <div className="grid gap-5 xl:grid-rows-[1fr_auto]">
-              <div className="sub-panel home-photo-panel w-full rounded-[1.75rem] border p-4">
-                <div className="placeholder-panel home-photo relative h-full min-h-[18rem] overflow-hidden rounded-[1.35rem] border">
+            <div className="hero-side grid gap-5">
+              <div className="home-photo-panel w-full">
+                <div className="home-photo relative h-full min-h-[18rem] overflow-hidden">
                   <Image
                     src="/profile-top.jpeg"
                     alt="Shlok Jadhav portrait for the home section"
                     fill
                     priority
-                    sizes="(min-width: 1280px) 28rem, (min-width: 640px) 34rem, calc(100vw - 5rem)"
-                    className="object-cover object-[50%_65%]"
+                    sizes="(min-width: 1280px) 30rem, (min-width: 640px) 28rem, calc(100vw - 5rem)"
+                    className="object-cover object-[50%_52%]"
                   />
                 </div>
               </div>
 
-              <div className="sub-panel focus-panel rounded-[1.5rem] border p-5">
+              <div className="focus-panel">
                 <p className="eyebrow text-xs uppercase tracking-[0.3em]">
                   Current Focus
                 </p>
-                <p className="theme-heading mt-3 text-[2rem] leading-[1.1] sm:text-[2.3rem]">
+                <p className="theme-heading focus-heading">
                   Looking for
                   <br />
-                  <span className="theme-accent">
+                  <span className="theme-accent focus-heading__target">
                     <em>Summer 2027 Internships</em>
                   </span>
                 </p>
-                <p className="theme-muted mt-4 text-sm leading-6 sm:text-base">
+                <p className="theme-muted focus-copy">
                   Currently working at{" "}
                   <a
                     href="#experience-tidal"
@@ -420,26 +499,8 @@ export default function Home() {
         <SectionBreak />
 
         <section
-          id="projects"
-          className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
-        >
-          <SectionHeading
-            title="Projects"
-            description="Some things that I’ve been building."
-          />
-
-          <div className="project-grid mt-9">
-            {projects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
-            ))}
-          </div>
-        </section>
-
-        <SectionBreak />
-
-        <section
           id="experience"
-          className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="site-section scroll-lens-section w-full"
         >
           <SectionHeading
             title="Experience"
@@ -516,41 +577,17 @@ export default function Home() {
         <SectionBreak />
 
         <section
-          id="courses"
-          className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          id="projects"
+          className="site-section scroll-lens-section w-full"
         >
           <SectionHeading
-            title="Courses"
-            description="Relevant coursework supporting my Computer Science and Data Science focus."
+            title="Projects"
+            description="Some things that I’ve been building."
           />
 
-          <div className="coursework-grid mt-9 grid gap-7 lg:grid-cols-3">
-            {relevantCoursework.map((semester) => (
-              <div key={semester.term} className="course-term">
-                <div className="course-term__header flex items-center justify-between gap-3">
-                  <h3 className="theme-heading text-2xl leading-tight">
-                    {semester.term}
-                  </h3>
-                  <span
-                    className={`course-status${semester.status === "Upcoming" ? " course-status--upcoming" : ""}`}
-                  >
-                    {semester.status}
-                  </span>
-                </div>
-                <div className="course-term__line mt-4 h-px" />
-                <ul className="mt-4 grid gap-3">
-                  {semester.courses.map((course) => (
-                    <li key={course.code} className="course-item">
-                      <p className="course-code text-xs uppercase tracking-[0.24em]">
-                        {course.code}
-                      </p>
-                      <p className="course-title mt-2 text-lg leading-snug">
-                        {course.title}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <div className="project-grid mt-9">
+            {projects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
         </section>
@@ -559,7 +596,7 @@ export default function Home() {
 
         <section
           id="awards"
-          className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="site-section scroll-lens-section w-full"
         >
           <SectionHeading
             title="Awards"
@@ -670,176 +707,245 @@ export default function Home() {
         <SectionBreak />
 
         <section
-          id="about-me"
-          className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          id="courses"
+          className="site-section scroll-lens-section w-full"
         >
           <SectionHeading
-            title="About Me"
-            description="A little bit more about me."
+            title="Courses"
+            description="Relevant coursework supporting my Computer Science and Data Science focus."
           />
 
-          <div className="sub-panel about-copy-panel mt-9 rounded-[1.5rem] border p-6 sm:p-8">
-            <p className="theme-muted max-w-3xl text-lg leading-8">
-              I realized pretty early on that college isn&apos;t just about classes and grades for me, but it&apos;s also a lifestyle and what you make of it.
-              Outside of class, I&apos;m involved in research and a few student orgs on campus, and I also love to build projects for fun.
-              I love keeping myself busy, and I&apos;m a firm believer that there are always things to learn, people to meet, places to explore, etc.
-            </p>
-
-            <div
-              id="about-more"
-              className={`about-more${isAboutMoreOpen ? " about-more--open" : ""}`}
-              aria-hidden={!isAboutMoreOpen}
-            >
-              <div className="about-more__inner">
-                <div className="about-more__content">
-                  <p className="theme-muted text-base leading-8">
-                    In my free time, I like to stay busy with a mix of hobbies.
-                    Music is a big part of my day, and what I&apos;m listening to changes pretty often.
-                    I also enjoy playing video games, something that&apos;s been part of my life since I was young, from playing on my sister&apos;s DS to our family Wii.
-                    I&apos;m a huge Pokémon fan and can recognize almost every single one (maybe not so much anymore).
-                    Sports have been another constant in my life; I&apos;ve played and followed them for as long as I can remember.
-                    Basketball is probably my favorite sport, and I&apos;ve been a dedicated Golden State Warriors fan since I was a kid.
-                    For a little over a decade, I practiced Taekwondo, which shaped not just my work ethic but also a big part of who I am.
-                    Since starting college, I&apos;ve gotten into weightlifting and enjoy pushing toward new PRs.
-                    Outside of that, traveling has always been a major part of my life.
-                    I&apos;ve been lucky to visit many different places growing up, and I&apos;m especially excited to explore countries like Egypt, Singapore, and Switzerland in the future.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="about-more-actions">
-              <button
-                type="button"
-                className={`about-more-toggle${isAboutMoreOpen ? " about-more-toggle--open" : ""}`}
-                aria-expanded={isAboutMoreOpen}
-                aria-controls="about-more"
-                onClick={() => setIsAboutMoreOpen((open) => !open)}
+          <div className="course-card-grid mt-9">
+            {courseCatalog.map((course) => (
+              <article
+                key={`${course.term}-${course.code}`}
+                className="course-card"
               >
-                {isAboutMoreOpen ? "Show less" : "Read more"}
-                <svg
-                  aria-hidden="true"
-                  className="about-more-toggle__icon h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
-              </button>
-            </div>
+                <div className="course-card__top">
+                  <p className="course-code text-xs uppercase tracking-[0.24em]">
+                    {course.code}
+                  </p>
+                  <span
+                    aria-label={`${course.term}, ${course.status}`}
+                    className={`course-semester${course.status === "Upcoming" ? " course-semester--upcoming" : ""}`}
+                    title={course.status}
+                  >
+                    {course.term}
+                  </span>
+                </div>
+                <p className="course-title mt-5 text-lg leading-snug">
+                  {course.title}
+                </p>
+              </article>
+            ))}
           </div>
 
-          <div className="mt-8 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-            <div className="about-listening-copy">
-              <p className="eyebrow text-xs uppercase tracking-[0.32em]">
-                Currently listening to
-              </p>
-              <h2 className="mt-4 text-4xl leading-tight sm:text-5xl">
-                <span className="album-accent font-bold">
-                  <em>Talk To You</em>
-                </span>{" "}
-                <br />
-                <span className="text-4xl theme-heading">by </span>
-                <span className="text-4xl theme-heading font-bold">
-                  ANOTR, 54 Ultra
-                </span>
-              </h2>
-            </div>
+        </section>
 
-            <div className="sub-panel about-media-panel overflow-hidden rounded-[1.5rem] border p-3">
-              <iframe
-                title="Spotify track"
-                src="https://open.spotify.com/embed/track/0kl6Ozan3fuUdCl6TlB15v?utm_source=generator"
-                width="100%"
-                height="152"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-                className="rounded-[1rem]"
-              />
-            </div>
+        <SectionBreak />
+
+        <section
+          id="skills"
+          className="site-section scroll-lens-section w-full"
+        >
+          <SectionHeading
+            title="Skills"
+            description="Languages, libraries, systems, and workflows I use."
+          />
+
+          <div className="skills-grid mt-9">
+            {skillGroups.map((group) => (
+              <article className="skill-category" key={group.title}>
+                <h3 className="skill-category__title">{group.title}</h3>
+                <ul className="skill-chip-list" aria-label={`${group.title} skills`}>
+                  {group.skills.map((skill) => (
+                    <li className="skill-chip" key={skill}>{skill}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
           </div>
         </section>
 
         <SectionBreak />
 
         <section
+          id="about-me"
+          className="site-section scroll-lens-section w-full"
+        >
+          <SectionHeading
+            title="About Me"
+            description="A little bit more about me."
+          />
+
+          <div className="about-story-panel mt-9">
+            <div className="about-copy-panel">
+              <p className="theme-muted text-lg leading-8">
+                I realized pretty early on that college isn&apos;t just about classes and grades for me, but it&apos;s also a lifestyle and what you make of it.
+                Outside of class, I&apos;m involved in research and a few student orgs on campus, and I also love to build projects for fun.
+                I love keeping myself busy, and I&apos;m a firm believer that there are always things to learn, people to meet, places to explore, etc.
+              </p>
+
+              <div
+                id="about-more"
+                className={`about-more${isAboutMoreOpen ? " about-more--open" : ""}`}
+                aria-hidden={!isAboutMoreOpen}
+              >
+                <div className="about-more__inner">
+                  <div className="about-more__content">
+                    <p className="theme-muted text-base leading-8">
+                      In my free time, I like to stay busy with a mix of hobbies.
+                      Music is a big part of my day, and what I&apos;m listening to changes pretty often.
+                      I also enjoy playing video games, something that&apos;s been part of my life since I was young, from playing on my sister&apos;s DS to our family Wii.
+                      I&apos;m a huge Pokémon fan and can recognize almost every single one (maybe not so much anymore).
+                      Sports have been another constant in my life; I&apos;ve played and followed them for as long as I can remember.
+                      Basketball is probably my favorite sport, and I&apos;ve been a dedicated Golden State Warriors fan since I was a kid.
+                      For a little over a decade, I practiced Taekwondo, which shaped not just my work ethic but also a big part of who I am.
+                      Since starting college, I&apos;ve gotten into weightlifting and enjoy pushing toward new PRs.
+                      Outside of that, traveling has always been a major part of my life.
+                      I&apos;ve been lucky to visit many different places growing up, and I&apos;m especially excited to explore countries like Egypt, Singapore, and Switzerland in the future.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="about-more-actions">
+                <button
+                  type="button"
+                  className={`about-more-toggle${isAboutMoreOpen ? " about-more-toggle--open" : ""}`}
+                  aria-expanded={isAboutMoreOpen}
+                  aria-controls="about-more"
+                  onClick={() => setIsAboutMoreOpen((open) => !open)}
+                >
+                  {isAboutMoreOpen ? "Show less" : "Read more"}
+                  <svg
+                    aria-hidden="true"
+                    className="about-more-toggle__icon h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="about-listening-panel mt-8">
+            <div className="about-listening-copy">
+              <p className="eyebrow text-xs uppercase tracking-[0.32em]">
+                Currently listening to
+              </p>
+              <h2 className="mt-4 text-4xl leading-tight sm:text-5xl">
+                <span className="album-accent font-bold">
+                  <em>Some favorite songs</em>
+                </span>
+              </h2>
+            </div>
+
+            <div className="music-player-layout">
+              <div className="music-track-list" aria-label="Favorite songs">
+                {favoriteTracks.map((track, index) => (
+                  <button
+                    key={track.id}
+                    type="button"
+                    aria-pressed={activeTrack.id === track.id}
+                    className={`music-track-tab${activeTrack.id === track.id ? " music-track-tab--active" : ""}`}
+                    onClick={() => setActiveTrackId(track.id)}
+                  >
+                    <span className="music-track-tab__index">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="music-track-tab__copy">
+                      <span className="music-track-tab__title">{track.title}</span>
+                      <span className="music-track-tab__artist">{track.artist}</span>
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              <div className="music-player-panel">
+                <iframe
+                  key={activeTrack.id}
+                  title={`Spotify Embed: ${activeTrack.title}`}
+                  src={`https://open.spotify.com/embed/track/${activeTrack.id}?utm_source=generator`}
+                  width="100%"
+                  height="352"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                  className="music-player-frame"
+                />
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <SectionBreak />
+
+        <section
           id="contact"
-          className="theme-panel scroll-lens-section w-full rounded-[1.75rem] border px-8 py-8 backdrop-blur sm:px-12"
+          className="site-section scroll-lens-section w-full"
         >
           <SectionHeading
             title="Contact"
-            description="Email, profiles, and resume links if you want to reach out."
+            description="Email, profiles, and resume."
           />
 
-          <div className="mt-9 grid gap-5 sm:grid-cols-2">
-            <div className="contact-card">
-              <p className="theme-soft text-sm uppercase tracking-[0.24em]">
-                Personal
-              </p>
+          <div className="contact-layout mt-9">
+            <div className="contact-email-list">
               <a
                 href="mailto:shlok.jadhav.07@gmail.com"
-                className="theme-link mt-2 inline-block border-b text-2xl leading-tight transition-colors transition-[border-color,color] duration-200"
+                className="contact-email-link"
               >
-                shlok.jadhav.07@gmail.com
+                <span className="contact-kicker">Personal</span>
+                <span className="contact-email-address">shlok.jadhav.07@gmail.com</span>
               </a>
-            </div>
-            <div className="contact-card">
-              <p className="theme-soft text-sm uppercase tracking-[0.24em]">
-                School
-              </p>
+
               <a
                 href="mailto:srjadhav2@wisc.edu"
-                className="theme-link mt-2 inline-block border-b text-2xl leading-tight transition-colors transition-[border-color,color] duration-200"
+                className="contact-email-link"
               >
-                srjadhav2@wisc.edu
+                <span className="contact-kicker">School</span>
+                <span className="contact-email-address">srjadhav2@wisc.edu</span>
               </a>
             </div>
-            <div className="contact-card contact-profiles-card sm:col-span-2">
-              <p className="theme-soft text-sm uppercase tracking-[0.24em]">
-                Profiles
-              </p>
-              <div className="mt-4 flex flex-wrap gap-3">
-                {socialProfiles.map((profile) => (
-                  <a
-                    key={profile.platform}
-                    href={profile.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="social-profile-link"
-                  >
-                    <SocialIcon platform={profile.platform} />
-                    <span>{profile.label}</span>
-                    <svg
-                      aria-hidden="true"
-                      className="social-profile-link__arrow h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      viewBox="0 0 24 24"
+
+            <div className="contact-action-panel">
+              <div className="contact-action-group">
+                <p className="contact-kicker">Profiles</p>
+                <div className="contact-action-row">
+                  {socialProfiles.map((profile) => (
+                    <a
+                      key={profile.platform}
+                      href={profile.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="social-profile-link"
                     >
-                      <path d="M7 17 17 7" />
-                      <path d="M8 7h9v9" />
-                    </svg>
-                  </a>
-                ))}
-              </div>
-            </div>
-            <div className="contact-card resume-card sm:col-span-2">
-              <div className="flex flex-wrap items-start justify-between gap-4">
-                <div>
-                  <p className="theme-soft text-sm uppercase tracking-[0.24em]">
-                    Resume
-                  </p>
-                  <h3 className="theme-heading mt-3 text-2xl leading-tight">
-                    Shlok Jadhav Resume
-                  </h3>
-                  <p className="theme-soft mt-2 text-sm">
-                    Last updated: June 18, 2026
-                  </p>
+                      <SocialIcon platform={profile.platform} />
+                      <span>{profile.label}</span>
+                      <svg
+                        aria-hidden="true"
+                        className="social-profile-link__arrow h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M7 17 17 7" />
+                        <path d="M8 7h9v9" />
+                      </svg>
+                    </a>
+                  ))}
                 </div>
-                <div className="flex flex-wrap gap-3">
+              </div>
+
+              <div className="contact-action-group">
+                <p className="contact-kicker">Resume</p>
+                <div className="contact-action-row">
                   <a
                     href="/documents/Shlok_Jadhav_Resume.pdf"
                     target="_blank"
@@ -861,7 +967,7 @@ export default function Home() {
                       <path d="M9 13h6" />
                       <path d="M9 17h6" />
                     </svg>
-                    Open Resume
+                    Open PDF
                     <svg
                       aria-hidden="true"
                       className="resume-action__arrow h-4 w-4"
@@ -874,6 +980,7 @@ export default function Home() {
                       <path d="M8 7h9v9" />
                     </svg>
                   </a>
+
                   <button
                     type="button"
                     className={`resume-action resume-toggle${isResumePreviewOpen ? " resume-toggle--open" : ""}`}
@@ -898,6 +1005,9 @@ export default function Home() {
                   </button>
                 </div>
               </div>
+            </div>
+
+            <div className="contact-resume-preview">
               <div
                 id="resume-preview"
                 className={`resume-preview${isResumePreviewOpen ? " resume-preview--open" : ""}`}
@@ -911,11 +1021,11 @@ export default function Home() {
                       rel="noreferrer"
                       tabIndex={isResumePreviewOpen ? undefined : -1}
                       className="resume-preview__link"
-                      aria-label="Open the full Shlok Jadhav resume PDF"
+                      aria-label="Open the full resume PDF"
                     >
                       <Image
                         src="/documents/Shlok_Jadhav_Resume-preview.png"
-                        alt="Preview of Shlok Jadhav's resume"
+                        alt="Resume preview"
                         width={612}
                         height={792}
                         sizes="(min-width: 768px) 48rem, calc(100vw - 7rem)"
@@ -929,6 +1039,7 @@ export default function Home() {
           </div>
         </section>
 
+        <SiteFooter />
       </div>
     </main>
   );

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FloatingNav } from "@/app/components/FloatingNav";
+import { SiteFooter } from "@/app/components/SiteFooter";
 import { getProject, projects } from "@/app/project-data";
 
 type ProjectPageProps = {
@@ -134,6 +135,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </section>
       </article>
+      <div className="project-detail-footer relative mx-auto w-full max-w-5xl">
+        <SiteFooter />
+      </div>
     </main>
   );
 }
