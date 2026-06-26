@@ -345,7 +345,7 @@ export default function Home() {
   const [isResumePreviewOpen, setIsResumePreviewOpen] = useState(false);
   const [hasResumePreviewOpened, setHasResumePreviewOpened] = useState(false);
   const [isAboutMoreOpen, setIsAboutMoreOpen] = useState(false);
-  const [activeTrackId, setActiveTrackId] = useState(favoriteTracks[0].id);
+  const [activeTrackId, setActiveTrackId] = useState<(typeof favoriteTracks)[number]["id"]>(favoriteTracks[0].id);
   const nameFlareRef = useRef<HTMLSpanElement>(null);
   const activeTrack = favoriteTracks.find((track) => track.id === activeTrackId) ?? favoriteTracks[0];
 
