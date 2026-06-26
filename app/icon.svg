@@ -1,25 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <circle cx="256" cy="256" r="214" fill="#f7f4ef" />
   <text
-    x="184"
-    y="352"
+    x="256"
+    y="342"
     fill="#ef6a1e"
-    font-family="'Times New Roman', Times, serif"
-    font-size="298"
-    letter-spacing="-24"
+    font-family="'Inclusive Sans', system-ui, sans-serif"
+    font-size="244"
+    font-weight="700"
+    letter-spacing="0"
     text-anchor="middle"
   >
-    S
-  </text>
-  <text
-    x="316"
-    y="352"
-    fill="#ef6a1e"
-    font-family="'Times New Roman', Times, serif"
-    font-size="298"
-    letter-spacing="-24"
-    text-anchor="middle"
-  >
-    J
+    SJ
   </text>
 </svg>

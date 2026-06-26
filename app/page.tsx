@@ -327,10 +327,10 @@ export default function Home() {
           <div className="grid gap-8 xl:grid-cols-[1.35fr_1fr] xl:items-start">
             <div className="flex h-full flex-col justify-between gap-10">
               <div>
-                <p className="theme-muted text-lg italic tracking-[0.01em] sm:text-xl">
+                <p className="display-accent hero-intro">
                   Hello! My name is
                 </p>
-                <h1 className="fireplace-name mt-3 max-w-3xl text-[5.2rem] leading-[0.82] tracking-[-0.055em] text-[var(--foreground)] sm:text-[6.8rem] xl:text-[8.4rem]">
+                <h1 className="fireplace-name mt-3 max-w-3xl text-[4.8rem] leading-[0.86] text-[var(--foreground)] sm:text-[6.25rem] xl:text-[7.9rem]">
                   <button
                     type="button"
                     onClick={handleNameFlare}

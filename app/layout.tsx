@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Inclusive_Sans, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
@@ -21,13 +22,29 @@ const themeScript = `
   })();
 `;
 
+const inclusiveSans = Inclusive_Sans({
+  display: "swap",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-inclusive-sans",
+  weight: ["400", "500", "600", "700"],
+});
+
+const playfairDisplay = Playfair_Display({
+  display: "swap",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-playfair-display",
+  weight: ["400", "600", "700"],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full" data-theme="light" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" className={`${inclusiveSans.variable} ${playfairDisplay.variable} h-full`} data-theme="light" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
         <Script id="theme-init" strategy="beforeInteractive">
           {themeScript}

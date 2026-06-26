@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 :root {
+  --font-body: var(--font-inclusive-sans, "Inclusive Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  --font-display: var(--font-inclusive-sans, "Inclusive Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  --font-accent: var(--font-playfair-display, "Playfair Display", Georgia, "Iowan Old Style", serif);
+  --font-mono-stack: "SFMono-Regular", Menlo, Consolas, monospace;
   --background: #180f0c;
   --foreground: #fff4e6;
   --muted: #e4c9b2;
@@ -171,8 +175,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Times New Roman", Times, serif;
-  --font-mono: "Courier New", Courier, monospace;
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-accent);
+  --font-mono: var(--font-mono-stack);
 }
 
 * {
@@ -189,8 +194,10 @@ body {
   scroll-behavior: smooth;
   background: var(--body-background);
   color: var(--foreground);
-  font-family: "Times New Roman", Times, serif;
-  letter-spacing: 0.01em;
+  font-family: var(--font-body);
+  font-feature-settings: "kern", "liga", "clig";
+  letter-spacing: 0;
+  text-rendering: optimizeLegibility;
   transition:
     background 240ms ease,
     color 240ms ease;
@@ -241,12 +248,27 @@ a {
 }
 
 .section-heading__title {
-  letter-spacing: -0.035em;
+  letter-spacing: 0;
 }
 
 .section-heading__note {
   color: var(--section-heading-copy);
+  font-family: var(--font-accent);
   font-style: italic;
+  font-weight: 400;
+}
+
+.display-accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.hero-intro {
+  color: var(--text-muted);
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  line-height: 1.2;
 }
 
 .theme-panel {
@@ -802,6 +824,8 @@ html[data-theme="light"] .theme-toggle__moon {
 
 .theme-heading {
   color: var(--heading);
+  font-family: var(--font-display);
+  font-weight: 700;
 }
 
 .theme-muted {
@@ -824,6 +848,12 @@ html[data-theme="light"] .theme-toggle__moon {
 
 .theme-accent {
   color: var(--accent);
+}
+
+.theme-accent em,
+.album-accent em {
+  font-family: var(--font-accent);
+  font-weight: 700;
 }
 
 .album-accent {
@@ -1015,7 +1045,7 @@ html[data-theme="light"] .theme-toggle__moon {
   border-radius: 0.35rem;
   background: #181a1c;
   padding: 0.5rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--font-mono-stack);
   font-size: clamp(0.58rem, 1.5vw, 0.72rem);
 }
 
@@ -1683,6 +1713,8 @@ html[data-theme="light"] .theme-toggle__moon {
   position: relative;
   display: inline-block;
   width: fit-content;
+  font-family: var(--font-display);
+  font-weight: 700;
 }
 
 .fireplace-name__button {
@@ -1709,7 +1741,7 @@ html[data-theme="light"] .theme-toggle__moon {
 .fireplace-name__text {
   position: relative;
   z-index: 1;
-  display: inline-block;
+  display: block;
   color: #fff3df;
   animation: fireplace-flicker 2.2s ease-in-out infinite;
   text-shadow:
@@ -1730,7 +1762,10 @@ html[data-theme="light"] .theme-toggle__moon {
 }
 
 .fireplace-name__texts {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.16em;
 }
 
 .fireplace-name__flare-active {
@@ -2527,6 +2562,10 @@ html[data-theme="light"] .theme-toggle__moon {
     display: none;
   }
 
+  .floating-nav__theme {
+    display: none;
+  }
+
   .floating-nav__toggle {
     display: inline-flex;
   }
@@ -2545,19 +2584,10 @@ html[data-theme="light"] .theme-toggle__moon {
     font-size: 0.96rem;
   }
 
-  .floating-nav__theme {
-    display: none;
-  }
-
   .floating-nav__menu .nav-link {
     padding: 0.68rem 0.64rem;
     font-size: 0.78rem;
     letter-spacing: 0.005em;
-  }
-
-  .floating-nav__theme {
-    width: 2rem;
-    height: 2rem;
   }
 
   .project-banner__label {
@@ -2728,7 +2758,7 @@ html[data-theme="light"] .theme-toggle__moon {
 
 .project-detail__highlight > span {
   color: var(--eyebrow-soft);
-  font-family: "Courier New", Courier, monospace;
+  font-family: var(--font-mono-stack);
   font-size: 0.75rem;
   letter-spacing: 0.16em;
 }
