@@ -442,7 +442,7 @@ export default function Home() {
         const currentIndex = favoriteTracks.findIndex((track) => track.id === currentId);
         return favoriteTracks[(currentIndex + 1) % favoriteTracks.length].id;
       });
-    }, 20000);
+    }, 10000);
 
     return () => globalThis.clearInterval(cycle);
   }, [activeTrackId, isAutoShuffleOn]);
