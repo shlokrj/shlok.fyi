@@ -177,6 +177,25 @@ const favoriteTracks = [
   { id: "3WVJfN1JmGewlDXGkQf0I4", title: "Havana", artist: "Pz'" },
 ] as const;
 
+type SpotifyEmbedController = {
+  addListener: (event: "ready", callback: () => void) => void;
+  destroy: () => void;
+  loadUri: (uri: string) => void;
+};
+
+type SpotifyIframeApi = {
+  createController: (
+    element: HTMLElement,
+    options: { height: string; uri: string; width: string },
+    callback: (controller: SpotifyEmbedController) => void,
+  ) => void;
+};
+
+type SpotifyWindow = typeof globalThis & {
+  __spotifyIframeApi?: SpotifyIframeApi;
+  onSpotifyIframeApiReady?: (api: SpotifyIframeApi) => void;
+};
+
 function useScrollLens() {
   useEffect(() => {
     let frame: number | null = globalThis.requestAnimationFrame(updateActiveSection);
@@ -346,7 +365,11 @@ export default function Home() {
   const [hasResumePreviewOpened, setHasResumePreviewOpened] = useState(false);
   const [isAboutMoreOpen, setIsAboutMoreOpen] = useState(false);
   const [activeTrackId, setActiveTrackId] = useState<(typeof favoriteTracks)[number]["id"]>(favoriteTracks[0].id);
+  const [isAutoShuffleOn, setIsAutoShuffleOn] = useState(true);
+  const [isSpotifyReady, setIsSpotifyReady] = useState(false);
   const nameFlareRef = useRef<HTMLSpanElement>(null);
+  const spotifyEmbedRef = useRef<HTMLDivElement>(null);
+  const spotifyControllerRef = useRef<SpotifyEmbedController | null>(null);
   const activeTrack = favoriteTracks.find((track) => track.id === activeTrackId) ?? favoriteTracks[0];
 
   const handleNameFlare = () => {
@@ -361,17 +384,92 @@ export default function Home() {
 
   useEffect(() => {
     const reduceMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) return;
+    if (reduceMotion || !isAutoShuffleOn) return;
 
     const cycle = globalThis.setInterval(() => {
       setActiveTrackId((currentId) => {
         const currentIndex = favoriteTracks.findIndex((track) => track.id === currentId);
         return favoriteTracks[(currentIndex + 1) % favoriteTracks.length].id;
       });
-    }, 7000);
+    }, 20000);
 
     return () => globalThis.clearInterval(cycle);
-  }, [activeTrackId]);
+  }, [activeTrackId, isAutoShuffleOn]);
+
+  useEffect(() => {
+    let isCancelled = false;
+    const spotifyWindow = globalThis as SpotifyWindow;
+
+    const createSpotifyPlayer = (api: SpotifyIframeApi) => {
+      if (
+        isCancelled ||
+        !spotifyEmbedRef.current ||
+        spotifyControllerRef.current
+      ) {
+        return;
+      }
+
+      api.createController(
+        spotifyEmbedRef.current,
+        {
+          width: "100%",
+          height: "352",
+          uri: `spotify:track:${favoriteTracks[0].id}`,
+        },
+        (controller) => {
+          if (isCancelled) {
+            controller.destroy();
+            return;
+          }
+
+          spotifyControllerRef.current = controller;
+          controller.addListener("ready", () => setIsSpotifyReady(true));
+        },
+      );
+    };
+
+    if (spotifyWindow.__spotifyIframeApi) {
+      createSpotifyPlayer(spotifyWindow.__spotifyIframeApi);
+    } else {
+      spotifyWindow.onSpotifyIframeApiReady = (api) => {
+        spotifyWindow.__spotifyIframeApi = api;
+        createSpotifyPlayer(api);
+      };
+
+      if (!document.querySelector('script[data-spotify-iframe-api="true"]')) {
+        const script = document.createElement("script");
+        script.src = "https://open.spotify.com/embed/iframe-api/v1";
+        script.async = true;
+        script.dataset.spotifyIframeApi = "true";
+        document.body.appendChild(script);
+      }
+    }
+
+    return () => {
+      isCancelled = true;
+      spotifyControllerRef.current?.destroy();
+      spotifyControllerRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isSpotifyReady) return;
+    spotifyControllerRef.current?.loadUri(`spotify:track:${activeTrackId}`);
+  }, [activeTrackId, isSpotifyReady]);
+
+  const selectTrack = (trackId: (typeof favoriteTracks)[number]["id"]) => {
+    setActiveTrackId(trackId);
+  };
+
+  const changeTrack = (direction: -1 | 1) => {
+    const currentIndex = favoriteTracks.findIndex(
+      (track) => track.id === activeTrackId,
+    );
+    const nextIndex =
+      (currentIndex + direction + favoriteTracks.length) %
+      favoriteTracks.length;
+    selectTrack(favoriteTracks[nextIndex].id);
+  };
 
   const scrollToExperience = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -404,7 +502,7 @@ export default function Home() {
           id="home"
           className="hero-section scroll-lens-section w-full"
         >
-          <div className="hero-grid grid gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(22rem,0.9fr)]">
+          <div className="hero-grid grid gap-12">
             <div className="hero-copy flex h-full flex-col gap-9">
               <div>
                 <p className="display-accent hero-intro">
@@ -450,7 +548,7 @@ export default function Home() {
                     fill
                     priority
                     sizes="(min-width: 1280px) 30rem, (min-width: 640px) 28rem, calc(100vw - 5rem)"
-                    className="object-cover object-[50%_52%]"
+                    className="object-cover"
                   />
                 </div>
               </div>
@@ -834,15 +932,57 @@ export default function Home() {
           </div>
 
           <div className="about-listening-panel mt-8">
-            <div className="about-listening-copy">
-              <p className="eyebrow text-xs uppercase tracking-[0.32em]">
-                Currently listening to
-              </p>
-              <h2 className="mt-4 text-4xl leading-tight sm:text-5xl">
-                <span className="album-accent font-bold">
-                  <em>Some favorite songs</em>
-                </span>
-              </h2>
+            <div className="about-listening-header">
+              <div className="about-listening-copy">
+                <p className="eyebrow text-xs uppercase tracking-[0.32em]">
+                  Currently listening to
+                </p>
+                <h2 className="mt-4 text-4xl leading-tight sm:text-5xl">
+                  <span className="album-accent font-bold">
+                    <em>Some favorite songs</em>
+                  </span>
+                </h2>
+              </div>
+
+              <div className="music-controls" aria-label="Song rotation controls">
+                <button
+                  type="button"
+                  className="music-control-button"
+                  aria-label="Previous song"
+                  onClick={() => changeTrack(-1)}
+                >
+                  <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M6 5v14M19 6 9 12l10 6V6Z" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  className={`music-control-button music-control-button--primary${isAutoShuffleOn ? " music-control-button--looping" : ""}`}
+                  aria-label={isAutoShuffleOn ? "Pause song rotation" : "Play song rotation"}
+                  aria-pressed={isAutoShuffleOn}
+                  onClick={() => setIsAutoShuffleOn((isOn) => !isOn)}
+                >
+                  {isAutoShuffleOn ? (
+                    <svg aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M7 5h3v14H7zM14 5h3v14h-3z" />
+                    </svg>
+                  ) : (
+                    <svg aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="m8 5 11 7-11 7V5Z" />
+                    </svg>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  className="music-control-button"
+                  aria-label="Next song"
+                  onClick={() => changeTrack(1)}
+                >
+                  <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M18 5v14M5 6l10 6-10 6V6Z" />
+                  </svg>
+                </button>
+              </div>
             </div>
 
             <div className="music-player-layout">
@@ -852,8 +992,8 @@ export default function Home() {
                     key={track.id}
                     type="button"
                     aria-pressed={activeTrack.id === track.id}
-                    className={`music-track-tab${activeTrack.id === track.id ? " music-track-tab--active" : ""}`}
-                    onClick={() => setActiveTrackId(track.id)}
+                    className={`music-track-tab${activeTrack.id === track.id ? " music-track-tab--active" : ""}${activeTrack.id === track.id && isAutoShuffleOn ? " music-track-tab--cycling" : ""}`}
+                    onClick={() => selectTrack(track.id)}
                   >
                     <span className="music-track-tab__index">
                       {String(index + 1).padStart(2, "0")}
@@ -867,15 +1007,10 @@ export default function Home() {
               </div>
 
               <div className="music-player-panel">
-                <iframe
-                  key={activeTrack.id}
-                  title={`Spotify Embed: ${activeTrack.title}`}
-                  src={`https://open.spotify.com/embed/track/${activeTrack.id}?utm_source=generator`}
-                  width="100%"
-                  height="352"
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                  className="music-player-frame"
+                <div
+                  ref={spotifyEmbedRef}
+                  className="music-player-embed"
+                  aria-label={`Spotify player for ${activeTrack.title} by ${activeTrack.artist}`}
                 />
               </div>
             </div>
