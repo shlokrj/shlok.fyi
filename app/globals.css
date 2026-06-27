@@ -2094,37 +2094,16 @@ html[data-theme="light"] .theme-toggle__moon {
   .scroll-lens-section:not(.scroll-visible) .award-feature-entry,
   .scroll-lens-section:not(.scroll-visible) .award-card-entry {
     opacity: 0;
-    filter: blur(14px);
-    transform: translateY(var(--reveal-y, 1.7rem)) scale(0.985);
-  }
-
-  .scroll-lens-section:not(.scroll-visible) .project-card,
-  .scroll-lens-section:not(.scroll-visible) .project-feature-entry,
-  .scroll-lens-section:not(.scroll-visible) .experience-entry,
-  .scroll-lens-section:not(.scroll-visible) .school-group,
-  .scroll-lens-section:not(.scroll-visible) .about-story-panel,
-  .scroll-lens-section:not(.scroll-visible) .about-listening-panel,
-  .scroll-lens-section:not(.scroll-visible) .music-track-tab,
-  .scroll-lens-section:not(.scroll-visible) .music-player-panel,
-  .scroll-lens-section:not(.scroll-visible) .contact-email-link,
-  .scroll-lens-section:not(.scroll-visible) .contact-action-group,
-  .scroll-lens-section:not(.scroll-visible) .course-term,
-  .scroll-lens-section:not(.scroll-visible) .course-card,
-  .scroll-lens-section:not(.scroll-visible) .skill-category,
-  .scroll-lens-section:not(.scroll-visible) .award-feature-entry,
-  .scroll-lens-section:not(.scroll-visible) .award-card-entry {
-    clip-path: var(--reveal-clip, inset(18% 0 0 0 round 0.5rem));
+    transform: translateY(var(--reveal-y, 1rem)) scale(0.992);
   }
 }
 
 .scroll-enter-down {
-  --reveal-y: 1.9rem;
-  --reveal-clip: inset(18% 0 0 0 round 0.5rem);
+  --reveal-y: 1.05rem;
 }
 
 .scroll-enter-up {
-  --reveal-y: -1.9rem;
-  --reveal-clip: inset(0 0 18% 0 round 0.5rem);
+  --reveal-y: -1.05rem;
 }
 
 .scroll-visible .experience-entry {
@@ -3039,7 +3018,7 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes section-title-rise {
   from {
     opacity: 0;
-    filter: blur(10px);
+    filter: blur(3px);
     transform: translateY(var(--reveal-y, 0.6em));
   }
   to {
@@ -3052,7 +3031,7 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes section-note-rise {
   from {
     opacity: 0;
-    filter: blur(9px);
+    filter: blur(2px);
     transform: translateY(var(--reveal-y, 0.85rem));
   }
   to {
@@ -3076,29 +3055,21 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes card-stack-rise {
   from {
     opacity: 0;
-    clip-path: var(--reveal-clip, inset(18% 0 0 0 round 0.5rem));
-    filter: blur(16px);
-    transform: translateY(var(--reveal-y, 2rem)) rotateX(6deg) scale(0.972);
+    transform: translateY(var(--reveal-y, 1rem)) scale(0.992);
   }
   to {
     opacity: 1;
-    clip-path: inset(0 0 0 0 round 0.5rem);
-    filter: blur(0);
-    transform: translateY(0) rotateX(0) scale(1);
+    transform: translateY(0) scale(1);
   }
 }
 
 @keyframes panel-unfold {
   from {
     opacity: 0;
-    clip-path: var(--reveal-clip, inset(0 0 28% 0 round 0.5rem));
-    filter: blur(16px);
-    transform: translateY(var(--reveal-y, 1.8rem)) scale(0.976);
+    transform: translateY(var(--reveal-y, 1rem)) scale(0.992);
   }
   to {
     opacity: 1;
-    clip-path: inset(0 0 0 0 round 0.5rem);
-    filter: blur(0);
     transform: translateY(0) scale(1);
   }
 }
@@ -3106,14 +3077,10 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes media-tile-in {
   from {
     opacity: 0;
-    clip-path: var(--reveal-clip, inset(20% 0 0 0 round 0.5rem));
-    filter: blur(14px);
-    transform: translateY(var(--reveal-y, 1.8rem)) scale(0.968);
+    transform: translateY(var(--reveal-y, 1rem)) scale(0.992);
   }
   to {
     opacity: 1;
-    clip-path: inset(0 0 0 0 round 0.5rem);
-    filter: blur(0);
     transform: translateY(0) scale(1);
   }
 }
@@ -3130,14 +3097,10 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes project-rise {
   from {
     opacity: 0;
-    clip-path: var(--reveal-clip, inset(18% 0 0 0 round 0.5rem));
-    filter: blur(16px);
-    transform: translateY(var(--reveal-y, 2rem)) scale(0.972);
+    transform: translateY(var(--reveal-y, 1rem)) scale(0.992);
   }
   to {
     opacity: 1;
-    clip-path: inset(0 0 0 0 round 0.5rem);
-    filter: blur(0);
     transform: translateY(0) scale(1);
   }
 }
@@ -3192,14 +3155,10 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes experience-rise {
   from {
     opacity: 0;
-    clip-path: var(--reveal-clip, inset(20% 0 0 0 round 0.5rem));
-    filter: blur(16px);
-    transform: translateY(var(--reveal-y, 2rem)) scale(0.972);
+    transform: translateY(var(--reveal-y, 1rem)) scale(0.992);
   }
   to {
     opacity: 1;
-    clip-path: inset(0 0 0 0 round 0.5rem);
-    filter: blur(0);
     transform: translateY(0) scale(1);
   }
 }
@@ -3207,14 +3166,10 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes detail-rise {
   from {
     opacity: 0;
-    clip-path: var(--reveal-clip, inset(18% 0 0 0 round 0.5rem));
-    filter: blur(15px);
-    transform: translateY(var(--reveal-y, 1.9rem)) scale(0.974);
+    transform: translateY(var(--reveal-y, 1rem)) scale(0.992);
   }
   to {
     opacity: 1;
-    clip-path: inset(0 0 0 0 round 0.5rem);
-    filter: blur(0);
     transform: translateY(0) scale(1);
   }
 }
@@ -3222,12 +3177,10 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes hero-copy-rise {
   from {
     opacity: 0;
-    filter: blur(16px);
-    transform: translateY(var(--reveal-y, 2rem)) scale(0.975);
+    transform: translateY(var(--reveal-y, 1rem)) scale(0.994);
   }
   to {
     opacity: 1;
-    filter: blur(0);
     transform: translateY(0) scale(1);
   }
 }
@@ -3248,14 +3201,10 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes course-term-rise {
   from {
     opacity: 0;
-    clip-path: var(--reveal-clip, inset(20% 0 0 0 round 0.5rem));
-    filter: blur(16px);
-    transform: translateY(var(--reveal-y, 2rem)) scale(0.972);
+    transform: translateY(var(--reveal-y, 1rem)) scale(0.992);
   }
   to {
     opacity: 1;
-    clip-path: inset(0 0 0 0 round 0.5rem);
-    filter: blur(0);
     transform: translateY(0) scale(1);
   }
 }
@@ -3263,14 +3212,10 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes award-rise {
   from {
     opacity: 0;
-    clip-path: var(--reveal-clip, inset(20% 0 0 0 round 0.5rem));
-    filter: blur(16px);
-    transform: translateY(var(--reveal-y, 2rem)) scale(0.972);
+    transform: translateY(var(--reveal-y, 1rem)) scale(0.992);
   }
   to {
     opacity: 1;
-    clip-path: inset(0 0 0 0 round 0.5rem);
-    filter: blur(0);
     transform: translateY(0) scale(1);
   }
 }

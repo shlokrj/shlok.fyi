@@ -200,6 +200,7 @@ function useScrollLens() {
   useEffect(() => {
     let frame: number | null = globalThis.requestAnimationFrame(updateActiveSection);
     let previousScrollY = globalThis.scrollY || globalThis.pageYOffset;
+    let staggeredSections = new WeakSet<HTMLElement>();
     const reduceMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     function updateActiveSection() {
@@ -238,7 +239,10 @@ function useScrollLens() {
         const drift = Math.max(-24, Math.min(24, centerDelta * -28));
         const inRevealBand = rect.top < globalThis.innerHeight * 0.92 && rect.bottom > globalThis.innerHeight * 0.08;
 
-        if (inRevealBand) updateReverseStagger(el);
+        if (inRevealBand && !staggeredSections.has(el)) {
+          updateReverseStagger(el);
+          staggeredSections.add(el);
+        }
         el.style.setProperty("--section-drift", `${drift.toFixed(2)}px`);
         el.style.setProperty("--section-visibility", visibleRatio.toFixed(3));
         el.classList.toggle("scroll-visible", inRevealBand);
@@ -254,13 +258,18 @@ function useScrollLens() {
       frame = globalThis.requestAnimationFrame(updateActiveSection);
     }
 
+    function scheduleResizeUpdate() {
+      staggeredSections = new WeakSet<HTMLElement>();
+      scheduleUpdate();
+    }
+
     globalThis.addEventListener("scroll", scheduleUpdate, { passive: true });
-    globalThis.addEventListener("resize", scheduleUpdate);
+    globalThis.addEventListener("resize", scheduleResizeUpdate);
 
     return () => {
       if (frame !== null) globalThis.cancelAnimationFrame(frame);
       globalThis.removeEventListener("scroll", scheduleUpdate);
-      globalThis.removeEventListener("resize", scheduleUpdate);
+      globalThis.removeEventListener("resize", scheduleResizeUpdate);
       clearScrollLens(Array.from(document.querySelectorAll<HTMLElement>(".scroll-lens-section")));
     };
   }, []);
