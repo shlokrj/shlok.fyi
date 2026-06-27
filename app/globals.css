@@ -226,9 +226,9 @@ a {
 
 .hero-section {
   display: flex;
-  min-height: calc(122vh - 5rem);
-  align-items: center;
-  padding: 7.4rem 0 7.1rem;
+  min-height: calc(100vh - 6rem);
+  align-items: flex-start;
+  padding: 4rem 0 5rem;
 }
 
 .hero-grid {
@@ -2113,16 +2113,18 @@ html[data-theme="light"] .theme-toggle__moon {
   .scroll-lens-section:not(.scroll-visible) .skill-category,
   .scroll-lens-section:not(.scroll-visible) .award-feature-entry,
   .scroll-lens-section:not(.scroll-visible) .award-card-entry {
-    clip-path: inset(18% 0 0 0 round 0.5rem);
+    clip-path: var(--reveal-clip, inset(18% 0 0 0 round 0.5rem));
   }
 }
 
 .scroll-enter-down {
   --reveal-y: 1.9rem;
+  --reveal-clip: inset(18% 0 0 0 round 0.5rem);
 }
 
 .scroll-enter-up {
   --reveal-y: -1.9rem;
+  --reveal-clip: inset(0 0 18% 0 round 0.5rem);
 }
 
 .scroll-visible .experience-entry {
@@ -2407,6 +2409,19 @@ html[data-theme="light"] .theme-toggle__moon {
 
 .scroll-visible .award-card-entry:nth-child(3) {
   animation-delay: 230ms;
+}
+
+.scroll-visible.scroll-enter-up :is(
+  .experience-entry,
+  .project-card,
+  .award-card-entry,
+  .course-card,
+  .skill-category,
+  .music-track-tab,
+  .contact-email-link,
+  .contact-action-group
+) {
+  animation-delay: var(--scroll-up-delay, 0ms);
 }
 
 .uw-outline {
@@ -3061,7 +3076,7 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes card-stack-rise {
   from {
     opacity: 0;
-    clip-path: inset(18% 0 0 0 round 0.5rem);
+    clip-path: var(--reveal-clip, inset(18% 0 0 0 round 0.5rem));
     filter: blur(16px);
     transform: translateY(var(--reveal-y, 2rem)) rotateX(6deg) scale(0.972);
   }
@@ -3076,7 +3091,7 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes panel-unfold {
   from {
     opacity: 0;
-    clip-path: inset(0 0 28% 0 round 0.5rem);
+    clip-path: var(--reveal-clip, inset(0 0 28% 0 round 0.5rem));
     filter: blur(16px);
     transform: translateY(var(--reveal-y, 1.8rem)) scale(0.976);
   }
@@ -3091,7 +3106,7 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes media-tile-in {
   from {
     opacity: 0;
-    clip-path: inset(20% 0 0 0 round 0.5rem);
+    clip-path: var(--reveal-clip, inset(20% 0 0 0 round 0.5rem));
     filter: blur(14px);
     transform: translateY(var(--reveal-y, 1.8rem)) scale(0.968);
   }
@@ -3115,7 +3130,7 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes project-rise {
   from {
     opacity: 0;
-    clip-path: inset(18% 0 0 0 round 0.5rem);
+    clip-path: var(--reveal-clip, inset(18% 0 0 0 round 0.5rem));
     filter: blur(16px);
     transform: translateY(var(--reveal-y, 2rem)) scale(0.972);
   }
@@ -3177,7 +3192,7 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes experience-rise {
   from {
     opacity: 0;
-    clip-path: inset(20% 0 0 0 round 0.5rem);
+    clip-path: var(--reveal-clip, inset(20% 0 0 0 round 0.5rem));
     filter: blur(16px);
     transform: translateY(var(--reveal-y, 2rem)) scale(0.972);
   }
@@ -3192,7 +3207,7 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes detail-rise {
   from {
     opacity: 0;
-    clip-path: inset(18% 0 0 0 round 0.5rem);
+    clip-path: var(--reveal-clip, inset(18% 0 0 0 round 0.5rem));
     filter: blur(15px);
     transform: translateY(var(--reveal-y, 1.9rem)) scale(0.974);
   }
@@ -3233,7 +3248,7 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes course-term-rise {
   from {
     opacity: 0;
-    clip-path: inset(20% 0 0 0 round 0.5rem);
+    clip-path: var(--reveal-clip, inset(20% 0 0 0 round 0.5rem));
     filter: blur(16px);
     transform: translateY(var(--reveal-y, 2rem)) scale(0.972);
   }
@@ -3248,7 +3263,7 @@ html[data-theme="light"] .theme-toggle__moon {
 @keyframes award-rise {
   from {
     opacity: 0;
-    clip-path: inset(20% 0 0 0 round 0.5rem);
+    clip-path: var(--reveal-clip, inset(20% 0 0 0 round 0.5rem));
     filter: blur(16px);
     transform: translateY(var(--reveal-y, 2rem)) scale(0.972);
   }

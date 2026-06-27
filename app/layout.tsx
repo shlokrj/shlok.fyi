@@ -45,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inclusiveSans.variable} ${playfairDisplay.variable} h-full`} data-theme="light" data-scroll-behavior="smooth" suppressHydrationWarning>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <Script id="theme-init" strategy="beforeInteractive">
           {themeScript}
         </Script>

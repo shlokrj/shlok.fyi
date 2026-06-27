@@ -238,6 +238,7 @@ function useScrollLens() {
         const drift = Math.max(-24, Math.min(24, centerDelta * -28));
         const inRevealBand = rect.top < globalThis.innerHeight * 0.92 && rect.bottom > globalThis.innerHeight * 0.08;
 
+        if (inRevealBand) updateReverseStagger(el);
         el.style.setProperty("--section-drift", `${drift.toFixed(2)}px`);
         el.style.setProperty("--section-visibility", visibleRatio.toFixed(3));
         el.classList.toggle("scroll-visible", inRevealBand);
@@ -270,6 +271,47 @@ function clearScrollLens(elements: HTMLElement[]) {
     el.classList.remove("scroll-lens-active", "scroll-lens-resting", "scroll-visible", "scroll-enter-up", "scroll-enter-down");
     el.style.removeProperty("--section-drift");
     el.style.removeProperty("--section-visibility");
+    el.querySelectorAll<HTMLElement>("[data-reverse-stagger]").forEach((item) => {
+      item.style.removeProperty("--scroll-up-delay");
+      item.removeAttribute("data-reverse-stagger");
+    });
+  });
+}
+
+const reverseStaggerGroups = [
+  [".experience-timeline", ".experience-entry"],
+  [".project-grid", ".project-card"],
+  [".awards-grid", ".award-card-entry"],
+  [".course-card-grid", ".course-card"],
+  [".skills-grid", ".skill-category"],
+  [".music-track-list", ".music-track-tab"],
+  [".contact-email-list", ".contact-email-link"],
+  [".contact-action-panel", ".contact-action-group"],
+] as const;
+
+function updateReverseStagger(section: HTMLElement) {
+  reverseStaggerGroups.forEach(([groupSelector, itemSelector]) => {
+    const group = section.querySelector<HTMLElement>(groupSelector);
+    if (!group) return;
+
+    const items = Array.from(group.children).filter(
+      (child): child is HTMLElement =>
+        child instanceof HTMLElement && child.matches(itemSelector),
+    );
+    if (items.length === 0) return;
+
+    const rowTops = Array.from(
+      new Set(items.map((item) => Math.round(item.offsetTop / 4) * 4)),
+    ).sort((a, b) => a - b);
+
+    items.forEach((item) => {
+      const rowTop = Math.round(item.offsetTop / 4) * 4;
+      const rowIndex = rowTops.indexOf(rowTop);
+      const reverseRowIndex = rowTops.length - rowIndex - 1;
+      const delay = Math.min(reverseRowIndex * 80, 400);
+      item.style.setProperty("--scroll-up-delay", `${delay}ms`);
+      item.dataset.reverseStagger = "true";
+    });
   });
 }
 
