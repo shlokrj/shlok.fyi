@@ -613,7 +613,7 @@ a {
 
 .music-track-tab--cycling::after {
   opacity: 0.82;
-  animation: music-cycle-progress 20s linear both;
+  animation: music-cycle-progress var(--music-cycle-duration, 10s) linear both;
 }
 
 .music-track-tab__index {

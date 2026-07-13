@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { FloatingNav } from "@/app/components/FloatingNav";
 import { SiteFooter } from "@/app/components/SiteFooter";
 import { SocialIcon } from "@/app/components/SocialIcon";
@@ -176,6 +176,11 @@ const favoriteTracks = [
   { id: "5KbEOYfLdTaUxM8KKTvDJ9", title: "Og Ginobili", artist: "Che" },
   { id: "3WVJfN1JmGewlDXGkQf0I4", title: "Havana", artist: "Pz'" },
 ] as const;
+
+const MUSIC_CYCLE_INTERVAL_MS = 10000;
+const musicCycleProgressStyle = {
+  "--music-cycle-duration": `${MUSIC_CYCLE_INTERVAL_MS}ms`,
+} as CSSProperties;
 
 type SpotifyEmbedController = {
   addListener: (event: "ready", callback: () => void) => void;
@@ -442,7 +447,7 @@ export default function Home() {
         const currentIndex = favoriteTracks.findIndex((track) => track.id === currentId);
         return favoriteTracks[(currentIndex + 1) % favoriteTracks.length].id;
       });
-    }, 10000);
+    }, MUSIC_CYCLE_INTERVAL_MS);
 
     return () => globalThis.clearInterval(cycle);
   }, [activeTrackId, isAutoShuffleOn]);
@@ -1044,6 +1049,7 @@ export default function Home() {
                     type="button"
                     aria-pressed={activeTrack.id === track.id}
                     className={`music-track-tab${activeTrack.id === track.id ? " music-track-tab--active" : ""}${activeTrack.id === track.id && isAutoShuffleOn ? " music-track-tab--cycling" : ""}`}
+                    style={activeTrack.id === track.id ? musicCycleProgressStyle : undefined}
                     onClick={() => selectTrack(track.id)}
                   >
                     <span className="music-track-tab__index">
