@@ -36,7 +36,7 @@ export const projects: Project[] = [
     name: "Sweeper",
     eyebrow: "Minesweeper AI research",
     summary:
-      "A playable Minesweeper lab for comparing symbolic reasoning, exact probability, and learned strategies.",
+      "Sweeper is a research-oriented Minesweeper AI system that compares symbolic reasoning, exact probabilistic inference, neural networks, and hybrid intelligence.",
     description:
       "Sweeper studies how an agent should make decisions in Minesweeper. It starts with symbolic proofs, uses exact mine probabilities when deduction runs out, and evaluates neural and hybrid strategies against the same board environments. The browser interface makes the work inspectable through a playable board, assisted modes, and benchmark results.",
     technologies: [
@@ -44,9 +44,9 @@ export const projects: Project[] = [
       "PyTorch",
       "React",
       "TypeScript",
-      "Cloudflare Workers",
+      "NumPy",
     ],
-    cardTechnologies: ["Python", "PyTorch", "Cloudflare Workers"],
+    cardTechnologies: ["Python", "PyTorch", "TypeScript"],
     highlights: [
       {
         label: "Reasoning first",
