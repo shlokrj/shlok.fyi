@@ -27,6 +27,12 @@ export type Project = {
     width: number;
     height: number;
   };
+  benchmarkImage?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
   visual: "sweeper" | "retra" | "cuey" | "flux";
 };
 
@@ -36,7 +42,7 @@ export const projects: Project[] = [
     name: "Sweeper",
     eyebrow: "Minesweeper AI research",
     summary:
-      "Sweeper is a research-oriented Minesweeper AI system that compares symbolic reasoning, exact probabilistic inference, neural networks, and hybrid intelligence.",
+      "A Minesweeper AI system benchmarking symbolic reasoning, exact inference, neural networks, and hybrid agents.",
     description:
       "Sweeper studies how an agent should make decisions in Minesweeper. It starts with symbolic proofs, uses exact mine probabilities when deduction runs out, and evaluates neural and hybrid strategies against the same board environments. The browser interface makes the work inspectable through a playable board, assisted modes, and benchmark results.",
     technologies: [
@@ -84,6 +90,12 @@ export const projects: Project[] = [
       alt: "Sweeper's assisted play mode showing a recommended next move.",
       width: 2048,
       height: 1116,
+    },
+    benchmarkImage: {
+      src: "/projects/sweeper-benchmarks.png",
+      alt: "Sweeper benchmark results comparing seven Minesweeper agents by win rate and decision rule.",
+      width: 1440,
+      height: 494,
     },
     visual: "sweeper",
   },

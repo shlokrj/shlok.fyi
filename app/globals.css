@@ -3806,6 +3806,19 @@ html[data-theme="light"] .theme-toggle__moon {
   border-radius: 0.5rem 0.5rem 1.5rem 1.5rem;
 }
 
+.project-detail__highlights--with-benchmark {
+  margin-bottom: 0.5rem;
+}
+
+.project-detail-visual--benchmark {
+  margin-bottom: 3rem;
+}
+
+.project-detail-visual__image--benchmark {
+  max-height: none;
+  object-fit: contain;
+}
+
 .project-detail__highlight {
   min-height: 15rem;
   border: 1px solid var(--project-border);

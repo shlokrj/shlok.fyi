@@ -122,7 +122,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </aside>
         </div>
 
-        <section className="project-detail__highlights">
+        <section className={`project-detail__highlights${project.benchmarkImage ? " project-detail__highlights--with-benchmark" : ""}`}>
           <p className="eyebrow text-xs uppercase tracking-[0.24em]">What it does</p>
           <div className="mt-5 grid gap-4 md:grid-cols-3">
             {project.highlights.map((highlight, index) => (
@@ -134,6 +134,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             ))}
           </div>
         </section>
+
+        {project.benchmarkImage ? (
+          <section className="project-detail-visual project-detail-visual--benchmark">
+            <Image
+              alt={project.benchmarkImage.alt}
+              className="project-detail-visual__image project-detail-visual__image--benchmark"
+              height={project.benchmarkImage.height}
+              sizes="(min-width: 1024px) 64rem, calc(100vw - 3rem)"
+              src={project.benchmarkImage.src}
+              width={project.benchmarkImage.width}
+            />
+          </section>
+        ) : null}
       </article>
       <div className="project-detail-footer relative mx-auto w-full max-w-5xl">
         <SiteFooter />
