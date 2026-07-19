@@ -337,21 +337,12 @@ function SectionBreak() {
   );
 }
 
-function SectionHeading({
-  title,
-  description,
-}: Readonly<{
-  title: string;
-  description: string;
-}>) {
+function SectionHeading({ title }: Readonly<{ title: string }>) {
   return (
     <div className="section-heading">
       <h2 className="theme-heading section-heading__title text-4xl leading-tight sm:text-5xl">
         {title}
       </h2>
-      <p className="section-heading__note mt-2 max-w-2xl text-sm leading-6 sm:text-base">
-        {description}
-      </p>
     </div>
   );
 }
@@ -365,7 +356,40 @@ function ProjectCard({ project }: Readonly<{ project: Project }>) {
     >
       <article>
         <div className="project-card__visual">
-          {project.image ? (
+          {project.visual === "sweeper" ? (
+            <div className="project-card__sweeper" aria-hidden="true">
+              <div className="project-card__sweeper-bar">
+                <strong>Sweeper</strong>
+                <span>01:42</span>
+              </div>
+              <div className="project-card__sweeper-board">
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--one">1</span>
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--two">2</span>
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--flag" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--one">1</span>
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--two">2</span>
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--three">3</span>
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--flag" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--one">1</span>
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--one">1</span>
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--two">2</span>
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--one">1</span>
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--flag" />
+                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
+              </div>
+            </div>
+          ) : project.image ? (
             <Image
               alt=""
               className="project-card__image"
@@ -658,7 +682,6 @@ export default function Home() {
         >
           <SectionHeading
             title="Experience"
-            description="Work, research, campus roles, and other professional experiences."
           />
 
           <div className="experience-timeline mt-9 grid gap-4">
@@ -736,13 +759,27 @@ export default function Home() {
         >
           <SectionHeading
             title="Projects"
-            description="Some things that I’ve been building."
           />
 
           <div className="project-grid mt-9">
             {projects.map((project) => (
               <ProjectCard key={project.slug} project={project} />
             ))}
+          </div>
+
+          <div className="project-more mt-8">
+            <a
+              className="project-more__link"
+              href="https://github.com/shlokrj"
+              rel="noreferrer"
+              target="_blank"
+            >
+              More on GitHub
+              <svg aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                <path d="M7 17 17 7" />
+                <path d="M8 7h9v9" />
+              </svg>
+            </a>
           </div>
         </section>
 
@@ -754,7 +791,6 @@ export default function Home() {
         >
           <SectionHeading
             title="Awards"
-            description="Recognition from competitions and events."
           />
 
           <div className="award-feature-entry mt-9">
@@ -866,7 +902,6 @@ export default function Home() {
         >
           <SectionHeading
             title="Courses"
-            description="Relevant coursework supporting my Computer Science and Data Science focus."
           />
 
           <div className="course-card-grid mt-9">
@@ -904,7 +939,6 @@ export default function Home() {
         >
           <SectionHeading
             title="Skills"
-            description="Languages, libraries, systems, and workflows I use."
           />
 
           <div className="skills-grid mt-9">
@@ -929,7 +963,6 @@ export default function Home() {
         >
           <SectionHeading
             title="About Me"
-            description="A little bit more about me."
           />
 
           <div className="about-story-panel mt-9">
@@ -1083,7 +1116,6 @@ export default function Home() {
         >
           <SectionHeading
             title="Contact"
-            description="Email, profiles, and resume."
           />
 
           <div className="contact-layout mt-9">
