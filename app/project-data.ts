@@ -42,10 +42,9 @@ export const projects: Project[] = [
     technologies: [
       "Python",
       "PyTorch",
-      "Next.js",
+      "React",
+      "TypeScript",
       "Cloudflare Workers",
-      "Exact Inference",
-      "Constraint Solving",
     ],
     cardTechnologies: ["Python", "PyTorch", "Cloudflare Workers"],
     highlights: [
@@ -73,6 +72,19 @@ export const projects: Project[] = [
       },
       { label: "GitHub repo", href: "https://github.com/shlokrj/sweeper" },
     ],
+    image: {
+      src: "/projects/sweeper-home.png",
+      alt: "Sweeper homepage with a Minesweeper board and strategy statistics.",
+      width: 2048,
+      height: 1116,
+      className: "project-detail-visual__image--contain",
+    },
+    secondaryImage: {
+      src: "/projects/sweeper-demo.png",
+      alt: "Sweeper's assisted play mode showing a recommended next move.",
+      width: 2048,
+      height: 1116,
+    },
     visual: "sweeper",
   },
   {

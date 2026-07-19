@@ -356,40 +356,7 @@ function ProjectCard({ project }: Readonly<{ project: Project }>) {
     >
       <article>
         <div className="project-card__visual">
-          {project.visual === "sweeper" ? (
-            <div className="project-card__sweeper" aria-hidden="true">
-              <div className="project-card__sweeper-bar">
-                <strong>Sweeper</strong>
-                <span>01:42</span>
-              </div>
-              <div className="project-card__sweeper-board">
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--one">1</span>
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--two">2</span>
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--flag" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--one">1</span>
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--two">2</span>
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--three">3</span>
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--flag" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--one">1</span>
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--one">1</span>
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--two">2</span>
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--one">1</span>
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--flag" />
-                <span className="project-card__sweeper-cell project-card__sweeper-cell--closed" />
-              </div>
-            </div>
-          ) : project.image ? (
+          {project.image ? (
             <Image
               alt=""
               className="project-card__image"
@@ -770,12 +737,13 @@ export default function Home() {
           <div className="project-more mt-8">
             <a
               className="project-more__link"
-              href="https://github.com/shlokrj"
+              href="https://github.com/shlokrj?tab=repositories"
               rel="noreferrer"
               target="_blank"
             >
-              More on GitHub
-              <svg aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+              <span className="project-more__github"><SocialIcon platform="github" /></span>
+              <span>More on GitHub</span>
+              <svg aria-hidden="true" className="project-more__arrow" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
                 <path d="M7 17 17 7" />
                 <path d="M8 7h9v9" />
               </svg>

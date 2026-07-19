@@ -1361,80 +1361,6 @@ html[data-theme="light"] .theme-toggle__moon {
   background: #07090b;
 }
 
-.project-card__sweeper {
-  position: absolute;
-  inset: 0;
-  padding: clamp(0.8rem, 3vw, 1.25rem);
-  background:
-    linear-gradient(135deg, rgba(61, 117, 78, 0.12), transparent 56%),
-    #f3f2e8;
-  color: #1d2920;
-  font-family: var(--font-mono-stack);
-}
-
-.project-card__sweeper-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 2px solid #273e2d;
-  background: #dce2d6;
-  padding: 0.45rem 0.6rem;
-  box-shadow: inset 0 0 0 1px #f9faf4;
-  font-size: clamp(0.56rem, 1.7vw, 0.68rem);
-}
-
-.project-card__sweeper-bar span {
-  color: #3d5542;
-}
-
-.project-card__sweeper-board {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  width: min(74%, 16rem);
-  margin: clamp(0.65rem, 2vw, 1rem) auto 0;
-  border: 2px solid #273e2d;
-  background: #d5dccf;
-  box-shadow: 0 0.5rem 1.25rem rgba(26, 50, 32, 0.14);
-}
-
-.project-card__sweeper-cell {
-  display: grid;
-  aspect-ratio: 1;
-  place-items: center;
-  border: 1px solid rgba(39, 62, 45, 0.26);
-  background: #e7ebe0;
-  font-size: clamp(0.55rem, 1.6vw, 0.75rem);
-  font-weight: 700;
-  line-height: 1;
-}
-
-.project-card__sweeper-cell--closed {
-  background: linear-gradient(135deg, #f9faf4, #b6c2ae);
-  box-shadow: inset -1px -1px 0 #84977c, inset 1px 1px 0 #ffffff;
-}
-
-.project-card__sweeper-cell--one {
-  color: #3f5daa;
-}
-
-.project-card__sweeper-cell--two {
-  color: #3a7b50;
-}
-
-.project-card__sweeper-cell--three {
-  color: #b54b3e;
-}
-
-.project-card__sweeper-cell--flag::before {
-  width: 0;
-  height: 0;
-  border-top: 0.28rem solid transparent;
-  border-bottom: 0.28rem solid transparent;
-  border-left: 0.48rem solid #c64b40;
-  content: "";
-  filter: drop-shadow(0 1px 0 rgba(33, 46, 35, 0.3));
-}
-
 .project-card__reveal {
   position: absolute;
   inset: 0;
@@ -1509,19 +1435,21 @@ html[data-theme="light"] .theme-toggle__moon {
 }
 
 .project-more {
-  display: flex;
-  justify-content: center;
+  display: block;
 }
 
 .project-more__link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.55rem;
+  width: 100%;
+  min-height: 4rem;
   border: 1px solid var(--link-border);
   border-radius: 0.35rem;
   background: color-mix(in srgb, var(--project-background) 64%, transparent);
   color: var(--link);
-  padding: 0.75rem 1rem;
+  padding: 0.9rem 1rem;
   font-size: 0.86rem;
   font-weight: 600;
   transition:
@@ -1531,7 +1459,14 @@ html[data-theme="light"] .theme-toggle__moon {
     transform 200ms ease;
 }
 
-.project-more__link svg {
+.project-more__github {
+  display: inline-flex;
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.project-more__github svg,
+.project-more__arrow {
   width: 1rem;
   height: 1rem;
 }
