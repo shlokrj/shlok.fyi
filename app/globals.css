@@ -1438,25 +1438,16 @@ html[data-theme="light"] .theme-toggle__moon {
   display: block;
 }
 
-.project-more__link {
+.project-more__link.project-action {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
   width: 100%;
   min-height: 4rem;
-  border: 1px solid var(--link-border);
-  border-radius: 0.35rem;
-  background: color-mix(in srgb, var(--project-background) 64%, transparent);
-  color: var(--link);
   padding: 0.9rem 1rem;
   font-size: 0.86rem;
   font-weight: 600;
-  transition:
-    background 200ms ease,
-    border-color 200ms ease,
-    color 200ms ease,
-    transform 200ms ease;
 }
 
 .project-more__github {
@@ -1469,6 +1460,10 @@ html[data-theme="light"] .theme-toggle__moon {
 .project-more__arrow {
   width: 1rem;
   height: 1rem;
+}
+
+.project-more__arrow {
+  transition: transform 250ms ease;
 }
 
 .project-card__flux {
@@ -2756,11 +2751,8 @@ html[data-theme="light"] .theme-toggle__moon {
     transform: translateX(3px);
   }
 
-  .project-more__link:hover {
-    border-color: var(--nav-hover);
-    background: var(--nav-item-background);
-    color: var(--nav-hover);
-    transform: translateY(-2px);
+  .project-more__link:hover .project-more__arrow {
+    transform: translate(2px, -2px);
   }
 
   .home-photo-panel:hover .home-photo img {
@@ -3786,6 +3778,16 @@ html[data-theme="light"] .theme-toggle__moon {
 
 .project-detail-visual__image--secondary {
   object-fit: contain;
+}
+
+.project-detail-visual--sweeper {
+  grid-template-columns: 1fr;
+}
+
+.project-detail-visual--sweeper .project-detail-visual__image {
+  height: auto;
+  max-height: none;
+  background: transparent;
 }
 
 .project-detail__body {

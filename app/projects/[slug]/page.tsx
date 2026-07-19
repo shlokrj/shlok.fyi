@@ -83,7 +83,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </header>
 
         {project.image ? (
-          <section className={`project-detail-visual${project.secondaryImage ? " project-detail-visual--gallery" : ""}`}>
+          <section className={`project-detail-visual${project.secondaryImage ? " project-detail-visual--gallery" : ""}${project.visual === "sweeper" ? " project-detail-visual--sweeper" : ""}`}>
             <Image
               alt={project.image.alt}
               className={`project-detail-visual__image ${project.image.className ?? ""}`}
@@ -98,7 +98,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 alt={project.secondaryImage.alt}
                 className="project-detail-visual__image project-detail-visual__image--secondary"
                 height={project.secondaryImage.height}
-                sizes="(min-width: 1024px) 16rem, 40vw"
+                sizes={project.visual === "sweeper" ? "(min-width: 1024px) 64rem, calc(100vw - 3rem)" : "(min-width: 1024px) 16rem, 40vw"}
                 src={project.secondaryImage.src}
                 width={project.secondaryImage.width}
               />

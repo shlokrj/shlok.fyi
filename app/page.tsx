@@ -736,7 +736,7 @@ export default function Home() {
 
           <div className="project-more mt-8">
             <a
-              className="project-more__link"
+              className="project-action project-more__link"
               href="https://github.com/shlokrj?tab=repositories"
               rel="noreferrer"
               target="_blank"
